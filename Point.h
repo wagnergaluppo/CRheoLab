@@ -10,6 +10,7 @@ class Point
     
         // Constructor
         Point(double, double, double);
+        Point();
 
         // Destructor
         virtual ~Point(){};

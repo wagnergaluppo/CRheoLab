@@ -27,6 +27,9 @@ public:
 
   int nInteriorFaces_;
   int nBoundaryFaces_;
+  //int nElements_;
+  //int nBoundaryElements_;
+
 
 private:
 

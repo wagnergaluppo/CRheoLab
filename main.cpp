@@ -10,10 +10,10 @@
 #include <vector>
 #include <algorithm> 
 #include <assert.h>
+#include <memory>
 
 #include "Mesh.cpp"
 #include "findFiles.h"
-#include "readPolyMesh.h"
 
 
 using namespace std;

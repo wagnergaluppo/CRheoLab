@@ -1,6 +1,7 @@
 #ifndef FACE_H
 #define FACE_H
 
+#include "Point.h"
 #include <vector>
 using std::vector;
 
@@ -9,7 +10,8 @@ class Face
     public:
 
         // Constructor  
-        Face(int, vector<int>& , int , int );
+        Face(int, vector<Point*> , int , int );
+        Face();
 
         // Destructor
         virtual  ~Face(){};
@@ -23,7 +25,7 @@ class Face
 
     private:
         int nPointsInFace_;
-        vector<int> facePoints_;
+        vector<Point*> facePoints_;
         int owner_;
         int neighbour_;  
   

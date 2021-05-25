@@ -1,10 +1,16 @@
 #include "Face.h"
 
-Face::Face(int nPointsInFace, vector<int>& facePoints, int owner=-1, int  neighbour=-1 )
+Face::Face(int nPointsInFace, vector<Point*> facePoints, int owner=-1, int  neighbour=-1 )
 :   nPointsInFace_(nPointsInFace),
     facePoints_(facePoints), 
     owner_(owner), 
     neighbour_(neighbour)
+{
+
+
+}
+
+Face::Face( )
 {
 
 

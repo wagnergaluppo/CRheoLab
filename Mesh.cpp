@@ -1,7 +1,8 @@
 #include "Mesh.h"
 
+
 Mesh::Mesh()
-:nPoints_(-2), nFaces_(-2), nPatches_(-2)
+: nPoints_(-2), nFaces_(-2), nPatches_(-2)
 { 
     std::cout << "I am the mesh constructor" << std::endl;
     readMesh();
@@ -62,6 +63,8 @@ void Mesh::readPoints(std::string path)
   // Gets number of points in file
   nPoints_ = getNEntitites(in_file);
 
+  pointList_.resize(nPoints_);
+
   // Loop over the points to fill the vector 
   while ( getline(in_file, line ) && line.find("(") == std::string::npos );
   {
@@ -74,7 +77,7 @@ void Mesh::readPoints(std::string path)
 
       std::stringstream(line ) >> c >> x >> y >> z;
       
-      pointList_.push_back( Point(x,y,z) ); // Node list
+      pointList_[i]= Point(x,y,z); // Node list
     }
   }
   // Close the file
@@ -101,7 +104,7 @@ void Mesh::readFaces(std::string path)
   nFaces_ = getNEntitites(in_file);
 
   // Resize the vectors according to the number of faces
- // faceList_.resize( nFaces_);
+  faceList_.resize(nFaces_);
 
   // Loop over the points to fill the vector 
   while ( getline(in_file, line ) && line.find("(") == std::string::npos );
@@ -109,23 +112,26 @@ void Mesh::readFaces(std::string path)
     int nPointsInFace; // catch number of points in each Face
     char c; // Variable to catch "("
 
+
     for ( int i = 0; i < nFaces_; i++ )
     {
       std::getline( in_file, line );
       std::stringstream line_2(line);
       line_2 >> nPointsInFace >> c;
+
+
             
-      std::vector<int> listOfPoints (nPointsInFace); // array to store the list of points
-    
+      std::vector<Point*> listOfPoints (nPointsInFace); // array to store the list of points
       int counter(0);
       int tmp;
 
       while(line_2 >> tmp)
       {
-        listOfPoints[counter]=tmp;
+        listOfPoints[counter]=&pointList_[tmp];
         counter++;
       } 
-      faceList_.push_back(Face(nPointsInFace,listOfPoints));
+
+      faceList_[i]=Face(nPointsInFace,listOfPoints);
 
     }
   }
