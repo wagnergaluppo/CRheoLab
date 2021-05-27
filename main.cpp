@@ -12,6 +12,20 @@
 #include <assert.h>
 #include <memory>
 
+
+// Write vectors to stream
+template <typename T>
+std::ostream& operator<<(std::ostream& os, const std::vector<T>& v)
+{
+    os << "[";
+    for (int i = 0; i < v.size(); ++i) {
+        os << v[i];
+    }
+    os << "]\n";
+    return os;
+}
+
+
 #include "Mesh.cpp"
 #include "findFiles.h"
 

@@ -28,3 +28,17 @@ void Face::setOwner(int owner)
 
 
 
+std::ostream& operator<<(std::ostream& os, const Face& p)
+{
+
+    os << "[ " << std::endl;
+
+    for (unsigned int i= 0; i < p.facePoints_.size() ; i++)
+    {
+        os << *p.facePoints_[i];
+    }
+
+    os << "]" << std::endl;
+
+return os;
+}

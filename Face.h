@@ -20,6 +20,9 @@ class Face
         void setOwner(int);
         void setNeighbour(int);
 
+        // Write to stream
+        friend std::ostream& operator<<(std::ostream& , const Face& );
+       
          
     protected:
 

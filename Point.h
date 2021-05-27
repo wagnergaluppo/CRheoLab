@@ -2,6 +2,7 @@
 #define POINT_H
 
 //include "forAllOperations.h"
+#include <iostream>
 
 
 class Point
@@ -17,7 +18,24 @@ class Point
 
         // Member Functions
         void setCoord(double, double, double);
-        
+
+
+        // Overloaded operatores
+        // Setter
+        double& operator[](int entry);
+
+        // Getter
+        double operator[](int entry) const ;
+
+        // Summation
+        Point operator+(Point const &obj);
+
+        // Subtraction
+        Point operator-(Point const &obj);
+
+        // Write to stream
+        friend std::ostream& operator<<(std::ostream& , const Point& );
+       
     protected:
 
     private:
