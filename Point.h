@@ -29,6 +29,7 @@ class Point
 
         // Summation
         Point operator+(Point const &obj);
+        Point operator+(Point const &obj) const;
 
         // Subtraction
         Point operator-(Point const &obj);

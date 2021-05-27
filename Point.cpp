@@ -60,6 +60,16 @@ Point Point::operator+(Point const &obj)
     return result;
 }
 
+Point Point::operator+(Point const &obj) const
+{
+    Point result;
+    result.x_ = x_ + obj.x_;
+    result.y_ = y_ + obj.y_;
+    result.z_ = z_ + obj.z_;
+
+    return result;
+}
+
 Point Point::operator-(Point const &obj)
 {
     Point result;
