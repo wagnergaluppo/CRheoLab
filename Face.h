@@ -31,7 +31,22 @@ class Face
         vector<Point*> facePoints_;
         int owner_;
         int neighbour_;  
-  
+
+        // Area vector
+        std::array<double, 3> areaVector_; 
+
+        // Center of mass
+        std::array<double, 3> centerOfMass_; 
+
+        // Area
+        double area_;
+
+        // Weighting factor
+        double weightingFactor_;
+
+        // Non-orthogonality angle
+        double nonOrthogonalityAngle_;
+ 
 };
 
 #endif // FACE_H

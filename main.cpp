@@ -12,20 +12,10 @@
 #include <assert.h>
 #include <memory>
 
-
-// Write vectors to stream
-template <typename T>
-std::ostream& operator<<(std::ostream& os, const std::vector<T>& v)
-{
-    os << "[";
-    for (int i = 0; i < v.size(); ++i) {
-        os << v[i];
-    }
-    os << "]\n";
-    return os;
-}
+#include "mathOperations.h"
 
 
+/*
 template <typename T>
 std::vector<T> operator+(const std::vector<T>& v1, const std::vector<T>& v2)
 {
@@ -37,7 +27,7 @@ std::vector<T> operator+(const std::vector<T>& v1, const std::vector<T>& v2)
    }
 
    return result;
-}
+}*/
 
 #include "Mesh.cpp"
 #include "findFiles.h"
@@ -49,7 +39,7 @@ using namespace std;
 int main()
 {
       
-    checkCaseStructure();
+ /*   checkCaseStructure();
     
     Mesh polyMesh;
 
@@ -70,7 +60,22 @@ int main()
     // Sums points coordinates between two meshes
     auto a = polyMesh.pointList_ + polyMesh2.pointList_;
 
-    cout << "my directory is " << getExecutablePath() << endl;
+    cout << "my directory is " << getExecutablePath() << endl;*/
+
+
+    vectorField teste(3);
+    teste[0]={1,1,1};
+    teste[1]={2,2,2};
+    teste[2]={3,3,3};
+
+
+    scalarField t1(3);
+    t1[0]=1;
+    t1[1]=2;
+    t1[2]=3;
+
+    //cout << teste*teste/t1  << endl;
+
 
     return 0;
 }
