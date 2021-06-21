@@ -1,37 +1,33 @@
 #include "Point.h"
 
 Point::Point(double x, double y, double z)
-:   x_(x),
-    y_(y),
-    z_(z)
+:   p_{x,y,z}
 {
 
 }
 
 Point::Point()
-:   x_(0),
-    y_(0),
-    z_(0)
+:   p_{0, 0 ,0}
 {
 
 }
 
 void Point::setCoord(double x, double y, double z)
 {
-    x_ = x;
-    y_ = y;
-    z_ = z;
+    p_[0] = x;
+    p_[1] = y;
+    p_[2] = z;
 }
 
 // Setter
 double& Point::operator[](int entry)
 {
     if (entry==0)
-        return x_;
+        return p_[0];
     else if(entry==1)
-        return y_;
+        return p_[1];
     else if(entry==2)
-        return z_;
+        return p_[2];
     else
         throw std::out_of_range("Point does not have index " + std::to_string(entry));
 }
@@ -40,11 +36,11 @@ double& Point::operator[](int entry)
 double Point::operator[](int entry) const 
 {
     if (entry==0)
-        return x_;
+        return p_[0];
     else if(entry==1)
-        return y_;
+        return p_[1];
     else if(entry==2)
-        return z_;
+        return p_[2];
     else
         throw std::out_of_range("Point does not have index " + std::to_string(entry));
 }
@@ -53,9 +49,9 @@ double Point::operator[](int entry) const
 Point Point::operator+(Point const &obj)
 {
     Point result;
-    result.x_ = x_ + obj.x_;
-    result.y_ = y_ + obj.y_;
-    result.z_ = z_ + obj.z_;
+    result.p_[0] = p_[0] + obj.p_[0];
+    result.p_[1] = p_[1] + obj.p_[1];
+    result.p_[2] = p_[2] + obj.p_[2];
 
     return result;
 }
@@ -63,9 +59,9 @@ Point Point::operator+(Point const &obj)
 Point Point::operator+(Point const &obj) const
 {
     Point result;
-    result.x_ = x_ + obj.x_;
-    result.y_ = y_ + obj.y_;
-    result.z_ = z_ + obj.z_;
+    result.p_[0] = p_[0] + obj.p_[0];
+    result.p_[1] = p_[1] + obj.p_[1];
+    result.p_[2] = p_[2] + obj.p_[2];
 
     return result;
 }
@@ -73,10 +69,10 @@ Point Point::operator+(Point const &obj) const
 Point Point::operator-(Point const &obj)
 {
     Point result;
-    result.x_ = x_ - obj.x_;
-    result.y_ = y_ - obj.y_;
-    result.z_ = z_ - obj.z_;
-    
+    result.p_[0] = p_[0] - obj.p_[0];
+    result.p_[1] = p_[1] - obj.p_[1];
+    result.p_[2] = p_[2] - obj.p_[2];
+
     return result;
 }
 

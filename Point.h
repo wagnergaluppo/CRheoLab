@@ -40,9 +40,7 @@ class Point
     protected:
 
     private:
-        double x_;
-        double y_;
-        double z_;
+        vector3 p_;
 
 };
 

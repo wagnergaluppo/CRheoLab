@@ -61,6 +61,9 @@ vector<T> operator-(const vector<T> & v1, const vector<T> & v2)
    return result;
 }
 
+
+
+
 // Multiplication
 scalarField operator*(const scalarField& v1, const scalarField& v2)
 {
