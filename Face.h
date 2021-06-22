@@ -33,10 +33,10 @@ class Face
         int neighbour_;  
 
         // Area vector
-        std::array<double, 3> areaVector_; 
+        vector3 areaVector_; 
 
         // Center of mass
-        std::array<double, 3> centerOfMass_; 
+        vector3 centerOfMass_; 
 
         // Area
         double area_;
@@ -46,7 +46,7 @@ class Face
 
         // Non-orthogonality angle
         double nonOrthogonalityAngle_;
- 
+
 };
 
 #endif // FACE_H

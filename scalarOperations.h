@@ -1,14 +1,3 @@
-
-// Check if both vectors have the same size
-template <typename T>
-void checkSize(const std::vector<T>& v1, const std::vector<T>& v2)
-{
-    if(v1.size() != v2.size() )
-    {
-        throw std::length_error("Vectors do not have the same dimensions");
-    }
-}
-
 // Output scalarField to screen
 std::ostream& operator<<(std::ostream& os, const scalarField& v)
 {
@@ -27,43 +16,6 @@ std::ostream& operator<<(std::ostream& os, const scalarField& v)
 
 // At the field level
 
-// Summation
-template <typename T>
-vector<T> operator+(const vector<T> & v1, const vector<T> & v2)
-{
-
-    checkSize(v1,v2);
-   
-   vector<T> result(v1.size());
-
-   for(unsigned int i = 0 ; i < v1.size(); i++)
-   {
-        result[i] = v1[i] + v2[i];
-   }
-
-   return result;
-}
-
-
-template <typename T>
-vector<T> operator-(const vector<T> & v1, const vector<T> & v2)
-{
-
-    checkSize(v1,v2);
-   
-   vector<T> result(v1.size());
-
-   for(unsigned int i = 0 ; i < v1.size(); i++)
-   {
-        result[i] = v1[i] - v2[i];
-   }
-
-   return result;
-}
-
-
-
-
 // Multiplication
 scalarField operator*(const scalarField& v1, const scalarField& v2)
 {
@@ -79,7 +31,6 @@ scalarField operator*(const scalarField& v1, const scalarField& v2)
 
    return result;
 }
-
 
 // Division
 scalarField operator/(const scalarField& v1, const scalarField& v2)
@@ -108,9 +59,6 @@ scalarField sqr(const scalarField& v1)
    }
    return result;
 }
-
-
-
 
 scalarField log(const scalarField& v1)
 {   

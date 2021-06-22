@@ -68,9 +68,7 @@ vector3 operator*(const vector3& v1,const double& d1)
 {
     vector3 result;
 
-    result[0] = d1*v1[0];
-    result[1] = d1*v1[1];
-    result[2] = d1*v1[2];
+    result = d1*v1;
 
    return result;
 }

@@ -15,21 +15,25 @@ public:
   // Destructor
   virtual ~Mesh(){};
               
+  std::vector<Point>  pointList_;
 
-  int nPoints_;
-  std::vector<Point> pointList_;
+  std::vector<Face>   faceList_;
 
-  int nFaces_;
-  std::vector<Face> faceList_;
+  std::vector <Cell>  cellList_;
 
-  int nPatches_;
   std::vector <Patch> patchList_;
 
-  int nInteriorFaces_;
-  int nBoundaryFaces_;
-  //int nElements_;
-  //int nBoundaryElements_;
+  int nPoints_;
 
+  int nFaces_;
+
+  int nInteriorFaces_;
+
+  int nBoundaryFaces_;
+  
+  int nCells_;
+
+  int nPatches_;
 
 private:
 

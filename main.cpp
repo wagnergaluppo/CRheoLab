@@ -35,7 +35,7 @@ using namespace std;
 int main()
 {
       
-   checkCaseStructure();
+   /*checkCaseStructure();
     
     Mesh polyMesh;
 
@@ -47,10 +47,19 @@ int main()
 
     cout << "my directory is " << getExecutablePath() << endl;
 
-   cout << 2.0/3 << endl;
+*/
+    vectorField test(4);
+    for(int i =0 ; i<test.size(); i++)
+    {
+        test[i][0]=i;
+        test[i][1]=i;
+        test[i][2]=i;
+    }
 
-   scalarField test (4);
+   cout << test << endl;
 
+   auto a = test&test;
+   cout << a << endl;
 
 
     return 0;

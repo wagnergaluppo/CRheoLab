@@ -21,10 +21,13 @@ class Cell
         double volume_;
 
         // Cell center of Mass
-        std::array<double, 3> centerOfMass_; 
+        vector3 centerOfMass_; 
 
         // Cell skewness
         double skewness_;
+
+        // Faces that make up a cell
+        vector<Face*> cellFaces_;
 
 
 };
