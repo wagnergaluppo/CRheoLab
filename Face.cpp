@@ -37,7 +37,11 @@ void Face::computeFaceAreaVector()
     vector3 tmp_vec1 = centerOfMass_ - facePoints_[0]->getPoint();
     vector3 tmp_vec2 = centerOfMass_ - facePoints_[1]->getPoint();
 
+    // Computes the face normal by doing the cross product of the products
     areaVector_ = (tmp_vec1^tmp_vec2)*area_;
+
+    // Need to correct the area vector after getting the center of the cell
+    
 }
 
 std::ostream& operator<<(std::ostream& os, const Face& p)
