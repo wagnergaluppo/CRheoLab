@@ -19,9 +19,9 @@ public:
 
   std::vector<Face>   faceList_;
 
-  std::vector<Cell>  cellList_;
+  std::vector<Cell>   cellList_;
 
-  std::vector<Patch> patchList_;
+  std::vector<Patch>  patchList_;
 
   int nPoints_;
 
