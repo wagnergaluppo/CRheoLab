@@ -76,6 +76,11 @@ Point Point::operator-(Point const &obj)
     return result;
 }
 
+vector3 Point::getPoint() const
+{
+    return p_;
+}
+
 
 std::ostream& operator<<(std::ostream& os, const Point& p)
 {

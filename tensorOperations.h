@@ -1,23 +1,38 @@
 
 // Output vectorField to screen
-std::ostream& operator<<(std::ostream& os, const tensorField& v)
+std::ostream& operator<<(std::ostream& os, const tensorField& t)
 {
     os << "[" << std::endl;
     
-    for (int i = 0; i < v.size(); ++i) {
+    for (int i = 0; i < t.size(); ++i) {
         
         os << "\t";
 
         os << "[ ";
 
-        for (int j=0; j< v[i].size(); j++)
+        for (int j=0; j< t[i].size(); j++)
         {
-            os<< v[i][j] << " ";
+            os<< t[i][j] << " ";
         }
         os << "]" << std::endl;
     }
 
     os << "]\n";
+    return os;
+}
+
+
+std::ostream& operator<<(std::ostream& os, const tensor& t)
+{
+    os << "[ " ;
+    
+    for (int i = 0; i < t.size(); ++i)
+    {
+
+        os<< t[i] << " ";
+    }
+
+    os << " ]\n";
     return os;
 }
 

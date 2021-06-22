@@ -1,0 +1,3 @@
+Compile the code with
+
+g++ -g main.cpp
