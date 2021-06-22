@@ -34,8 +34,8 @@ void Face::setOwner(int owner)
 void Face::computeFaceAreaVector()
 {
     //Creates two vectors from the center of mass
-    vector3 tmp_vec1 = centerOfMass_ - facePoints_[0]->getPoint();
-    vector3 tmp_vec2 = centerOfMass_ - facePoints_[1]->getPoint();
+    vector3 tmp_vec1 = facePoints_[0]->getPoint() - centerOfMass_;
+    vector3 tmp_vec2 = facePoints_[1]->getPoint() - centerOfMass_;
 
     // Computes the face normal by doing the cross product of the products
     areaVector_ = (tmp_vec1^tmp_vec2)*area_;
