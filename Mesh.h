@@ -3,6 +3,7 @@
 
 #include "Point.cpp"
 #include "Face.cpp"
+#include "Cell.cpp"
 #include "Patch.cpp"
 
 class Mesh {
