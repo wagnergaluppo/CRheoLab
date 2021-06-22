@@ -21,6 +21,7 @@ std::ostream& operator<<(std::ostream& os, const tensorField& v)
     return os;
 }
 
+
 // Math Operations
 
 // At the vector level
