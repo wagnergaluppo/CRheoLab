@@ -19,6 +19,7 @@ class Face
         // Member Functions      
         void setOwner(int);
         void setNeighbour(int);
+        void computeFaceAreaVector();
 
         // Write to stream
         friend std::ostream& operator<<(std::ostream& , const Face& );

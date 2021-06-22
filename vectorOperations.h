@@ -21,6 +21,22 @@ std::ostream& operator<<(std::ostream& os, const vectorField& v)
     return os;
 }
 
+
+// Output vectorField to screen
+std::ostream& operator<<(std::ostream& os, const vector3& v)
+{
+    os << "[ " ;
+
+    for (int i = 0; i < v.size(); ++i) {
+
+        os<< v[i] << " ";
+    }
+
+    os << "]" << std::endl;
+    return os;
+}
+
+
 // Math Operations
 
 // At the vector level

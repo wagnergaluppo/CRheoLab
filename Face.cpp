@@ -4,7 +4,12 @@ Face::Face(int nPointsInFace, vector<Point*> facePoints, int owner=-1, int  neig
 :   nPointsInFace_(nPointsInFace),
     facePoints_(facePoints), 
     owner_(owner), 
-    neighbour_(neighbour)
+    neighbour_(neighbour),
+    areaVector_{-2,-2,-2},
+    centerOfMass_{-2,-2,-2},
+    area_(0),
+    weightingFactor_(0),
+    nonOrthogonalityAngle_(0)
 {
 
 
@@ -26,7 +31,14 @@ void Face::setOwner(int owner)
     owner_ = owner;
 }
 
+void Face::computeFaceAreaVector()
+{
+    //Creates two vectors from the center of mass
+    vector3 tmp_vec1 = centerOfMass_ - facePoints_[0]->getPoint();
+    vector3 tmp_vec2 = centerOfMass_ - facePoints_[1]->getPoint();
 
+    areaVector_ = (tmp_vec1^tmp_vec2)*area_;
+}
 
 std::ostream& operator<<(std::ostream& os, const Face& p)
 {

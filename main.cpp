@@ -35,11 +35,11 @@ using namespace std;
 int main()
 {
       
-   /*checkCaseStructure();
+   checkCaseStructure();
     
     Mesh polyMesh;
 
-    // Print single point
+    /*// Print single point
     cout << polyMesh.pointList_[0] << endl;
 
     // Sums points coordinates between two meshes
@@ -48,20 +48,9 @@ int main()
     cout << "my directory is " << getExecutablePath() << endl;
 
 */
-    vectorField test(4);
-    for(int i =0 ; i<test.size(); i++)
-    {
-        test[i][0]=i;
-        test[i][1]=i;
-        test[i][2]=i;
-    }
-
-   cout << test << endl;
-
-   auto a = test&test;
-   cout << a << endl;
 
 
+    polyMesh.faceList_[0].computeFaceAreaVector();
     return 0;
 }
 

@@ -34,6 +34,9 @@ class Point
         // Subtraction
         Point operator-(Point const &obj);
 
+        // Return point vector
+        vector3 getPoint() const;
+
         // Write to stream
         friend std::ostream& operator<<(std::ostream& , const Point& );
        
