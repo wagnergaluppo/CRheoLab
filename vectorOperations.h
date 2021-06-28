@@ -311,29 +311,20 @@ vectorField operator^(const vectorField& v1, const vectorField& v2)
 
 
 
+// Magnitude of a vector
+double mag(const vector3& v1)
+{
 
 
+    double result = std::sqrt(
+                              v1[0]*v1[0]
+                            + v1[1]*v1[1]
+                            + v1[2]*v1[2]
+                        );
+   
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   return result;
+}
 
 
 // Magnitude of a vector

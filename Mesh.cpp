@@ -193,6 +193,9 @@ void Mesh::readNeighbour(std::string path)
   // Gets number of faces in file
   int nNeighbours = getNEntitites(in_file);
 
+  // Variable to store maximum value of neighbour
+  int storeMax(0);
+
     // Loop over the points to fill the vector 
   while ( getline(in_file, line ) && line.find("(") == std::string::npos );
   {
@@ -204,6 +207,11 @@ void Mesh::readNeighbour(std::string path)
       std::stringstream line_2(line);
       line_2 >> tmp;
       faceList_[i].setNeighbour(tmp); //setFace neighbor
+     
+      if(tmp > storeMax)
+      {
+        storeMax = tmp;
+      }
 
     }
   }
@@ -212,6 +220,7 @@ void Mesh::readNeighbour(std::string path)
 
   nInteriorFaces_ = nNeighbours;
   nBoundaryFaces_ = nFaces_ - nInteriorFaces_;
+  nCells_ = storeMax + 1;
 }
 
 
@@ -355,3 +364,42 @@ std::string Mesh::getExecutablePath()
 
   return executablePath+"/";
 }
+
+void Mesh::computeFaceWeightingFactor()
+{
+
+    //std::vector<Cell>& cells = cellList_;
+
+    std::vector<Face>& faces = faceList_;
+
+    std::vector<Cell> cells(nCells_);
+
+    // Loop through interior faces
+    for (unsigned int i = 0; i < nInteriorFaces_ ; i++ )
+    {
+      int cellOwner = faces[i].getOwner();
+
+      int cellNeighbour = faces[i].getNeighbour();
+
+      vector3 faceCenter = faces[i].getCenterOfMass();
+
+      vector3 d_Cf = cells[cellOwner].getCenterOfMass() - faceCenter;
+
+      vector3 d_fF = cells[cellNeighbour].getCenterOfMass() - faceCenter;
+
+      vector3 e_f = faces[i].getFaceAreaVector()/mag( faces[i].getFaceAreaVector() );
+
+      faces[i].setweightingFactor( (d_Cf & e_f) / ( (d_Cf & e_f) + (d_fF & e_f) ));
+
+    }
+
+    // Loop through boundary faces
+    for (unsigned int i = nInteriorFaces_ + 1; i < nFaces_  ; i++ )
+    {
+      faces[i].setweightingFactor(1.0);
+    }
+
+
+
+}
+

@@ -38,6 +38,7 @@ int main()
    checkCaseStructure();
     
     Mesh polyMesh;
+    polyMesh.computeFaceWeightingFactor();
 
     /*// Print single point
     cout << polyMesh.pointList_[0] << endl;

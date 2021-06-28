@@ -5,14 +5,13 @@ Face::Face(int nPointsInFace, vector<Point*> facePoints, int owner=-1, int  neig
     facePoints_(facePoints), 
     owner_(owner), 
     neighbour_(neighbour),
-    areaVector_{-2,-2,-2},
+    areaVector_({-2,-2,-2}),
     centerOfMass_{-2,-2,-2},
     area_(0),
     weightingFactor_(0),
     nonOrthogonalityAngle_(0)
 {
-
-
+    computeFaceAreaVector();
 }
 
 Face::Face( )
@@ -43,6 +42,35 @@ void Face::computeFaceAreaVector()
     // Need to correct the area vector after getting the center of the cell
     
 }
+
+
+void Face::setweightingFactor(double g_c)
+{
+    weightingFactor_ = g_c;
+}
+
+
+
+int Face::getOwner() const
+{
+    return owner_;
+}
+
+int Face::getNeighbour() const
+{
+    return neighbour_;
+}
+
+vector3 Face::getCenterOfMass() const
+{
+    return centerOfMass_;
+}
+
+vector3 Face::getFaceAreaVector() const
+{
+    return areaVector_;
+}
+
 
 std::ostream& operator<<(std::ostream& os, const Face& p)
 {

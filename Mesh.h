@@ -36,6 +36,9 @@ public:
 
   int nPatches_;
 
+
+  void computeFaceWeightingFactor();
+
 private:
 
   void readMesh();

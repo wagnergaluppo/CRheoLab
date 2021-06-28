@@ -20,6 +20,12 @@ class Face
         void setOwner(int);
         void setNeighbour(int);
         void computeFaceAreaVector();
+        void setweightingFactor(double);
+
+        int getOwner() const ;
+        int getNeighbour() const;
+        vector3 getCenterOfMass() const;
+        vector3 getFaceAreaVector() const;
 
         // Write to stream
         friend std::ostream& operator<<(std::ostream& , const Face& );

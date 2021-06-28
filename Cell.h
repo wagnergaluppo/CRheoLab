@@ -12,6 +12,10 @@ class Cell
 
         // Destructor
         virtual  ~Cell(){};
+
+        // 
+        vector3 getCenterOfMass() const;
+
          
     protected:
 
