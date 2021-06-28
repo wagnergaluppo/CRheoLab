@@ -16,9 +16,9 @@ public:
   // Destructor
   virtual ~Mesh(){};
               
-  std::vector<Point>  pointList_;
+  std::vector<Point> pointList_;
 
-  std::vector<Face>   faceList_;
+  std::vector<Face>  faceList_;
 
   std::vector<Cell>  cellList_;
 

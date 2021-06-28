@@ -377,23 +377,22 @@ void Mesh::computeFaceWeightingFactor()
     // Loop through interior faces
     for (unsigned int i = 0; i < nInteriorFaces_ ; i++ )
     {
-      int cellOwner = faces[i].getOwner();
+      const int cellOwner = faces[i].getOwner();
 
-      int cellNeighbour = faces[i].getNeighbour();
+      const int cellNeighbour = faces[i].getNeighbour();
 
-      vector3 faceCenter = faces[i].getCenterOfMass();
+      const vector3 faceCenter = faces[i].getCenterOfMass();
 
-      vector3 d_Cf = cells[cellOwner].getCenterOfMass() - faceCenter;
+      const vector3 d_Cf = cells[cellOwner].getCenterOfMass() - faceCenter;
 
-      vector3 d_fF = cells[cellNeighbour].getCenterOfMass() - faceCenter;
+      const vector3 d_fF = cells[cellNeighbour].getCenterOfMass() - faceCenter;
 
-      vector3 e_f = faces[i].getFaceAreaVector()/mag( faces[i].getFaceAreaVector() );
+      const vector3 e_f = faces[i].getFaceAreaVector()/mag( faces[i].getFaceAreaVector() );
 
       faces[i].setweightingFactor( (d_Cf & e_f) / ( (d_Cf & e_f) + (d_fF & e_f) ));
-
     }
 
-    // Loop through boundary faces
+    // Loop through boundary the faces
     for (unsigned int i = nInteriorFaces_ + 1; i < nFaces_  ; i++ )
     {
       faces[i].setweightingFactor(1.0);
