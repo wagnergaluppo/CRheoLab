@@ -372,6 +372,7 @@ void Mesh::computeFaceWeightingFactor()
 
     std::vector<Face>& faces = faceList_;
 
+    // This is a place holder for when the cellList is implemented
     std::vector<Cell> cells(nCells_);
 
     // Loop through interior faces
