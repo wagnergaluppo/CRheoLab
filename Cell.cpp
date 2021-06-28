@@ -10,8 +10,6 @@ skewness_(1)
 }
 
 
-Tens que mudar esta função
-
 vector3 Cell::getCenterOfMass() const
 {
     return centerOfMass_;
