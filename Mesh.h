@@ -36,14 +36,11 @@ public:
 
   int nPatches_;
 
-
-  void computeFaceWeightingFactor();
-
 private:
 
-  void readMesh();
-  
   std::string getExecutablePath();
+
+  void readMesh();
 
   int getNEntitites(std::ifstream& file);
 
@@ -51,9 +48,11 @@ private:
 
   void readFaces(std::string path);
 
-  void readOwners(std::string path);
+  vector<int> readOwners(std::string path);
 
-  void readNeighbour(std::string path);
+  vector<int> readNeighbours(std::string path);
+
+  void readCells(std::string pathOwners, std::string pathNeighbours);
 
   void readBoundary(std::string path);
 

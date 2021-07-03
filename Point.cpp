@@ -7,7 +7,7 @@ Point::Point(double x, double y, double z)
 }
 
 Point::Point()
-:   p_{0, 0 ,0}
+:   p_{-1, -1 ,-1}
 {
 
 }
