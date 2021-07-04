@@ -32,20 +32,20 @@ std::string Mesh::getExecutablePath()
 
 void Mesh::readMesh()
 {
-    std::string pathPoints (getExecutablePath()+std::string("constant/")+std::string("polyMesh/points"));
-    readPoints(pathPoints);
+    std::string filePoints (getExecutablePath()+std::string("constant/")+std::string("polyMesh/points"));
+    readPoints(filePoints);
 
-    std::string pathFaces (getExecutablePath()+std::string("constant/")+std::string("polyMesh/faces"));
-    readFaces(pathFaces);
+    std::string fileFaces (getExecutablePath()+std::string("constant/")+std::string("polyMesh/faces"));
+    readFaces(fileFaces);
 
-    std::string pathOwners(getExecutablePath()+std::string("constant/")+std::string("polyMesh/owner"));
+    std::string fileOwners(getExecutablePath()+std::string("constant/")+std::string("polyMesh/owner"));
 
-    std::string pathNeighbour(getExecutablePath()+std::string("constant/")+std::string("polyMesh/neighbour"));
+    std::string  fileNeighbours(getExecutablePath()+std::string("constant/")+std::string("polyMesh/neighbour"));
 
-    readCells(pathOwners, pathNeighbour);
+    updateCellAndFaceData(fileOwners, fileNeighbours);
 
-    std::string pathBoundary(getExecutablePath()+std::string("constant/")+std::string("polyMesh/boundary"));
-    readBoundary(pathBoundary);
+    std::string fileBoundary(getExecutablePath()+std::string("constant/")+std::string("polyMesh/boundary"));
+    readBoundary(fileBoundary);
 
     std::cout << "Mesh was read successfully!" << std::endl;
 }
@@ -151,6 +151,7 @@ void Mesh::readFaces(std::string path)
         counter++;
       } 
 
+
       faceList_[i]=Face(nPointsInFace,listOfPoints);
       faceList_[i].setID(i);
 
@@ -241,7 +242,7 @@ vector<int> Mesh::readNeighbours(std::string path)
 }
 
 
-void Mesh::readCells(std::string pathOwners, std::string pathNeighbours)
+void Mesh::updateCellAndFaceData(std::string pathOwners, std::string pathNeighbours)
 {
   // Reads owners
   const vector<int> ownersList = readOwners(pathOwners);

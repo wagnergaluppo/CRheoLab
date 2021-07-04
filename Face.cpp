@@ -225,7 +225,6 @@ void Face::computeFaceAreaVector()
     double mag_vector_tmp = mag(areaVector_tmp);
 
     // distance vector between owner and neighbour cell
-
     vector3 d_ON = neighbour_->getCenterOfMass() - owner_->getCenterOfMass();
 
     if( (areaVector_tmp & d_ON) < 0) 

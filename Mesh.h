@@ -52,7 +52,7 @@ private:
 
   vector<int> readNeighbours(std::string path);
 
-  void readCells(std::string pathOwners, std::string pathNeighbours);
+  void updateCellAndFaceData(std::string pathOwners, std::string pathNeighbours);
 
   void readBoundary(std::string path);
 
