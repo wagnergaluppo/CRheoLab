@@ -224,8 +224,20 @@ void Face::computeFaceAreaVector()
     // Computes the norm of the cross product between two vectors
     double mag_vector_tmp = mag(areaVector_tmp);
 
+    // distance vector between owner and neighbour cell
+
+    vector3 d_ON = neighbour_->getCenterOfMass() - owner_->getCenterOfMass();
+
+    if( (areaVector_tmp & d_ON) < 0) 
+    {
+        // rotates area vector by 180º
+        areaVector_tmp=-1.0*areaVector_tmp;
+    }
+
     // Calculates the faceAreaVector
     areaVector_ = (areaVector_tmp/mag_vector_tmp)*area_;
+
+
     
 }
 
