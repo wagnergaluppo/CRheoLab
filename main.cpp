@@ -28,7 +28,6 @@ std::ostream& operator<<(std::ostream& os, const std::vector<T>& v)
     return os;
 }
 
-
 using namespace std;
 
 
@@ -38,8 +37,15 @@ int main()
    checkCaseStructure();
     
     Mesh polyMesh;
-    polyMesh.computeFaceWeightingFactor();
+    for(unsigned int i =0 ; i<polyMesh.nInteriorFaces_ ; i++)
+    {
+        polyMesh.faceList_[i].computeFaceWeightingFactor_interiorFaces(); 
+    }
 
+    for(unsigned int i = polyMesh.nInteriorFaces_; i<polyMesh.nFaces_; i++)
+    {
+        polyMesh.faceList_[i].computeFaceWeightingFactor_boundaryFaces();
+    }
     /*// Print single point
     cout << polyMesh.pointList_[0] << endl;
 
@@ -50,8 +56,11 @@ int main()
 
 */
 
+    std::cout << "I am done" << std::endl;
 
-    polyMesh.faceList_[0].computeFaceAreaVector();
+
+    //polyMesh.faceList_[0].owner()=2;
+    //std::cout << polyMesh.faceList_[0].owner() << std::endl;
     return 0;
 }
 

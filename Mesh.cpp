@@ -2,7 +2,12 @@
 
 
 Mesh::Mesh()
-: nPoints_(-2), nFaces_(-2), nPatches_(-2)
+: nPoints_(-1),
+  nFaces_(-1),
+  nInteriorFaces_(-1),
+  nBoundaryFaces_(-1),
+  nCells_(-1),
+  nPatches_(-1)
 { 
     std::cout << "I am the mesh constructor" << std::endl;
     readMesh();
@@ -10,22 +15,37 @@ Mesh::Mesh()
 }
 
 
+// Function to get the current working directory of the executable file
+std::string Mesh::getExecutablePath()
+{
+  char result[ PATH_MAX ];
+  ssize_t count = readlink( "/proc/self/exe", result, PATH_MAX );
+
+  std::string executablePath ( result, (count > 0) ? count : 0 );
+
+  executablePath=executablePath.substr(0, executablePath.find_last_of("/"));
+
+  return executablePath+"/";
+}
+
+
+
 void Mesh::readMesh()
 {
-    std::string pathPoints (getExecutablePath()+std::string("constant/")+std::string("polyMesh/points"));
-    readPoints(pathPoints);
+    std::string filePoints (getExecutablePath()+std::string("constant/")+std::string("polyMesh/points"));
+    readPoints(filePoints);
 
-    std::string pathFaces (getExecutablePath()+std::string("constant/")+std::string("polyMesh/faces"));
-    readFaces(pathFaces);
+    std::string fileFaces (getExecutablePath()+std::string("constant/")+std::string("polyMesh/faces"));
+    readFaces(fileFaces);
 
-    std::string pathOwners(getExecutablePath()+std::string("constant/")+std::string("polyMesh/owner"));
-    readOwners(pathOwners);
+    std::string fileOwners(getExecutablePath()+std::string("constant/")+std::string("polyMesh/owner"));
 
-    std::string pathNeighbour(getExecutablePath()+std::string("constant/")+std::string("polyMesh/neighbour"));
-    readNeighbour(pathNeighbour);
+    std::string  fileNeighbours(getExecutablePath()+std::string("constant/")+std::string("polyMesh/neighbour"));
 
-    std::string pathBoundary(getExecutablePath()+std::string("constant/")+std::string("polyMesh/boundary"));
-    readBoundary(pathBoundary);
+    updateCellAndFaceData(fileOwners, fileNeighbours);
+
+    std::string fileBoundary(getExecutablePath()+std::string("constant/")+std::string("polyMesh/boundary"));
+    readBoundary(fileBoundary);
 
     std::cout << "Mesh was read successfully!" << std::endl;
 }
@@ -131,7 +151,9 @@ void Mesh::readFaces(std::string path)
         counter++;
       } 
 
+
       faceList_[i]=Face(nPointsInFace,listOfPoints);
+      faceList_[i].setID(i);
 
     }
   }
@@ -140,8 +162,7 @@ void Mesh::readFaces(std::string path)
 
 }
 
-
-void Mesh::readOwners(std::string path)
+vector<int> Mesh::readOwners(std::string path)
 {
   // Passes the path of points into a ifsteam
   std::ifstream in_file(path.c_str());
@@ -153,10 +174,13 @@ void Mesh::readOwners(std::string path)
       //return 1;
   }
 
+  // String to catch the file input
   std::string line;
 
   // Gets number of owners in file
   int nOwners = getNEntitites(in_file);
+
+  vector<int> tmp_OwnersList(nOwners);
 
   // Loop over the points to fill the vector 
   while ( getline(in_file, line ) && line.find("(") == std::string::npos );
@@ -168,15 +192,17 @@ void Mesh::readOwners(std::string path)
       std::getline( in_file, line );
       std::stringstream line_2(line);
       line_2 >> tmp;
-      faceList_[i].setOwner(tmp); //Set Face Owner
+      tmp_OwnersList[i]=tmp; 
     }
   }
   // Close the file
   in_file.close();
 
+  return tmp_OwnersList;
+
 }
 
-void Mesh::readNeighbour(std::string path)
+vector<int> Mesh::readNeighbours(std::string path)
 {
   // Passes the path of points into a ifsteam
   std::ifstream in_file(path.c_str());
@@ -188,40 +214,112 @@ void Mesh::readNeighbour(std::string path)
       //return 1;
   }
 
+  // String to catch the file input
   std::string line;
 
   // Gets number of faces in file
   int nNeighbours = getNEntitites(in_file);
 
-  // Variable to store maximum value of neighbour
-  int storeMax(0);
+  vector<int> tmp_NeighboursList(nNeighbours);
 
-    // Loop over the points to fill the vector 
+  // Loop over the points to fill the vector 
   while ( getline(in_file, line ) && line.find("(") == std::string::npos );
   {
-    int tmp(0); // catch number of owner
+    int tmp(0); // catch number of cell neighbour
 
     for ( int i = 0; i < nNeighbours; i++ )
     {
       std::getline( in_file, line );
       std::stringstream line_2(line);
       line_2 >> tmp;
-      faceList_[i].setNeighbour(tmp); //setFace neighbor
-     
-      if(tmp > storeMax)
-      {
-        storeMax = tmp;
-      }
-
+      tmp_NeighboursList[i]=tmp;
     }
   }
   // Close the file
   in_file.close();
 
-  nInteriorFaces_ = nNeighbours;
-  nBoundaryFaces_ = nFaces_ - nInteriorFaces_;
-  nCells_ = storeMax + 1;
+  return tmp_NeighboursList;
 }
+
+
+void Mesh::updateCellAndFaceData(std::string pathOwners, std::string pathNeighbours)
+{
+  // Reads owners
+  const vector<int> ownersList = readOwners(pathOwners);
+  
+  // Reads neighbours
+  const vector<int> neighboursList = readNeighbours(pathNeighbours);
+  
+  // Updates the number of interior faces and boundary faces
+  nInteriorFaces_ = neighboursList.size();
+  nBoundaryFaces_ = nFaces_ - nInteriorFaces_;
+  
+  // Updates the number of cells in the mesh
+  nCells_ = *std::max_element(std::begin(neighboursList), std::end(neighboursList)) + 1 ;
+  
+  // Updates the size of cellList_
+  cellList_.resize(nCells_);
+
+  // Gets faces that constitute each cell
+  vector<vector<Face*> > cellFaces(nCells_);
+
+  // Loops over the interior faces
+  for( int i = 0 ; i < nInteriorFaces_ ; i++)
+  {    
+    int tmp_owner = ownersList[i];
+    int tmp_neighbour = neighboursList[i];
+
+    cellFaces[tmp_owner].push_back(&faceList_[i]);
+    cellFaces[tmp_neighbour].push_back(&faceList_[i]);
+
+  }
+
+  // Loops over the boundary faces
+  for (int i = nInteriorFaces_; i < nFaces_; i++)
+  {
+    int tmp_owner = ownersList[i];
+    
+    cellFaces[tmp_owner].push_back(&faceList_[i]);
+  }
+  
+  // Updates the vector<Face*> in for each cell
+  for(unsigned int cellI = 0; cellI<cellList_.size(); cellI++)
+  {
+    cellList_[cellI].setCellFaces(cellFaces[cellI]);
+    cellList_[cellI].setCellID(cellI);
+  }
+
+  // Assign the pointers to cell owners and neighbours for each face
+  // Loops over the interior faces
+  for(unsigned int faceI = 0; faceI< nInteriorFaces_; faceI++)
+  {
+    int tmp_owner = ownersList[faceI];
+    int tmp_neighbour = neighboursList[faceI];
+
+    faceList_[faceI].setOwner( cellList_[tmp_owner]  );
+    faceList_[faceI].setNeighbour( cellList_[tmp_neighbour]  );
+
+    // Update face parameters
+    faceList_[faceI].computeFaceArea();
+    faceList_[faceI].computeFaceCenterOfMass();
+    faceList_[faceI].computeFaceAreaVector_interiorFaces();
+  }
+
+  // Loops over the boundary faces
+  for(unsigned int faceI = nInteriorFaces_ +1; faceI< nFaces_; faceI++)
+  {
+    int tmp_owner = ownersList[faceI];
+    faceList_[faceI].setOwner( cellList_[tmp_owner]  );
+    
+    // Update face parameters
+    faceList_[faceI].computeFaceArea();
+    faceList_[faceI].computeFaceCenterOfMass();
+    faceList_[faceI].computeFaceAreaVector_boundaryFaces();
+  }
+  
+}
+
+
 
 
 void Mesh::readBoundary(std::string path)
@@ -351,55 +449,3 @@ void Mesh::readBoundary(std::string path)
 
 
 }
-
-// Function to get the current working directory of the executable file
-std::string Mesh::getExecutablePath()
-{
-  char result[ PATH_MAX ];
-  ssize_t count = readlink( "/proc/self/exe", result, PATH_MAX );
-
-  std::string executablePath ( result, (count > 0) ? count : 0 );
-
-  executablePath=executablePath.substr(0, executablePath.find_last_of("/"));
-
-  return executablePath+"/";
-}
-
-void Mesh::computeFaceWeightingFactor()
-{
-
-    //std::vector<Cell>& cells = cellList_;
-
-    std::vector<Face>& faces = faceList_;
-
-    // This is a place holder for when the cellList is implemented
-    std::vector<Cell> cells(nCells_);
-
-    // Loop through interior faces
-    for (unsigned int i = 0; i < nInteriorFaces_ ; i++ )
-    {
-      const int cellOwner = faces[i].getOwner();
-
-      const int cellNeighbour = faces[i].getNeighbour();
-
-      const vector3 faceCenter = faces[i].getCenterOfMass();
-
-      const vector3 d_Cf = cells[cellOwner].getCenterOfMass() - faceCenter;
-
-      const vector3 d_fF = cells[cellNeighbour].getCenterOfMass() - faceCenter;
-
-      const vector3 e_f = faces[i].getFaceAreaVector()/mag( faces[i].getFaceAreaVector() );
-
-      faces[i].setweightingFactor( (d_Cf & e_f) / ( (d_Cf & e_f) + (d_fF & e_f) ));
-    }
-
-    // Loop through boundary the faces
-    for (unsigned int i = nInteriorFaces_ + 1; i < nFaces_  ; i++ )
-    {
-      faces[i].setweightingFactor(1.0);
-    }
-
-
-
-}
-

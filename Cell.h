@@ -1,7 +1,7 @@
 #ifndef CELL_H
 #define CELL_H
 
-#include "Face.h"
+class Face;
 
 class Cell
 {
@@ -13,13 +13,20 @@ class Cell
         // Destructor
         virtual  ~Cell(){};
 
-        // 
-        vector3 getCenterOfMass() const;
+        // Setters
+        void setCellFaces(const vector<Face*>& );
+        void setCellID(const int& );
+
+        // Getters
+        const vector3& getCenterOfMass() const;
 
          
     protected:
 
     private:
+
+        // cellID
+        int ID_;
 
         // Cell Volume
         double volume_;
