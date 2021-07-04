@@ -298,6 +298,11 @@ void Mesh::updateCellAndFaceData(std::string pathOwners, std::string pathNeighbo
 
     faceList_[faceI].setOwner( cellList_[tmp_owner]  );
     faceList_[faceI].setNeighbour( cellList_[tmp_neighbour]  );
+
+    // Update face parameters
+    faceList_[faceI].computeFaceArea();
+    faceList_[faceI].computeFaceCenterOfMass();
+    faceList_[faceI].computeFaceAreaVector_interiorFaces();
   }
 
   // Loops over the boundary faces
@@ -305,6 +310,11 @@ void Mesh::updateCellAndFaceData(std::string pathOwners, std::string pathNeighbo
   {
     int tmp_owner = ownersList[faceI];
     faceList_[faceI].setOwner( cellList_[tmp_owner]  );
+    
+    // Update face parameters
+    faceList_[faceI].computeFaceArea();
+    faceList_[faceI].computeFaceCenterOfMass();
+    faceList_[faceI].computeFaceAreaVector_boundaryFaces();
   }
   
 }

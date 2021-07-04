@@ -1,5 +1,4 @@
 #include "Face.h"
-#include "Cell.h"
 
 Face::Face(int nPointsInFace, vector<Point*> facePoints)
 :       
@@ -14,9 +13,7 @@ Face::Face(int nPointsInFace, vector<Point*> facePoints)
     weightingFactor_(-1),
     nonOrthogonalityAngle_(-1)
 {
-    computeFaceArea();
-    computeFaceCenterOfMass();
-    computeFaceAreaVector();
+
 }
 
 Face::Face( )
@@ -212,7 +209,7 @@ void Face::computeFaceCenterOfMass()
 
 }
 
-void Face::computeFaceAreaVector()
+void Face::computeFaceAreaVector_interiorFaces()
 {
     //Creates two vectors from the center of mass and one of the points in the face
     vector3 tmp_vec1 = facePoints_[0]->getPoint() - centerOfMass_;
@@ -240,7 +237,21 @@ void Face::computeFaceAreaVector()
     
 }
 
+void Face::computeFaceAreaVector_boundaryFaces()
+{
+    //Creates two vectors from the center of mass and one of the points in the face
+    vector3 tmp_vec1 = facePoints_[0]->getPoint() - centerOfMass_;
+    vector3 tmp_vec2 = facePoints_[1]->getPoint() - centerOfMass_;
 
+    // Computes the face normal by doing the cross product of the products (this is not the faceAreaVector)
+    vector3 areaVector_tmp = (tmp_vec1^tmp_vec2);
+    
+    // Computes the norm of the cross product between two vectors
+    double mag_vector_tmp = mag(areaVector_tmp);
+
+    // Calculates the faceAreaVector
+    areaVector_ = (areaVector_tmp/mag_vector_tmp)*area_;    
+}
 
 void Face::computeFaceWeightingFactor()
 {

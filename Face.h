@@ -5,8 +5,7 @@
 #include <vector>
 using std::vector;
 
-
-class Cell;
+#include "Cell.h"
 
 class Face
 {
@@ -33,8 +32,9 @@ class Face
         const vector3& getAreaVector() const;
 
         void computeFaceArea();
+        void computeFaceAreaVector_interiorFaces();
+        void computeFaceAreaVector_boundaryFaces();
         void computeFaceCenterOfMass();
-        void computeFaceAreaVector();
         void computeFaceWeightingFactor();
 
         // Write to stream

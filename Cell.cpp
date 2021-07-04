@@ -1,5 +1,3 @@
-#include "Cell.h"
-
 #include "Face.h"
 
 Cell::Cell()
