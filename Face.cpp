@@ -253,7 +253,7 @@ void Face::computeFaceAreaVector_boundaryFaces()
     areaVector_ = (areaVector_tmp/mag_vector_tmp)*area_;    
 }
 
-void Face::computeFaceWeightingFactor()
+void Face::computeFaceWeightingFactor_interiorFaces()
 {
     const vector3& faceCenter = getCenterOfMass();
     const vector3& C_o = owner_->getCenterOfMass();
@@ -263,6 +263,11 @@ void Face::computeFaceWeightingFactor()
     const vector3 d_fF = C_n - faceCenter;
     const vector3 e_f = getAreaVector()/mag( getAreaVector() );
     setweightingFactor( (d_Cf & e_f) / ( (d_Cf & e_f) + (d_fF & e_f) ));
+}
+
+void Face::computeFaceWeightingFactor_boundaryFaces()
+{
+    setweightingFactor(1.0);
 }
 
 

@@ -275,7 +275,7 @@ void Mesh::updateCellAndFaceData(std::string pathOwners, std::string pathNeighbo
   }
 
   // Loops over the boundary faces
-  for (int i = nInteriorFaces_ +1 ; i < nFaces_; i++)
+  for (int i = nInteriorFaces_; i < nFaces_; i++)
   {
     int tmp_owner = ownersList[i];
     

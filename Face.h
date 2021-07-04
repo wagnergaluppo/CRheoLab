@@ -35,7 +35,8 @@ class Face
         void computeFaceAreaVector_interiorFaces();
         void computeFaceAreaVector_boundaryFaces();
         void computeFaceCenterOfMass();
-        void computeFaceWeightingFactor();
+        void computeFaceWeightingFactor_interiorFaces();
+        void computeFaceWeightingFactor_boundaryFaces();
 
         // Write to stream
         friend std::ostream& operator<<(std::ostream& , const Face& );

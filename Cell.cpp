@@ -4,7 +4,7 @@ Cell::Cell()
 :
 ID_(-1),
 volume_(-1),
-centerOfMass_{-1,-1,-1},
+centerOfMass_({-1,-1,-1}),
 skewness_(-1),
 cellFaces_()
 {

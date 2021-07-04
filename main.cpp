@@ -37,9 +37,14 @@ int main()
    checkCaseStructure();
     
     Mesh polyMesh;
-    for(unsigned int i =0 ; i<polyMesh.faceList_.size(); i++)
+    for(unsigned int i =0 ; i<polyMesh.nInteriorFaces_ ; i++)
     {
-        polyMesh.faceList_[i].computeFaceWeightingFactor();
+        polyMesh.faceList_[i].computeFaceWeightingFactor_interiorFaces(); 
+    }
+
+    for(unsigned int i = polyMesh.nInteriorFaces_; i<polyMesh.nFaces_; i++)
+    {
+        polyMesh.faceList_[i].computeFaceWeightingFactor_boundaryFaces();
     }
     /*// Print single point
     cout << polyMesh.pointList_[0] << endl;
@@ -51,7 +56,7 @@ int main()
 
 */
 
-
+    std::cout << "I am done" << std::endl;
 
 
     //polyMesh.faceList_[0].owner()=2;
