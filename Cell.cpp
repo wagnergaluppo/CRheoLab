@@ -28,3 +28,13 @@ const vector3& Cell::getCenterOfMass() const
 {
     return centerOfMass_;
 }
+
+double Cell::getNonOrthogonality()
+{
+    return this->nonOrthogonality_;
+}
+
+void Cell::setNonOrthogonality(double nonOrthoAngle)
+{
+    this->nonOrthogonality_=nonOrthoAngle;
+}

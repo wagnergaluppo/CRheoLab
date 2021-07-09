@@ -20,6 +20,11 @@ class Cell
         // Getters
         const vector3& getCenterOfMass() const;
 
+        
+        // getters and setters for nonOrthogonality attribute
+        double getNonOrthogonality();
+        void setNonOrthogonality(double);
+
          
     protected:
 
@@ -39,6 +44,9 @@ class Cell
 
         // Faces that make up a cell
         vector<Face*> cellFaces_;
+
+        // cell non-orthogonality
+        double nonOrthogonality_;
 
 
 };
