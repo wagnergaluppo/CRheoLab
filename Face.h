@@ -38,6 +38,12 @@ class Face
         void computeFaceWeightingFactor_interiorFaces();
         void computeFaceWeightingFactor_boundaryFaces();
 
+        void computeNonOrthogonality_interiorFaces();
+        void computeNonOrthogonality_boundaryFaces();
+
+        void setNonOrthogonalityFace(double);
+        double getNonOrthogonalityFace();
+
         // Write to stream
         friend std::ostream& operator<<(std::ostream& , const Face& );
        
@@ -67,7 +73,7 @@ class Face
         double weightingFactor_;
 
         // Non-orthogonality angle
-        double nonOrthogonalityAngle_;
+        double nonOrthogonalityFace_;
 
 };
 

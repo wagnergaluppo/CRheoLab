@@ -22,8 +22,11 @@ class Cell
 
         
         // getters and setters for nonOrthogonality attribute
-        double getNonOrthogonality();
-        void setNonOrthogonality(double);
+        double getNonOrthogonalityCell();
+        void setNonOrthogonalityCell(double);
+
+        vector<Face*> getCellFaces();
+        
 
          
     protected:

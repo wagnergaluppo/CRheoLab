@@ -23,18 +23,31 @@ void Cell::setCellFaces(const vector<Face*>& cellFaces)
     cellFaces_=cellFaces;   
 }
 
+std::vector<Face*> Cell::getCellFaces()
+{
+    return  cellFaces_;
+}
+
 
 const vector3& Cell::getCenterOfMass() const
 {
     return centerOfMass_;
 }
 
-double Cell::getNonOrthogonality()
+double Cell::getNonOrthogonalityCell()
 {
-    return this->nonOrthogonality_;
+    return nonOrthogonality_;
 }
 
-void Cell::setNonOrthogonality(double nonOrthoAngle)
+void Cell::setNonOrthogonalityCell(double)
 {
-    this->nonOrthogonality_=nonOrthoAngle;
+    for (auto &face : this->cellFaces_)
+        {
+            if (face->getNonOrthogonalityFace() > this->getNonOrthogonalityCell())
+            {
+                nonOrthogonality_=face->getNonOrthogonalityFace();
+            }
+
+        }
 }
+

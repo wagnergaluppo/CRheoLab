@@ -11,7 +11,7 @@ Face::Face(int nPointsInFace, vector<Point*> facePoints)
     centerOfMass_({-1,-1,-1}),
     areaVector_({-1,-1,-1}),
     weightingFactor_(-1),
-    nonOrthogonalityAngle_(-1)
+    nonOrthogonalityFace_(-1)
 {
 
 }
@@ -270,8 +270,6 @@ void Face::computeFaceWeightingFactor_boundaryFaces()
     setweightingFactor(1.0);
 }
 
-
-
 std::ostream& operator<<(std::ostream& os, const Face& p)
 {
 
@@ -285,4 +283,41 @@ std::ostream& operator<<(std::ostream& os, const Face& p)
     os << "]" << std::endl;
 
 return os;
+}
+
+
+void Face::computeNonOrthogonality_interiorFaces()
+{
+    const vector3& C_o = owner_->getCenterOfMass(); //from owner com
+    const vector3& C_n = neighbour_->getCenterOfMass(); // from neighbor
+    
+    // theta = acos(d.n/[|d|.|n|]) 
+    const vector3 dVec = C_o - C_n; // dVector= owner-neighbor
+    const vector3 nCap = getAreaVector(); //face normal vector
+    double theta =acos((dVec & nCap)/(mag(dVec)*mag(nCap)));
+    setNonOrthogonalityFace(theta);
+}
+
+void Face::computeNonOrthogonality_boundaryFaces()
+{
+    const vector3& faceCenter = getCenterOfMass(); //faceCenter
+    const vector3& C_o = owner_->getCenterOfMass(); //from owner com
+    // theta = acos(d.n/[|d|.|n|]) 
+
+    const vector3 dVec = C_o - faceCenter; // dVector= owner-faceCenter
+
+    const vector3 nCap = getAreaVector(); //face normal vector
+    double theta =acos((dVec & nCap)/(mag(dVec)*mag(nCap)));
+    setNonOrthogonalityFace(theta);
+}
+
+//defined getters and setters for non-orthogonality of a face
+double Face::getNonOrthogonalityFace()
+{
+    return nonOrthogonalityFace_;
+}
+
+void Face::setNonOrthogonalityFace(double nonOrthoAngle)
+{
+    nonOrthogonalityFace_=nonOrthoAngle;
 }
