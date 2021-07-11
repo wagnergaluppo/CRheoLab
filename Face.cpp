@@ -300,7 +300,7 @@ void Face::computeNonOrthogonality_interiorFaces()
 
 void Face::computeNonOrthogonality_boundaryFaces()
 {
-    const vector3& faceCenter = getCenterOfMass(); //faceCenter
+    const vector3& faceCenter = getIntersectionPoint(); //faceCenter
     const vector3& C_o = owner_->getCenterOfMass(); //from owner com
     // theta = acos(d.n/[|d|.|n|]) 
 

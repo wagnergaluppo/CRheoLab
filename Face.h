@@ -41,6 +41,13 @@ class Face
         void computeNonOrthogonality_interiorFaces();
         void computeNonOrthogonality_boundaryFaces();
 
+
+
+        
+        // Setter and getter for the Intersection Point
+        void setIntersectionPoint(vector3);
+        vector3 getIntersectionPoint() const;  
+
         void setNonOrthogonalityFace(double);
         double getNonOrthogonalityFace();
 
@@ -74,6 +81,7 @@ class Face
 
         // Non-orthogonality angle
         double nonOrthogonalityFace_;
+        vector3 intersectionPoint_; 
 
 };
 
