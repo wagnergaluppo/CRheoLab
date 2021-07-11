@@ -321,3 +321,14 @@ void Face::setNonOrthogonalityFace(double nonOrthoAngle)
 {
     nonOrthogonalityFace_=nonOrthoAngle;
 }
+// Setter for the Intersection Point
+void Face::setIntersectionPoint(vector3 intersectionPoint)
+{
+    intersectionPoint_=intersectionPoint;
+}
+
+// Getter for the Intersection Point
+vector3 Face::getIntersectionPoint() const   
+{
+    return intersectionPoint_;
+}
