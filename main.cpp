@@ -22,7 +22,7 @@ std::ostream& operator<<(std::ostream& os, const std::vector<T>& v)
 {
     os << "[ \n";
     for (int i = 0; i < v.size(); ++i) {
-        os << v[i];
+        os << v[i] << std::endl;
     }
     os << "]\n";
     return os;
@@ -37,6 +37,11 @@ int main()
    checkCaseStructure();
     
     Mesh polyMesh;
+
+    for (unsigned int i = 0; i< polyMesh.nFaces_ ; i++)
+    {
+        std::cout << polyMesh.faceList_[i].getWeightingFactor() << std::endl;;
+    }
 
     /*// Print single point
     cout << polyMesh.pointList_[0] << endl;

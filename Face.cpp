@@ -61,6 +61,12 @@ const vector3& Face::getAreaVector() const
     return areaVector_;
 }
 
+const double& Face::getWeightingFactor() const
+{
+    return weightingFactor_;
+}
+
+
 void Face::computeArea()
 {
 

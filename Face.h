@@ -30,6 +30,7 @@ class Face
         const Cell* getNeighbour() const;
         const vector3& getCenterOfMass() const;
         const vector3& getAreaVector() const;
+        const double& getWeightingFactor() const;
 
         void computeArea();
         void computeAreaVector();

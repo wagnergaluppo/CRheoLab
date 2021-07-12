@@ -307,6 +307,7 @@ void Mesh::updateCellAndFaceData(std::string pathOwners, std::string pathNeighbo
     faceList_[faceI].computeArea();
     faceList_[faceI].computeCenterOfMass();
     faceList_[faceI].computeAreaVector();
+    faceList_[faceI].computeWeightingFactor();
   }
 
 }
