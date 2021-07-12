@@ -31,19 +31,10 @@ class Face
         const vector3& getCenterOfMass() const;
         const vector3& getAreaVector() const;
 
-<<<<<<< HEAD
         void computeArea();
         void computeAreaVector();
         void computeCenterOfMass();
         void computeWeightingFactor();
-=======
-        void computeFaceArea();
-        void computeFaceAreaVector_interiorFaces();
-        void computeFaceAreaVector_boundaryFaces();
-        void computeFaceCenterOfMass();
-        void computeFaceWeightingFactor_interiorFaces();
-        void computeFaceWeightingFactor_boundaryFaces();
->>>>>>> 6faf6e381177298a19dfa4c2d992aac85476a4ec
 
         // Write to stream
         friend std::ostream& operator<<(std::ostream& , const Face& );
