@@ -20,37 +20,62 @@ FoamFile
     frontAndBack
     {
         type            patch;
+<<<<<<< HEAD
         physicalType    patch;
         nFaces          5316;
         startFace       3923;
+=======
+        nFaces          10000;
+        startFace       2970000;
+>>>>>>> 6faf6e381177298a19dfa4c2d992aac85476a4ec
     }
     bottom
     {
         type            patch;
+<<<<<<< HEAD
         physicalType    patch;
         nFaces          32;
         startFace       9239;
+=======
+        nFaces          10000;
+        startFace       2980000;
+>>>>>>> 6faf6e381177298a19dfa4c2d992aac85476a4ec
     }
     right
     {
         type            patch;
+<<<<<<< HEAD
         physicalType    patch;
         nFaces          32;
         startFace       9271;
+=======
+        nFaces          20000;
+        startFace       2990000;
+>>>>>>> 6faf6e381177298a19dfa4c2d992aac85476a4ec
     }
     top
     {
         type            patch;
+<<<<<<< HEAD
         physicalType    patch;
         nFaces          32;
         startFace       9303;
+=======
+        nFaces          10000;
+        startFace       3010000;
+>>>>>>> 6faf6e381177298a19dfa4c2d992aac85476a4ec
     }
     left
     {
         type            patch;
+<<<<<<< HEAD
         physicalType    patch;
         nFaces          32;
         startFace       9335;
+=======
+        nFaces          10000;
+        startFace       3020000;
+>>>>>>> 6faf6e381177298a19dfa4c2d992aac85476a4ec
     }
 )
 
