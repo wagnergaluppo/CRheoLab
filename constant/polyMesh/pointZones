@@ -9,49 +9,12 @@ FoamFile
 {
     version     2.0;
     format      ascii;
-    class       polyBoundaryMesh;
+    class       regIOobject;
     location    "constant/polyMesh";
-    object      boundary;
+    object      pointZones;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-5
-(
-    frontAndBack
-    {
-        type            patch;
-        physicalType    patch;
-        nFaces          5316;
-        startFace       3923;
-    }
-    bottom
-    {
-        type            patch;
-        physicalType    patch;
-        nFaces          32;
-        startFace       9239;
-    }
-    right
-    {
-        type            patch;
-        physicalType    patch;
-        nFaces          32;
-        startFace       9271;
-    }
-    top
-    {
-        type            patch;
-        physicalType    patch;
-        nFaces          32;
-        startFace       9303;
-    }
-    left
-    {
-        type            patch;
-        physicalType    patch;
-        nFaces          32;
-        startFace       9335;
-    }
-)
+0()
 
 // ************************************************************************* //

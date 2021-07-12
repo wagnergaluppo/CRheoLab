@@ -5,27 +5,36 @@
 #include <vector>
 using std::vector;
 
+#include "Cell.h"
+
 class Face
 {
     public:
 
         // Constructor  
-        Face(int, vector<Point*> , int , int );
+        Face(int, vector<Point*>);
         Face();
 
         // Destructor
         virtual  ~Face(){};
        
-        // Member Functions      
-        void setOwner(int);
-        void setNeighbour(int);
-        void computeFaceAreaVector();
+        // Member Functions
+        // Setters      
+        void setOwner(Cell&);
+        void setNeighbour(Cell&);
+        void setID(const int&);
         void setweightingFactor(double);
 
-        int getOwner() const ;
-        int getNeighbour() const;
-        vector3 getCenterOfMass() const;
-        vector3 getFaceAreaVector() const;
+        // getters
+        const Cell* getOwner() const;
+        const Cell* getNeighbour() const;
+        const vector3& getCenterOfMass() const;
+        const vector3& getAreaVector() const;
+
+        void computeArea();
+        void computeAreaVector();
+        void computeCenterOfMass();
+        void computeWeightingFactor();
 
         // Write to stream
         friend std::ostream& operator<<(std::ostream& , const Face& );
@@ -34,19 +43,23 @@ class Face
     protected:
 
     private:
+        int ID_;
+
         int nPointsInFace_;
         vector<Point*> facePoints_;
-        int owner_;
-        int neighbour_;  
 
-        // Area vector
-        vector3 areaVector_; 
+        Cell* owner_;
+        Cell* neighbour_;
+
+
+        // Area
+        double area_;
 
         // Center of mass
         vector3 centerOfMass_; 
 
-        // Area
-        double area_;
+        // Area vector
+        vector3 areaVector_; 
 
         // Weighting factor
         double weightingFactor_;
