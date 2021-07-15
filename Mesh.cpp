@@ -310,9 +310,15 @@ void Mesh::updateCellAndFaceData(std::string pathOwners, std::string pathNeighbo
     faceList_[faceI].computeWeightingFactor();
   }
 
+  //Update Cell Centers and Volume
+  for (unsigned int cellI = 0; cellI< nCells_; cellI++)
+      {
+          cellList_[cellI].computeVolume();
+          cellList_[cellI].computeCenter();
+      }
+
+
 }
-
-
 
 
 void Mesh::readBoundary(std::string path)
