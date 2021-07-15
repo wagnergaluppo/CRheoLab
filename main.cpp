@@ -38,24 +38,6 @@ int main()
     
     Mesh polyMesh;
 
-    for (unsigned int i = 0; i< polyMesh.nFaces_ ; i++)
-    {
-      std::cout << polyMesh.faceList_[i].getWeightingFactor() << std::endl;;
-    }
-
-    std::cout <<"\n\n\n Cell Volumes and  Cell Centers\n" << std::endl;
-    for (unsigned int i = 0; i< polyMesh.nCells_ ; i++)
-    {
-      std::cout << polyMesh.cellList_[i].getVolume()<<",        " << polyMesh.cellList_[i].getCenterOfMass() << std::endl;
-    }
-
-
-
-
-
-    
-   
-
     /*// Print single point
     cout << polyMesh.pointList_[0] << endl;
 

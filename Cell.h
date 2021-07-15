@@ -25,8 +25,10 @@ class Cell
 
         void computeCenter();
         void computeVolume();
-        double computepyrVol (vector3, vector3, vector3) const;
-        vector3 computeGeometriCenter() const;
+
+        double computepyrVol (const vector3&, const vector3&, const vector3&) const;
+        
+        vector3 computeGeometricCenter() const;
          
     protected:
 
