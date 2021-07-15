@@ -268,7 +268,6 @@ void Face::computeWeightingFactor()
         double SfdOwn = std::abs(Sf & d_Cf);
         double SfdNei = std::abs(Sf & d_fF);
 
-        
         //setweightingFactor( std::abs(d_fF & e_f) / ( std::abs(d_Cf & e_f) + std::abs(d_fF & e_f) ));
         setweightingFactor( SfdNei / ( SfdOwn + SfdNei ) );
     }
