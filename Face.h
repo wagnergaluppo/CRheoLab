@@ -20,37 +20,28 @@ class Face
        
         // Member Functions
         // Setters      
-        void setOwner(Cell&);
-        void setNeighbour(Cell&);
+        void setOwner(const Cell&);
+        void setNeighbour(const Cell&);
         void setID(const int&);
-        void setweightingFactor(double);
+        void setWeightingFactor(const double&);
+        void setNonOrthogonalityFace(const double&); 
 
         // getters
         const Cell* getOwner() const;
         const Cell* getNeighbour() const;
         const vector3& getCenterOfMass() const;
         const vector3& getAreaVector() const;
+        const double& getWeightingFactor() const;
+        const double& getNonOrthogonality() const; 
 
-        void computeFaceArea();
-        void computeFaceAreaVector_interiorFaces();
-        void computeFaceAreaVector_boundaryFaces();
-        void computeFaceCenterOfMass();
-        void computeFaceWeightingFactor_interiorFaces();
-        void computeFaceWeightingFactor_boundaryFaces();
-
-        void computeNonOrthogonality_interiorFaces();
-        void computeNonOrthogonality_boundaryFaces();
-
-
+        // computations
+        void computeArea();
+        void computeAreaVector();
+        void computeCenterOfMass();
+        void computeWeightingFactor();
+        void computeNonOrthogonality();
 
         
-        // Setter and getter for the Intersection Point
-        void setIntersectionPoint(vector3);
-        vector3 getIntersectionPoint() const;  
-
-        void setNonOrthogonalityFace(double);
-        double getNonOrthogonalityFace();
-
         // Write to stream
         friend std::ostream& operator<<(std::ostream& , const Face& );
        
@@ -63,8 +54,8 @@ class Face
         int nPointsInFace_;
         vector<Point*> facePoints_;
 
-        Cell* owner_;
-        Cell* neighbour_;
+        const Cell* owner_;
+        const Cell* neighbour_;
 
 
         // Area
@@ -80,8 +71,7 @@ class Face
         double weightingFactor_;
 
         // Non-orthogonality angle
-        double nonOrthogonalityFace_;
-        vector3 intersectionPoint_; 
+        double nonOrthogonalityAngle_;
 
 };
 

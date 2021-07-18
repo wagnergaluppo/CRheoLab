@@ -16,17 +16,24 @@ class Cell
         // Setters
         void setCellFaces(const vector<Face*>& );
         void setCellID(const int& );
+        void setCenterOfMass(const vector3&);
+        void setNonOrthogonality(const double&);
+
+  
 
         // Getters
         const vector3& getCenterOfMass() const;
+        const double&  getVolume() const;
+        const double& getNonOrthogonality() const;
 
-        
-        // getters and setters for nonOrthogonality attribute
-        double getNonOrthogonalityCell();
-        void setNonOrthogonalityCell(double);
+        //computers
+        void computeCenter();
+        void computeVolume();
+        double computepyrVol (const vector3&, const vector3&, const vector3&) const;
+        vector3 computeGeometricCenter() const;
+        void computeMaxNonOrthogonality();
+    
 
-        vector<Face*> getCellFaces();
-        
 
          
     protected:
@@ -48,8 +55,8 @@ class Cell
         // Faces that make up a cell
         vector<Face*> cellFaces_;
 
-        // cell non-orthogonality
-        double nonOrthogonality_;
+        double maxNonOrthogonality_;
+
 
 
 };
