@@ -9,7 +9,6 @@ skewness_(-1),
 cellFaces_()
 
 {
-
     
 }
 
@@ -22,18 +21,18 @@ void Cell::setCellID(const int& ID)
 void Cell::setCellFaces(const vector<Face*>& cellFaces)
 {
     // Deep copy of points
-    cellFaces_=cellFaces;   
+    cellFaces_ = cellFaces;   
 }
+
 
 void Cell::setNonOrthogonality(const double& angle)
 {
-    maxNonOrthogonality_=angle;
+    maxNonOrthogonality_ = angle;
     
 }
 
-
-
 //getters
+
 const vector3& Cell::getCenterOfMass() const
 {
     return centerOfMass_;
@@ -59,15 +58,16 @@ void Cell::computeVolume()
     
     for(int faceI = 0; faceI < cellFaces_.size(); faceI++)
     {    
-      const vector3& Sf = cellFaces_[faceI]->getAreaVector();   
+			const vector3& Sf = cellFaces_[faceI]->getAreaVector();   
 
       const vector3& Cf = cellFaces_[faceI]->getCenterOfMass();
 
       //Accumulate volume-weighted face-pyramid center
       double pyrvol = computepyrVol(Sf, Cf, geometricCenter);
 
+			//Accumulate volume-weighted face-pyramid center
       cellVolume += pyrvol;
-     //Accumulate volume-weighted face-pyramid center          
+               
     }
 
     volume_ = cellVolume;                                                                    
@@ -112,8 +112,9 @@ double Cell::computepyrVol( const vector3& Sf, const vector3& Cf  , const vector
     }
 
     // Computes the volume of the sub-pyramid
-    double pyrVol = std::max(  ( (flipNormal*Sf) & d_gf) 
-                                , VSMALL
+    double pyrVol = std::max(  
+															( (flipNormal*Sf) & d_gf) 
+                              , VSMALL
                             )/3;
     
     return pyrVol;
@@ -138,19 +139,16 @@ vector3 Cell::computeGeometricCenter() const{
 
 void Cell::computeMaxNonOrthogonality()
 {
-    double maxNonOrthogonalityAngle_=0.0;
+    double maxNonOrthogonalityAngle = 0.0;
     for (int i=0; i< this->cellFaces_.size(); i++)
     {
 
         maxNonOrthogonalityAngle_= std::max(
-                                                maxNonOrthogonalityAngle_,
+                                                maxNonOrthogonalityAngle,
                                                 cellFaces_[i]->getNonOrthogonality()
                                             );
-
-        
     }
 
-    setNonOrthogonality(maxNonOrthogonalityAngle_);
+    setNonOrthogonality(maxNonOrthogonalityAngle);
 }
-
 

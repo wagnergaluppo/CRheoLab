@@ -19,8 +19,6 @@ class Cell
         void setCenterOfMass(const vector3&);
         void setNonOrthogonality(const double&);
 
-  
-
         // Getters
         const vector3& getCenterOfMass() const;
         const double&  getVolume() const;
@@ -33,8 +31,6 @@ class Cell
         vector3 computeGeometricCenter() const;
         void computeMaxNonOrthogonality();
     
-
-
          
     protected:
 
@@ -56,8 +52,6 @@ class Cell
         vector<Face*> cellFaces_;
 
         double maxNonOrthogonality_;
-
-
 
 };
 

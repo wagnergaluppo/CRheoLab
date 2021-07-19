@@ -49,8 +49,6 @@ void Face::setNonOrthogonalityFace(const double& nonOrthoAngle)
 }
 
 
-
-
 //getters
 
 const Cell* Face::getOwner() const
@@ -84,7 +82,7 @@ const double& Face::getNonOrthogonality() const
     return nonOrthogonalityAngle_;
 }
 
-//computers
+// Compute
 void Face::computeArea()
 {
 
@@ -245,8 +243,6 @@ void Face::computeAreaVector()
     double mag_vector_tmp = mag(areaVector_tmp);
 
 
-
-
     if (isInteriorFace)
     {
         // distance vector between owner and neighbour cell
@@ -259,10 +255,7 @@ void Face::computeAreaVector()
         }
     }
     // Calculates the faceAreaVector
-    areaVector_ = (areaVector_tmp/mag_vector_tmp)*area_;
-
-
-    
+    areaVector_ = (areaVector_tmp/mag_vector_tmp)*area_; 
 }
 
 void Face::computeWeightingFactor()
@@ -287,12 +280,15 @@ void Face::computeWeightingFactor()
         double SfdNei = std::abs(Sf & d_fF);
 
         //setweightingFactor( std::abs(d_fF & e_f) / ( std::abs(d_Cf & e_f) + std::abs(d_fF & e_f) ));
+
         setWeightingFactor( SfdNei / ( SfdOwn + SfdNei ) );
     }
     else
     {
         setWeightingFactor(1.0);
     }
+
+    
 }
 
 
@@ -315,34 +311,37 @@ void Face::computeNonOrthogonality()
 {
     bool isInteriorFace (getNeighbour());
 
-    const vector3& C_o = owner_->getCenterOfMass(); //owner com
+    const vector3& C_o = owner_->getCenterOfMass(); //Cell owner
 
-    const vector3& Sf = getAreaVector(); //face normal vector
+    const vector3& Sf = getAreaVector(); // Face Area vector
 
-    const vector3 nf=Sf/mag(Sf);
+    const vector3 nf = Sf/mag(Sf); // Face normal vector
 
-    double theta=-1;
+    double theta = -1;
 
     if (isInteriorFace)
     {
         const vector3& C_n = neighbour_->getCenterOfMass(); // from neighbor
         
-        
         const vector3 d = C_n - C_o;
 
         // theta = acos(d.nf/[|d|.|n|]) 
-        double thetaRad = std::acos((d & nf)/(mag(d)*mag(nf)));
-        theta= radToDegree(thetaRad);
-        
+        double thetaRad = std::acos(
+																		(d & nf)/(mag(d)*mag(nf))
+																	 );
+        theta = radToDegree(thetaRad);
     }
     else
     {   
         const vector3& faceCenter= getCenterOfMass();
         const vector3 dn = faceCenter- C_o;
-        double thetaRad = std::acos((dn & nf)/(mag(dn)*mag(nf)));
-        theta= radToDegree(thetaRad);
+        double thetaRad = std::acos(
+																			(dn & nf)/(mag(dn)*mag(nf))
+																	 );
+        theta = radToDegree(thetaRad);
         
     }
+	
     setNonOrthogonalityFace(theta);
 }
 

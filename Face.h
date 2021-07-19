@@ -32,6 +32,7 @@ class Face
         const vector3& getCenterOfMass() const;
         const vector3& getAreaVector() const;
         const double& getWeightingFactor() const;
+
         const double& getNonOrthogonality() const; 
 
         // computations
@@ -40,7 +41,6 @@ class Face
         void computeCenterOfMass();
         void computeWeightingFactor();
         void computeNonOrthogonality();
-
         
         // Write to stream
         friend std::ostream& operator<<(std::ostream& , const Face& );
