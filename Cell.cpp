@@ -12,7 +12,7 @@ cellFaces_()
     
 }
 
-//setters
+// Setters
 void Cell::setCellID(const int& ID)
 {
     ID_ = ID;
@@ -31,7 +31,7 @@ void Cell::setNonOrthogonality(const double& angle)
     
 }
 
-//getters
+// Getters
 
 const vector3& Cell::getCenterOfMass() const
 {
@@ -48,7 +48,7 @@ const double& Cell::getNonOrthogonality() const
     return maxNonOrthogonality_;
 }
 
-//computer
+// Computations
 void Cell::computeVolume()
 {
     
@@ -143,7 +143,7 @@ void Cell::computeMaxNonOrthogonality()
     for (int i=0; i< this->cellFaces_.size(); i++)
     {
 
-        maxNonOrthogonalityAngle_= std::max(
+        maxNonOrthogonalityAngle= std::max(
                                                 maxNonOrthogonalityAngle,
                                                 cellFaces_[i]->getNonOrthogonality()
                                             );

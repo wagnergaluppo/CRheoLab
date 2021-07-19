@@ -24,7 +24,7 @@ class Cell
         const double&  getVolume() const;
         const double& getNonOrthogonality() const;
 
-        //computers
+        // Computations
         void computeCenter();
         void computeVolume();
         double computepyrVol (const vector3&, const vector3&, const vector3&) const;

@@ -20,7 +20,7 @@ Face::Face( )
 {
 }
 
-//setters
+// Setters
 void Face::setOwner ( const Cell& owner)
 {
     owner_ = &owner;
@@ -49,7 +49,7 @@ void Face::setNonOrthogonalityFace(const double& nonOrthoAngle)
 }
 
 
-//getters
+// Getters
 
 const Cell* Face::getOwner() const
 {
@@ -82,7 +82,7 @@ const double& Face::getNonOrthogonality() const
     return nonOrthogonalityAngle_;
 }
 
-// Compute
+// Computations
 void Face::computeArea()
 {
 

@@ -326,7 +326,6 @@ void Mesh::updateCellAndFaceData(std::string pathOwners, std::string pathNeighbo
   for (unsigned int cellI = 0; cellI < nCells_; cellI++)
   {
     cellList_[cellI].computeMaxNonOrthogonality();    
-    std::cout<<cellList_[cellI].getNonOrthogonality()<<std::endl;; 
   }
 
 }

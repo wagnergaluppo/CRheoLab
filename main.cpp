@@ -47,16 +47,16 @@ int main()
     // Sums points coordinates between two meshes
     auto a = polyMesh.pointList_ + polyMesh.pointList_;
 
-    cout << "my directory is " << getExecutablePath() << endl;
+    cout << "my directory is " << getExecutablePath() << endl;*/
 
-*/
+    for(int i = 0; i < polyMesh.nCells_; i++)
+    {
+        std::cout << polyMesh.cellList_[i].getNonOrthogonality() << std::endl;
+    }
 
-    //std::cout << "I am done\n\n\n" << std::endl;
 
 
-
-    
-    std::cout<<polyMesh.faceList_[0].getNonOrthogonality();
+    std::cout << "I am done\n\n\n" << std::endl;
 
     return 0;
 }

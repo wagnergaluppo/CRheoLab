@@ -26,16 +26,15 @@ class Face
         void setWeightingFactor(const double&);
         void setNonOrthogonalityFace(const double&); 
 
-        // getters
+        // Getters
         const Cell* getOwner() const;
         const Cell* getNeighbour() const;
         const vector3& getCenterOfMass() const;
         const vector3& getAreaVector() const;
         const double& getWeightingFactor() const;
-
         const double& getNonOrthogonality() const; 
 
-        // computations
+        // Computations
         void computeArea();
         void computeAreaVector();
         void computeCenterOfMass();
