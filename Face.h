@@ -20,10 +20,11 @@ class Face
        
         // Member Functions
         // Setters      
-        void setOwner(Cell&);
-        void setNeighbour(Cell&);
+        void setOwner(const Cell&);
+        void setNeighbour(const Cell&);
         void setID(const int&);
-        void setweightingFactor(double);
+        void setWeightingFactor(const double&);
+        void setNonOrthogonalityFace(const double&); 
 
         // getters
         const Cell* getOwner() const;
@@ -32,11 +33,15 @@ class Face
         const vector3& getAreaVector() const;
         const double& getWeightingFactor() const;
 
+        const double& getNonOrthogonality() const; 
+
+        // computations
         void computeArea();
         void computeAreaVector();
         void computeCenterOfMass();
         void computeWeightingFactor();
-
+        void computeNonOrthogonality();
+        
         // Write to stream
         friend std::ostream& operator<<(std::ostream& , const Face& );
        
@@ -49,8 +54,8 @@ class Face
         int nPointsInFace_;
         vector<Point*> facePoints_;
 
-        Cell* owner_;
-        Cell* neighbour_;
+        const Cell* owner_;
+        const Cell* neighbour_;
 
 
         // Area

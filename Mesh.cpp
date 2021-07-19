@@ -271,6 +271,7 @@ void Mesh::updateCellAndFaceData(std::string pathOwners, std::string pathNeighbo
 
     cellFaces[tmp_owner].push_back(&faceList_[i]);
     cellFaces[tmp_neighbour].push_back(&faceList_[i]);
+  
 
   }
 
@@ -306,7 +307,6 @@ void Mesh::updateCellAndFaceData(std::string pathOwners, std::string pathNeighbo
     faceList_[faceI].computeArea();
     faceList_[faceI].computeCenterOfMass();
     faceList_[faceI].computeAreaVector();
-    
   }
 
   //Update Cell Centers and Volume
@@ -320,8 +320,14 @@ void Mesh::updateCellAndFaceData(std::string pathOwners, std::string pathNeighbo
   for (unsigned int faceI = 0; faceI < nFaces_; faceI++)
   {
     faceList_[faceI].computeWeightingFactor();
+    faceList_[faceI].computeNonOrthogonality();
   }
 
+  for (unsigned int cellI = 0; cellI < nCells_; cellI++)
+  {
+    cellList_[cellI].computeMaxNonOrthogonality();    
+    std::cout<<cellList_[cellI].getNonOrthogonality()<<std::endl;; 
+  }
 
 }
 

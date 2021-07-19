@@ -127,3 +127,9 @@ scalarField pow(const scalarField& v1, const int n)
    return result;
 }
 
+double radToDegree(const double s)
+{   
+
+     double degrees = (180/M_PI)*s;
+     return degrees;
+}

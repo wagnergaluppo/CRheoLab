@@ -17,18 +17,20 @@ class Cell
         void setCellFaces(const vector<Face*>& );
         void setCellID(const int& );
         void setCenterOfMass(const vector3&);
-        //void setVolume(const double&);
+        void setNonOrthogonality(const double&);
 
         // Getters
         const vector3& getCenterOfMass() const;
         const double&  getVolume() const;
+        const double& getNonOrthogonality() const;
 
+        //computers
         void computeCenter();
         void computeVolume();
-
         double computepyrVol (const vector3&, const vector3&, const vector3&) const;
-        
         vector3 computeGeometricCenter() const;
+        void computeMaxNonOrthogonality();
+    
          
     protected:
 
@@ -49,6 +51,7 @@ class Cell
         // Faces that make up a cell
         vector<Face*> cellFaces_;
 
+        double maxNonOrthogonality_;
 
 };
 
