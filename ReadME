@@ -6,6 +6,10 @@ Compile the code with:
 
 To Run case:
 
->./run/CRheo 
+>cd run
+
+>gmshToFoam mesh32.msh
+
+>./CRheo 
 
 
