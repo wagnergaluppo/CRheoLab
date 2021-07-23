@@ -1,5 +1,7 @@
+#ifndef SCALAROPERATIONS_H
+#define SCALAROPERATIONS_H
 // Output scalarField to screen
-std::ostream& operator<<(std::ostream& os, const scalarField& v)
+inline std::ostream& operator<<(std::ostream& os, const scalarField& v)
 {
     os << "[" << std::endl;
     
@@ -17,7 +19,7 @@ std::ostream& operator<<(std::ostream& os, const scalarField& v)
 // At the field level
 
 // Multiplication
-scalarField operator*(const scalarField& v1, const scalarField& v2)
+inline scalarField operator*(const scalarField& v1, const scalarField& v2)
 {
 
     checkSize(v1,v2);
@@ -33,7 +35,7 @@ scalarField operator*(const scalarField& v1, const scalarField& v2)
 }
 
 // Division
-scalarField operator/(const scalarField& v1, const scalarField& v2)
+inline scalarField operator/(const scalarField& v1, const scalarField& v2)
 {
 
     checkSize(v1,v2);
@@ -49,7 +51,7 @@ scalarField operator/(const scalarField& v1, const scalarField& v2)
 }
 
 // Square
-scalarField sqr(const scalarField& v1)
+inline scalarField sqr(const scalarField& v1)
 {   
    scalarField result(v1.size());
 
@@ -60,7 +62,7 @@ scalarField sqr(const scalarField& v1)
    return result;
 }
 
-scalarField log(const scalarField& v1)
+inline scalarField log(const scalarField& v1)
 {   
    scalarField result(v1.size());
 
@@ -72,7 +74,7 @@ scalarField log(const scalarField& v1)
    return result;
 }
 
-scalarField exp(const scalarField& v1)
+inline scalarField exp(const scalarField& v1)
 {   
    scalarField result(v1.size());
 
@@ -83,7 +85,7 @@ scalarField exp(const scalarField& v1)
    return result;
 }
 
-scalarField sin(const scalarField& v1)
+inline scalarField sin(const scalarField& v1)
 {   
    scalarField result(v1.size());
 
@@ -94,7 +96,7 @@ scalarField sin(const scalarField& v1)
    return result;
 }
 
-scalarField cos(const scalarField& v1)
+inline scalarField cos(const scalarField& v1)
 {   
    scalarField result(v1.size());
 
@@ -105,7 +107,7 @@ scalarField cos(const scalarField& v1)
    return result;
 }
 
-scalarField tan(const scalarField& v1)
+inline scalarField tan(const scalarField& v1)
 {   
    scalarField result(v1.size());
 
@@ -116,7 +118,7 @@ scalarField tan(const scalarField& v1)
    return result;
 }
 
-scalarField pow(const scalarField& v1, const int n)
+inline scalarField pow(const scalarField& v1, const int n)
 {   
    scalarField result(v1.size());
 
@@ -127,9 +129,11 @@ scalarField pow(const scalarField& v1, const int n)
    return result;
 }
 
-double radToDegree(const double s)
+inline double radToDegree(const double s)
 {   
 
      double degrees = (180/M_PI)*s;
      return degrees;
 }
+
+#endif

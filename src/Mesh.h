@@ -1,10 +1,19 @@
 #ifndef MESH_H
 #define MESH_H
 
-#include "Point.cpp"
-#include "Face.cpp"
-#include "Patch.cpp"
-#include "Cell.cpp"
+#include <vector>
+#include <string>
+#include <limits.h>
+#include <unistd.h>
+#include <fstream>
+#include <sstream>
+#include <algorithm> 
+
+#include "Point.h"
+#include "Face.h"
+#include "Cell.h"
+#include "Patch.h"
+#include "findFiles.h"
 
 class Mesh {
 

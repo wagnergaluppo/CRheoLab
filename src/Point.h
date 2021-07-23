@@ -3,6 +3,7 @@
 
 //include "forAllOperations.h"
 #include <iostream>
+#include "mathOperations.h"
 
 
 class Point

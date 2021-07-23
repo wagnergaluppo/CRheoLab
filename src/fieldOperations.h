@@ -1,7 +1,9 @@
+#ifndef FIELDOPERATIONS_H
+#define FIELDOPERATIONS_H
 
 // Check if both vectors have the same size
-template <typename T>
-void checkSize(const std::vector<T>& v1, const std::vector<T>& v2)
+template <typename T1>
+inline void checkSize(const std::vector<T1>& v1, const std::vector<T1>& v2)
 {
     if(v1.size() != v2.size() )
     {
@@ -14,12 +16,12 @@ void checkSize(const std::vector<T>& v1, const std::vector<T>& v2)
 // At the field level
 // Summation
 template <typename T>
-vector<T> operator+(const vector<T> & v1, const vector<T> & v2)
+inline std::vector<T> operator+(const std::vector<T> & v1, const std::vector<T> & v2)
 {
 
     checkSize(v1,v2);
    
-   vector<T> result(v1.size());
+   std::vector<T> result(v1.size());
 
    for(unsigned int i = 0 ; i < v1.size(); i++)
    {
@@ -31,12 +33,12 @@ vector<T> operator+(const vector<T> & v1, const vector<T> & v2)
 
 
 template <typename T>
-vector<T> operator-(const vector<T> & v1, const vector<T> & v2)
+inline std::vector<T> operator-(const std::vector<T> & v1, const std::vector<T> & v2)
 {
 
     checkSize(v1,v2);
    
-   vector<T> result(v1.size());
+   std::vector<T> result(v1.size());
 
    for(unsigned int i = 0 ; i < v1.size(); i++)
    {
@@ -45,3 +47,5 @@ vector<T> operator-(const vector<T> & v1, const vector<T> & v2)
 
    return result;
 }
+
+#endif

@@ -1,8 +1,11 @@
+#ifndef FINDFILES_H
+#define FINDFILES_H
+
 #include <dirent.h> 
 #include <cstdio>
 
 // Function to get the current working directory of the executable file
-std::string getExecutablePath()
+inline std::string getExecutablePath()
 {
   char result[ PATH_MAX ];
   ssize_t count = readlink( "/proc/self/exe", result, PATH_MAX );
@@ -15,7 +18,7 @@ std::string getExecutablePath()
 }
 
 // Function to check if a folder exists withing the executable path
-void checkFileStructure(std::string folderName,  std::string pathname = getExecutablePath())
+inline void checkFileStructure(std::string folderName,  std::string pathname = getExecutablePath())
 {
   #include <dirent.h>
   #include <errno.h>
@@ -34,7 +37,7 @@ void checkFileStructure(std::string folderName,  std::string pathname = getExecu
 }
 
 // Check if case structure is Ok
-void checkCaseStructure()
+inline void checkCaseStructure()
 {
 
   checkFileStructure("constant");
@@ -48,3 +51,5 @@ void checkCaseStructure()
 
   std::cout << "Everything is clear!" << std::endl;
 }
+
+#endif

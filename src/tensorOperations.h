@@ -1,6 +1,7 @@
-
+#ifndef TENSOROPERATIONS_H
+#define TENSOROPERATIONS_H
 // Output vectorField to screen
-std::ostream& operator<<(std::ostream& os, const tensorField& t)
+inline std::ostream& operator<<(std::ostream& os, const tensorField& t)
 {
     os << "[" << std::endl;
     
@@ -22,7 +23,7 @@ std::ostream& operator<<(std::ostream& os, const tensorField& t)
 }
 
 
-std::ostream& operator<<(std::ostream& os, const tensor& t)
+inline std::ostream& operator<<(std::ostream& os, const tensor& t)
 {
     os << "[ " ;
     
@@ -42,7 +43,7 @@ std::ostream& operator<<(std::ostream& os, const tensor& t)
 // At the vector level
 
 // Summation
-tensor operator+(const tensor& t1, const tensor& t2)
+inline tensor operator+(const tensor& t1, const tensor& t2)
 {
    
    tensor result;
@@ -57,7 +58,7 @@ tensor operator+(const tensor& t1, const tensor& t2)
 
 
 // Subtraction
-tensor operator-(const tensor& t1, const tensor& t2)
+inline tensor operator-(const tensor& t1, const tensor& t2)
 {
    
    tensor result;
@@ -71,7 +72,7 @@ tensor operator-(const tensor& t1, const tensor& t2)
 }
 
 // scalar multiplication
-tensor operator*(const double& d1, const tensor& t1)
+inline tensor operator*(const double& d1, const tensor& t1)
 {
     tensor result;
 
@@ -83,7 +84,7 @@ tensor operator*(const double& d1, const tensor& t1)
    return result;
 }
 
-tensor operator*(const tensor& t1,const double& d1)
+inline tensor operator*(const tensor& t1,const double& d1)
 {
     tensor result;
 
@@ -97,7 +98,7 @@ tensor operator*(const tensor& t1,const double& d1)
 
 
 // scalar division
-tensor operator/(const tensor& t1, const double& d1)
+inline tensor operator/(const tensor& t1, const double& d1)
 {
     tensor result;
 
@@ -109,7 +110,7 @@ tensor operator/(const tensor& t1, const double& d1)
    return result;
 }
 
-tensor  operator/(const double& d1, const tensor& t1)
+inline tensor  operator/(const double& d1, const tensor& t1)
 {
     tensor result;
 
@@ -136,7 +137,7 @@ tensor operator&(const tensor& t1, const vector3& v1)
 // At the field level
 
 
-tensorField operator*(const tensorField& t1, const double& d1)
+inline tensorField operator*(const tensorField& t1, const double& d1)
 {
     tensorField result(t1.size());
 
@@ -148,7 +149,7 @@ tensorField operator*(const tensorField& t1, const double& d1)
     return result;
 }
 
-tensorField operator*( const double& d1, const tensorField& t1)
+inline tensorField operator*( const double& d1, const tensorField& t1)
 {
 
     tensorField result(t1.size());
@@ -161,7 +162,7 @@ tensorField operator*( const double& d1, const tensorField& t1)
     return result;
 }
 
-tensorField operator*( const scalarField& s1, const tensorField& t1)
+inline tensorField operator*( const scalarField& s1, const tensorField& t1)
 {
 
     tensorField result(t1.size());
@@ -174,7 +175,7 @@ tensorField operator*( const scalarField& s1, const tensorField& t1)
     return result;
 }
 
-tensorField operator/(const tensorField& t1, const double& d1)
+inline tensorField operator/(const tensorField& t1, const double& d1)
 {
 
     tensorField result(t1.size());
@@ -187,7 +188,7 @@ tensorField operator/(const tensorField& t1, const double& d1)
     return result;
 }
 
-tensorField operator/(const double& d1, const tensorField& t1)
+inline tensorField operator/(const double& d1, const tensorField& t1)
 {
     tensorField result(t1.size());
 
@@ -199,7 +200,7 @@ tensorField operator/(const double& d1, const tensorField& t1)
     return result;
 }
 
-tensorField operator/(const tensorField& t1, const scalarField& s1)
+inline tensorField operator/(const tensorField& t1, const scalarField& s1)
 {
 
     tensorField result(t1.size());
@@ -213,7 +214,7 @@ tensorField operator/(const tensorField& t1, const scalarField& s1)
 }
 
 
-tensorField operator/(const scalarField& s1, const tensorField& t1)
+inline tensorField operator/(const scalarField& s1, const tensorField& t1)
 {
     tensorField result(t1.size());
 
@@ -224,3 +225,4 @@ tensorField operator/(const scalarField& s1, const tensorField& t1)
 
     return result;
 }
+#endif

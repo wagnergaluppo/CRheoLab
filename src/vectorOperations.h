@@ -1,6 +1,7 @@
-
+#ifndef VECTOROPERATIONS_H
+#define VECTOROPERATIONS_H
 // Output vectorField to screen
-std::ostream& operator<<(std::ostream& os, const vectorField& v)
+inline std::ostream& operator<<(std::ostream& os, const vectorField& v)
 {
     os << "[" << std::endl;
     
@@ -23,7 +24,7 @@ std::ostream& operator<<(std::ostream& os, const vectorField& v)
 
 
 // Output vectorField to screen
-std::ostream& operator<<(std::ostream& os, const vector3& v)
+inline std::ostream& operator<<(std::ostream& os, const vector3& v)
 {
     os << "[ " ;
 
@@ -42,7 +43,7 @@ std::ostream& operator<<(std::ostream& os, const vector3& v)
 // At the vector level
 
 // Summation
-vector3 operator+(const vector3& v1, const vector3& v2)
+inline vector3 operator+(const vector3& v1, const vector3& v2)
 {
    
    vector3 result;
@@ -56,7 +57,7 @@ vector3 operator+(const vector3& v1, const vector3& v2)
 
 
 // Subtraction
-vector3 operator-(const vector3& v1, const vector3& v2)
+inline vector3 operator-(const vector3& v1, const vector3& v2)
 {
    
    vector3 result;
@@ -69,7 +70,7 @@ vector3 operator-(const vector3& v1, const vector3& v2)
 }
 
 // scalar multiplication
-vector3 operator*(const double& d1, const vector3& v1)
+inline vector3 operator*(const double& d1, const vector3& v1)
 {
     vector3 result;
 
@@ -80,7 +81,7 @@ vector3 operator*(const double& d1, const vector3& v1)
    return result;
 }
 
-vector3 operator*(const vector3& v1,const double& d1)
+inline vector3 operator*(const vector3& v1,const double& d1)
 {
     vector3 result;
 
@@ -92,7 +93,7 @@ vector3 operator*(const vector3& v1,const double& d1)
 
 
 // scalar division
-vector3 operator/(const vector3& v1, const double& d1)
+inline vector3 operator/(const vector3& v1, const double& d1)
 {
     vector3 result;
 
@@ -103,7 +104,7 @@ vector3 operator/(const vector3& v1, const double& d1)
    return result;
 }
 
-vector3  operator/(const double& d1, const vector3& v1)
+inline vector3  operator/(const double& d1, const vector3& v1)
 {
     vector3 result;
 
@@ -115,7 +116,7 @@ vector3  operator/(const double& d1, const vector3& v1)
 }
 
 // outer product
-tensor operator*(const vector3& v1, const vector3& v2)
+inline tensor operator*(const vector3& v1, const vector3& v2)
 {
  
    tensor result;
@@ -136,7 +137,7 @@ tensor operator*(const vector3& v1, const vector3& v2)
 
 
 // inner product / dot product
-double operator&(const vector3& v1, const vector3& v2)
+inline double operator&(const vector3& v1, const vector3& v2)
 {  
    double result;
 
@@ -151,7 +152,7 @@ double operator&(const vector3& v1, const vector3& v2)
 
 
 // cross product
-vector3 operator^(const vector3& v1, const vector3& v2)
+inline vector3 operator^(const vector3& v1, const vector3& v2)
 {   
    vector3 result;
 
@@ -165,7 +166,7 @@ vector3 operator^(const vector3& v1, const vector3& v2)
 
 
 // At the field level
-vectorField operator*(const vectorField& v1, const double& d1)
+inline vectorField operator*(const vectorField& v1, const double& d1)
 {
     vectorField result(v1.size());
 
@@ -177,7 +178,7 @@ vectorField operator*(const vectorField& v1, const double& d1)
     return result;
 }
 
-vectorField operator*( const double& d1, const vectorField& v1)
+inline vectorField operator*( const double& d1, const vectorField& v1)
 {
 
     vectorField result(v1.size());
@@ -190,7 +191,7 @@ vectorField operator*( const double& d1, const vectorField& v1)
     return result;
 }
 
-vectorField operator*( const scalarField& s1, const vectorField& v1)
+inline vectorField operator*( const scalarField& s1, const vectorField& v1)
 {
 
     vectorField result(v1.size());
@@ -203,7 +204,7 @@ vectorField operator*( const scalarField& s1, const vectorField& v1)
     return result;
 }
 
-tensorField operator*(const vectorField& v1, const vectorField& v2)
+inline tensorField operator*(const vectorField& v1, const vectorField& v2)
 {
 
     checkSize(v1,v2);
@@ -219,7 +220,7 @@ tensorField operator*(const vectorField& v1, const vectorField& v2)
 }
 
 
-vectorField operator/(const vectorField& v1, const double& d1)
+inline vectorField operator/(const vectorField& v1, const double& d1)
 {
 
     vectorField result(v1.size());
@@ -232,7 +233,7 @@ vectorField operator/(const vectorField& v1, const double& d1)
     return result;
 }
 
-vectorField operator/(const double& d1, const vectorField& v1)
+inline vectorField operator/(const double& d1, const vectorField& v1)
 {
     vectorField result(v1.size());
 
@@ -244,7 +245,7 @@ vectorField operator/(const double& d1, const vectorField& v1)
     return result;
 }
 
-vectorField operator/(const vectorField& v1, const scalarField& s1)
+inline vectorField operator/(const vectorField& v1, const scalarField& s1)
 {
 
     vectorField result(v1.size());
@@ -258,7 +259,7 @@ vectorField operator/(const vectorField& v1, const scalarField& s1)
 }
 
 
-vectorField operator/(const scalarField& s1, const vectorField& v1)
+inline vectorField operator/(const scalarField& s1, const vectorField& v1)
 {
     vectorField result(v1.size());
 
@@ -271,7 +272,7 @@ vectorField operator/(const scalarField& s1, const vectorField& v1)
 }
 
 
-scalarField operator&(const vectorField& v1, const vectorField& v2)
+inline scalarField operator&(const vectorField& v1, const vectorField& v2)
 {
     scalarField result(v1.size());
 
@@ -283,7 +284,7 @@ scalarField operator&(const vectorField& v1, const vectorField& v2)
     return result;
 }
 
-vectorField operator^(const vectorField& v1, const vectorField& v2)
+inline vectorField operator^(const vectorField& v1, const vectorField& v2)
 {
     vectorField result(v1.size());
 
@@ -296,23 +297,8 @@ vectorField operator^(const vectorField& v1, const vectorField& v2)
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Magnitude of a vector
-double mag(const vector3& v1)
+inline double mag(const vector3& v1)
 {
 
 
@@ -328,7 +314,7 @@ double mag(const vector3& v1)
 
 
 // Magnitude of a vector
-scalarField mag(const vectorField& v1)
+inline scalarField mag(const vectorField& v1)
 {
    scalarField result(v1.size());
 
@@ -345,7 +331,7 @@ scalarField mag(const vectorField& v1)
 }
 
 // Square of the magnitude of a vector
-scalarField magSqr(const vectorField& v1)
+inline scalarField magSqr(const vectorField& v1)
 {
     scalarField result(v1.size());
 
@@ -365,3 +351,4 @@ vectorField unitVector(const vectorField& v1)
    return result;
 }
 */
+#endif

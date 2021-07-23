@@ -1,6 +1,5 @@
 #include "Mesh.h"
 
-
 Mesh::Mesh()
 : nPoints_(-1),
   nFaces_(-1),

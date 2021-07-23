@@ -1,5 +1,15 @@
-Compile the code with
+Compile the code with:
 
-g++ -g main.cpp
+>make clean
+>make 
+
+
+To Run case:
+
+>cd run
+
+>gmshToFoam mesh32.msh
+
+>./CRheo 
 
 

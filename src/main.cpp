@@ -1,22 +1,5 @@
-
 #include <iostream>
-#include <math.h> 
-#include <cstring>
-#include <string>
-#include <limits.h>
-#include <unistd.h>
-#include <fstream>
-#include <sstream>
-#include <vector>
-#include <algorithm> 
-#include <assert.h>
-#include <memory>
-
-#include "mathOperations.h"
-#include "Mesh.cpp"
-#include "findFiles.h"
-
- #include <fstream>
+#include "Mesh.h"
 
 //  void write_csv(std::string filename, std::string , std::vector<double> );
 
