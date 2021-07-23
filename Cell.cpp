@@ -31,8 +31,13 @@ void Cell::setNonOrthogonality(const double& angle)
     
 }
 
-// Getters
+void Cell::setSkewness(const double& skewness)
+{
+    skewness_ = skewness;
+}
 
+
+// Getters
 const vector3& Cell::getCenterOfMass() const
 {
     return centerOfMass_;
@@ -46,6 +51,11 @@ const double& Cell::getVolume() const
 const double& Cell::getNonOrthogonality() const
 {
     return maxNonOrthogonality_;
+}
+
+const double& Cell::getSkewness() const
+{
+    return skewness_;
 }
 
 // Computations
@@ -152,3 +162,17 @@ void Cell::computeMaxNonOrthogonality()
     setNonOrthogonality(maxNonOrthogonalityAngle);
 }
 
+void Cell::computeSkewness()
+{
+    double maxSkewness = 0.0;
+    for (int i=0; i< this->cellFaces_.size(); i++)
+    {
+
+        maxSkewness = std::max(
+                                                maxSkewness,
+                                                cellFaces_[i]->getSkewness()
+                                            );
+    }
+
+    setSkewness(maxSkewness);
+}

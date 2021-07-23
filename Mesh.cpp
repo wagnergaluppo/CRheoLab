@@ -321,11 +321,13 @@ void Mesh::updateCellAndFaceData(std::string pathOwners, std::string pathNeighbo
   {
     faceList_[faceI].computeWeightingFactor();
     faceList_[faceI].computeNonOrthogonality();
+    faceList_[faceI].computeSkewness(); 
   }
 
   for (unsigned int cellI = 0; cellI < nCells_; cellI++)
   {
     cellList_[cellI].computeMaxNonOrthogonality();    
+    cellList_[cellI].computeSkewness(); 
   }
 
 }

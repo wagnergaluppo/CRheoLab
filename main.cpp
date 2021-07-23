@@ -49,12 +49,10 @@ int main()
 
     cout << "my directory is " << getExecutablePath() << endl;*/
 
-    for(int i = 0; i < polyMesh.nCells_; i++)
+    for(unsigned int i = 0 ; i < polyMesh.nCells_ ; i++)
     {
-        std::cout << polyMesh.cellList_[i].getNonOrthogonality() << std::endl;
+        std::cout << polyMesh.cellList_[i].getSkewness() << std::endl;
     }
-
-
 
     std::cout << "I am done\n\n\n" << std::endl;
 

@@ -18,11 +18,13 @@ class Cell
         void setCellID(const int& );
         void setCenterOfMass(const vector3&);
         void setNonOrthogonality(const double&);
+        void setSkewness(const double&);
 
         // Getters
         const vector3& getCenterOfMass() const;
         const double&  getVolume() const;
         const double& getNonOrthogonality() const;
+        const double& getSkewness() const;
 
         // Computations
         void computeCenter();
@@ -30,6 +32,7 @@ class Cell
         double computepyrVol (const vector3&, const vector3&, const vector3&) const;
         vector3 computeGeometricCenter() const;
         void computeMaxNonOrthogonality();
+        void computeSkewness();
     
          
     protected:

@@ -76,7 +76,7 @@ Point Point::operator-(Point const &obj)
     return result;
 }
 
-vector3 Point::getPoint() const
+const vector3& Point::getPoint() const
 {
     return p_;
 }

@@ -25,6 +25,7 @@ class Face
         void setID(const int&);
         void setWeightingFactor(const double&);
         void setNonOrthogonalityFace(const double&); 
+        void setSkewness(const double&);
 
         // Getters
         const Cell* getOwner() const;
@@ -33,6 +34,8 @@ class Face
         const vector3& getAreaVector() const;
         const double& getWeightingFactor() const;
         const double& getNonOrthogonality() const; 
+        const double& getSkewness() const;
+        const vector3& getIntersectionPoint() const;
 
         // Computations
         void computeArea();
@@ -40,7 +43,9 @@ class Face
         void computeCenterOfMass();
         void computeWeightingFactor();
         void computeNonOrthogonality();
-        
+        void computeIntersectionPoint();
+        void computeSkewness();
+
         // Write to stream
         friend std::ostream& operator<<(std::ostream& , const Face& );
        
@@ -71,6 +76,12 @@ class Face
 
         // Non-orthogonality angle
         double nonOrthogonalityAngle_;
+
+        // Face Skewness
+        double skewness_;
+
+        // Intersection point (IP)
+        vector3 intersectionPoint_; 
 
 };
 

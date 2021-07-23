@@ -35,7 +35,7 @@ class Point
         Point operator-(Point const &obj);
 
         // Return point vector
-        vector3 getPoint() const;
+        const vector3& getPoint() const;
 
         // Write to stream
         friend std::ostream& operator<<(std::ostream& , const Point& );
