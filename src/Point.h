@@ -29,11 +29,10 @@ class Point
         double operator[](int entry) const ;
 
         // Summation
-        Point operator+(Point const &obj);
         Point operator+(Point const &obj) const;
 
         // Subtraction
-        Point operator-(Point const &obj);
+        Point operator-(Point const &obj) const;
 
         // Return point vector
         const vector3& getPoint() const;
