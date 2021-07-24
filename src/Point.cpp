@@ -45,17 +45,6 @@ double Point::operator[](int entry) const
         throw std::out_of_range("Point does not have index " + std::to_string(entry));
 }
 
-
-Point Point::operator+(Point const &obj)
-{
-    Point result;
-    result.p_[0] = p_[0] + obj.p_[0];
-    result.p_[1] = p_[1] + obj.p_[1];
-    result.p_[2] = p_[2] + obj.p_[2];
-
-    return result;
-}
-
 Point Point::operator+(Point const &obj) const
 {
     Point result;
@@ -66,7 +55,7 @@ Point Point::operator+(Point const &obj) const
     return result;
 }
 
-Point Point::operator-(Point const &obj)
+Point Point::operator-(Point const &obj) const
 {
     Point result;
     result.p_[0] = p_[0] - obj.p_[0];
