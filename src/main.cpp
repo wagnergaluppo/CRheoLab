@@ -18,7 +18,9 @@ using namespace std;
 
 int main()
 {
-      
+        
+    std::cout << "Current path is : " << getExecutablePath() << std::endl;
+
    checkCaseStructure();
     
     Mesh polyMesh;

@@ -47,7 +47,6 @@ public:
 
 private:
 
-  std::string getExecutablePath();
 
   void readMesh();
 

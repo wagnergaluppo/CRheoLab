@@ -1,7 +1,6 @@
 #ifndef POINT_H
 #define POINT_H
 
-//include "forAllOperations.h"
 #include <iostream>
 #include "mathOperations.h"
 
@@ -20,7 +19,6 @@ class Point
         // Member Functions
         void setCoord(double, double, double);
 
-
         // Overloaded operatores
         // Setter
         double& operator[](int entry);
@@ -29,11 +27,10 @@ class Point
         double operator[](int entry) const ;
 
         // Summation
-        Point operator+(Point const &obj);
         Point operator+(Point const &obj) const;
 
         // Subtraction
-        Point operator-(Point const &obj);
+        Point operator-(Point const &obj) const;
 
         // Return point vector
         const vector3& getPoint() const;

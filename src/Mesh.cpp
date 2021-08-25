@@ -1,5 +1,6 @@
 #include "Mesh.h"
 
+
 Mesh::Mesh()
 : nPoints_(-1),
   nFaces_(-1),
@@ -14,24 +15,10 @@ Mesh::Mesh()
 }
 
 
-// Function to get the current working directory of the executable file
-std::string Mesh::getExecutablePath()
-{
-  char result[ PATH_MAX ];
-  ssize_t count = readlink( "/proc/self/exe", result, PATH_MAX );
-
-  std::string executablePath ( result, (count > 0) ? count : 0 );
-
-  executablePath=executablePath.substr(0, executablePath.find_last_of("/"));
-
-  return executablePath+"/";
-}
-
-
-
 void Mesh::readMesh()
 {
     std::string filePoints (getExecutablePath()+std::string("constant/")+std::string("polyMesh/points"));
+    std::cout << filePoints << std::endl;
     readPoints(filePoints);
 
     std::string fileFaces (getExecutablePath()+std::string("constant/")+std::string("polyMesh/faces"));

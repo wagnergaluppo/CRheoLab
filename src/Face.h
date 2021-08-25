@@ -39,6 +39,8 @@ class Face
 
         // Computations
         void computeArea();
+        
+        /// @brief Computes the face area vector \f$\vec{S}_f\f$
         void computeAreaVector();
         void computeCenterOfMass();
         void computeWeightingFactor();
@@ -68,7 +70,7 @@ class Face
         // Center of mass
         vector3 centerOfMass_; 
 
-        // Area vector
+        /// Area vector, \f$\vec{S}_f\f$
         vector3 areaVector_; 
 
         // Weighting factor
