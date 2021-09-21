@@ -40,3 +40,25 @@ By definition the surface unit normal always points outwards from the face. Howe
 To this end, the dot product between the vector that connects the center of the owner cell and the neighbour cell \f$\vec{d}_{ON}\f$ and the face area vector. If the operation is positive, \f$\vec{S}_f\f$ is pointing in the correct diction. If the value is negative, \f$\vec{S}_f\f$ is multiplied with a scalar of value -1 to correct its direction.
 
 For more details, please refer to Face::computeAreaVector() .
+
+### Face and Cell Skewness
+
+By definiton the Face Skewness is a measure of the distance between the face center of mass (\f$\vec{F_{cm}}\f$) and the face point that corresponds to the intersection \f$\vec{F_{i}}\f$ of the face and the line that:
+* **For Interior Faces**: joins the center of masses of the cells that share the face, owner \f$\vec{O_{cm}}\f$ and neighbour \f$\vec{N_{cm}}\f$;
+* **For boundary Faces**: is normal to the face and intersects the boundary (Owner) cell center of mass \f$\vec{O_{cm}}\f$.
+
+This will give the Skewness Vector, \f$\vec{S_{kw}}\f$, (See Figure XX)
+
+\image html Face_IntPt.png "Figure XX: Face Intersection Point and Skewness Vector" width=350px
+
+Then the actual Skewness, \f$S_{kw}\f$, value is obtained by a normalization, as:
+
+\f$S_{kw}=\frac{\| \vec{S_{kw}} \|}{M}\f$ 
+
+where \f$M\f$ is the maximum magnitude of the following quantities:
+* **For Interior Faces**: \f$0.2 \| \vec{O_{cm} N_{cm}} \|\f$;
+* **For boundary Faces**: \f$0.4 \| \vec{O_{cm} F_{i}} \|\f$;
+* Projection of the vector that connects the Face center of mass, \f$ \vec{F_{cm}}\f$, with each of the Face Points, \f$\vec{P_{i}}\f$, on the direction of the Skewness Vector, \f$\vec{S_{kw}}\f$, for all the Face Points (see Figure YY).
+
+\image html PtProj.png "Figure Y: Projection of Vector that connects the Face center of mass with the Face Points on the Direction of the Skewness Vector" width=350px
+
