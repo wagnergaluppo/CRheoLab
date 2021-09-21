@@ -62,3 +62,5 @@ where \f$M\f$ is the maximum magnitude of the following quantities:
 
 \image html PtProj.png "Figure YY: Projection of Vector that connects the Face center of mass with the Face Points on the Direction of the Skewness Vector" width=550px
 
+Finnaly the Owner and Neighbour (for interior faces) cells skewness should be updated with the maximum of the value just calculated and the current cell value. This way, the cell skewness will be equal to the maximum skewness of the faces that comprise it.
+
