@@ -58,9 +58,9 @@ Then the actual Skewness, \f$S_{kw}\f$, value is obtained by a normalization, as
 where \f$M\f$ is the maximum magnitude of the following quantities:
 * **For Interior Faces**: \f$0.2 \| \vec{O_{cm} N_{cm}} \|\f$;
 * **For boundary Faces**: \f$0.4 \| \vec{O_{cm} F_{i}} \|\f$;
-* Projection of the vector that connects the Face center of mass, \f$ \vec{F_{cm}}\f$, with each of the Face Points, \f$\vec{P_{i}}\f$, on the direction of the Skewness Vector, \f$\vec{S_{kw}}\f$, for all the Face Points (see Figure YY).
+* Projection of the vector that connects the Face center of mass, \f$ \vec{F_{cm}}\f$, with each of the Face Points, \f$\vec{P_{i}}\f$, on the direction of the Skewness Vector, \f$\vec{S_{kw}}\f$, for all the Face Points (see Figure YY). For more details, please refer to Face::computeSkewness()
 
 \image html PtProj.png "Figure YY: Projection of Vector that connects the Face center of mass with the Face Points on the Direction of the Skewness Vector" width=550px
 
-Finnaly the Owner and Neighbour (for interior faces) cells skewness should be updated with the maximum of the value just calculated and the current cell value. This way, the cell skewness will be equal to the maximum skewness of the faces that comprise it.
+Finnaly the Owner and Neighbour (for interior faces) cells skewness should be updated with the maximum of the value just calculated and the current cell value. This way, the cell skewness will be equal to the maximum skewness of the faces that comprise it. For more details, please refer to Cell::computeSkewness().
 
