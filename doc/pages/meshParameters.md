@@ -49,7 +49,7 @@ By definiton the Face Skewness is a measure of the distance between the face cen
 
 This will give the Skewness Vector, \f$\vec{S_{kw}}\f$, (See Figure XX)
 
-\image html Face_IntPt.png "Figure XX: Face Intersection Point and Skewness Vector" width=350px
+\image html FaceIntPt.png "Figure XX: Face Intersection Point and Skewness Vector" width=550px
 
 Then the actual Skewness, \f$S_{kw}\f$, value is obtained by a normalization, as:
 
@@ -60,5 +60,5 @@ where \f$M\f$ is the maximum magnitude of the following quantities:
 * **For boundary Faces**: \f$0.4 \| \vec{O_{cm} F_{i}} \|\f$;
 * Projection of the vector that connects the Face center of mass, \f$ \vec{F_{cm}}\f$, with each of the Face Points, \f$\vec{P_{i}}\f$, on the direction of the Skewness Vector, \f$\vec{S_{kw}}\f$, for all the Face Points (see Figure YY).
 
-\image html PtProj.png "Figure Y: Projection of Vector that connects the Face center of mass with the Face Points on the Direction of the Skewness Vector" width=350px
+\image html PtProj.png "Figure YY: Projection of Vector that connects the Face center of mass with the Face Points on the Direction of the Skewness Vector" width=550px
 
