@@ -42,10 +42,17 @@ class Face
         
         /// @brief Computes the face area vector \f$\vec{S}_f\f$
         void computeAreaVector();
+
         void computeCenterOfMass();
+        /// @brief Computation of cells face weighting factor, \f$g_{c}\f$.
+        /// @brief \f[ g_{c} =  \frac{ \left | \vec{d}_{fF} \cdot \vec{S}_f \right | }{ \left | \vec{d}_{Cf} \cdot \vec{S}_f \right | + \left | \vec{d}_{fF} \cdot \vec{S}_f \right |} \f]
+        
         void computeWeightingFactor();
+        
         void computeNonOrthogonality();
+        
         void computeIntersectionPoint();
+        
         void computeSkewness();
 
         // Write to stream

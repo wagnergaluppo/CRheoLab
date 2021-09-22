@@ -41,6 +41,8 @@ int main()
 
     std::cout << "I am done\n\n\n" << std::endl;
 
+    std::cout << polyMesh.patchList_[0].name() << endl;
+
     return 0;
 }
 
