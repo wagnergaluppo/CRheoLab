@@ -23,4 +23,5 @@ gmshToFoam mesh32.msh
 ## Execute CRheo
 CRheo 
 
-
+# Note: 
+# If the folders obj/ and bin/ are not present when you download the code. Create them with `mkdir obj bin`
