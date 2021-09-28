@@ -51,6 +51,11 @@ all: $(OUTPUT) $(MAIN)
 
 $(OUTPUT):
 	$(MD) $(OUTPUT)
+	
+### To create automatically the obj and bin directory
+$(shell   $(MD) $(OBJ_DIR))
+$(shell   $(MD) $(BIN_DIR))
+
 
 $(MAIN): $(OBJ_FILES) 
 	$(CXX) $(CXXFLAGS) -o  $@ $^  $(LFLAGS) 
