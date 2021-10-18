@@ -114,6 +114,62 @@ This implementation is carried out in Face::computeWeightingFactor()
 @note \f$g_{f} = 1 - g_{C}\f$
 
 
+----
+### Cell Volume and Center of Mass
+For each cell of the mesh there is the necessity of compute the cell volume and center of mass.
+
+Firstly, the methodology behind the computation of each cell volume is built over the following steps:
+
+1. Compute the geometric centre \f$X_G\f$ of each cell 
+
+\f[
+   X_G = \frac{1}{k} \sum^k_{i=1}X_i
+\f]
+
+    where k stands for the number of vertices in each cell. This step is implement in Cell::computeGeometricCenter(). 
+
+2. Decompose each cell into pyramids (Figure CCV1) where:
+   - The number of pyramids is equal to the number of faces
+   - The apex of each pyramid is the geometric centre of the cell
+
+   \image html i1.svg "Figure CCV1: Decomposition of a Polyhedron cell into Pyramids" width=550px
+   
+   
+3. Calculate the volume \f$V_{pyr}\f$ of each pyramid
+
+\f[
+  V_{pyr} = \frac{1}{3} d_{Gf}.\vec{S}_f
+\f]
+
+	This step is implement in Cell::computepyrVol(). 
+
+
+4. Compute the volume of each cell \f$V_C \f$ as the sum of the volumes of all pyramids
+
+\f[
+   V_C = \sum_{\sim Sub-pyramids} V_{pyr}
+\f]
+
+	This step is implement in Cell::computeVolume(). 
+
+
+The computation of the center of mass \f$X_C\f$ of each cell can be done by the subsequent steps:
+
+1. Compute the geometric centre \f$(X_{CE})_{pyr}\f$ of each of the pyramids 
+
+\f[
+(X_{CE})_{pyr} = 0.75(X_{CE})_f + 0.25(X_G)_{pyr}
+\f]
+
+2. The cell centroid \f$X_G\f$ is equal to the weighted mean of the centroids of the pyramids:
+
+\f[
+X_C = \frac{\sum_{\sim Sub-pyramids}(X_{CE})_{pyr}V_{pyr}}{V_C}
+\f]
+
+The computation of \f$X_C\f$ is implemented in Cell::computeCenter().
+
+@note Notice that the centroid has the same coordinates as the center of mass, since the cell is homogeneous.
 
 ----
 ### Face and Cell Skewness
