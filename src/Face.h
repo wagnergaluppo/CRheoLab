@@ -57,9 +57,6 @@ class Face
 
         // Write to stream
         friend std::ostream& operator<<(std::ostream& , const Face& );
-       
-         
-    protected:
 
     private:
         int ID_;
@@ -69,7 +66,6 @@ class Face
 
         const Cell* owner_;
         const Cell* neighbour_;
-
 
         // Area
         double area_;
@@ -91,7 +87,6 @@ class Face
 
         // Intersection point (IP)
         vector3 intersectionPoint_; 
-
 };
 
 #endif // FACE_H

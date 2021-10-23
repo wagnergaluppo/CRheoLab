@@ -38,8 +38,6 @@ class Point
         // Write to stream
         friend std::ostream& operator<<(std::ostream& , const Point& );
        
-    protected:
-
     private:
         vector3 p_;
 

@@ -1,17 +1,18 @@
 #ifndef VECTOROPERATIONS_H
 #define VECTOROPERATIONS_H
+
 // Output vectorField to screen
 inline std::ostream& operator<<(std::ostream& os, const vectorField& v)
 {
     os << "[" << std::endl;
     
-    for (int i = 0; i < v.size(); ++i) {
+    for (unsigned int i = 0; i < v.size(); ++i) {
         
         os << "\t";
 
         os << "[ ";
 
-        for (int j=0; j< v[i].size(); j++)
+        for (unsigned int j=0; j< v[i].size(); j++)
         {
             os<< v[i][j] << " ";
         }
@@ -22,13 +23,12 @@ inline std::ostream& operator<<(std::ostream& os, const vectorField& v)
     return os;
 }
 
-
 // Output vectorField to screen
 inline std::ostream& operator<<(std::ostream& os, const vector3& v)
 {
     os << "[ " ;
 
-    for (int i = 0; i < v.size(); ++i) {
+    for (unsigned int i = 0; i < v.size(); ++i) {
 
         os<< v[i] << " ";
     }
@@ -118,7 +118,6 @@ inline vector3  operator/(const double& d1, const vector3& v1)
 // outer product
 inline tensor operator*(const vector3& v1, const vector3& v2)
 {
- 
    tensor result;
 
     result[0] = v1[0]*v2[0] ;
@@ -193,7 +192,6 @@ inline vectorField operator*( const double& d1, const vectorField& v1)
 
 inline vectorField operator*( const scalarField& s1, const vectorField& v1)
 {
-
     vectorField result(v1.size());
 
     for(unsigned int i = 0 ; i < v1.size(); i++)
@@ -206,7 +204,6 @@ inline vectorField operator*( const scalarField& s1, const vectorField& v1)
 
 inline tensorField operator*(const vectorField& v1, const vectorField& v2)
 {
-
     checkSize(v1,v2);
 
     tensorField result(v1.size());
@@ -222,7 +219,6 @@ inline tensorField operator*(const vectorField& v1, const vectorField& v2)
 
 inline vectorField operator/(const vectorField& v1, const double& d1)
 {
-
     vectorField result(v1.size());
 
     for(unsigned int i = 0 ; i < v1.size(); i++)
@@ -247,7 +243,6 @@ inline vectorField operator/(const double& d1, const vectorField& v1)
 
 inline vectorField operator/(const vectorField& v1, const scalarField& s1)
 {
-
     vectorField result(v1.size());
 
     for(unsigned int i = 0 ; i < v1.size(); i++)
@@ -300,15 +295,11 @@ inline vectorField operator^(const vectorField& v1, const vectorField& v2)
 // Magnitude of a vector
 inline double mag(const vector3& v1)
 {
-
-
     double result = std::sqrt(
                               v1[0]*v1[0]
                             + v1[1]*v1[1]
                             + v1[2]*v1[2]
                         );
-   
-
    return result;
 }
 

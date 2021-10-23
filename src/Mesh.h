@@ -14,13 +14,14 @@
 #include "Cell.h"
 #include "Patch.h"
 #include "findFiles.h"
+#include "RunTime.h"
 
 class Mesh {
 
 public:
 
   // Constructor
-  Mesh();
+  Mesh(RunTime& time);
 
   // Destructor
   virtual ~Mesh(){};
@@ -33,24 +34,27 @@ public:
 
   std::vector<Patch> patchList_;
 
-  int nPoints_;
+  unsigned int nPoints_;
 
-  int nFaces_;
+  unsigned int nFaces_;
 
-  int nInteriorFaces_;
+  unsigned int nInteriorFaces_;
 
-  int nBoundaryFaces_;
+  unsigned int nBoundaryFaces_;
   
-  int nCells_;
+  unsigned int nCells_;
 
-  int nPatches_;
+  unsigned int nPatches_;
+
+  const RunTime& runTime() const;
 
 private:
 
+  RunTime& runTime_;
 
   void readMesh();
 
-  int getNEntitites(std::ifstream& file);
+  unsigned int getNEntitites(std::ifstream& file);
 
   void readPoints(std::string path);
 
@@ -63,7 +67,6 @@ private:
   void updateCellAndFaceData(std::string pathOwners, std::string pathNeighbours);
 
   void readBoundary(std::string path);
-
 } ;
 
 #endif // MESH_H

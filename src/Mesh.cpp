@@ -1,17 +1,16 @@
 #include "Mesh.h"
 
 
-Mesh::Mesh()
-: nPoints_(-1),
-  nFaces_(-1),
-  nInteriorFaces_(-1),
-  nBoundaryFaces_(-1),
-  nCells_(-1),
-  nPatches_(-1)
+Mesh::Mesh(RunTime& time)
+: nPoints_(0),
+  nFaces_(0),
+  nInteriorFaces_(0),
+  nBoundaryFaces_(0),
+  nCells_(0),
+  nPatches_(0),
+  runTime_(time)
 { 
-    std::cout << "I am the mesh constructor" << std::endl;
-    readMesh();
-
+  readMesh();
 }
 
 
@@ -37,9 +36,9 @@ void Mesh::readMesh()
 }
 
 
-int Mesh::getNEntitites(std::ifstream& file)
+unsigned int Mesh::getNEntitites(std::ifstream& file)
 {
-  int nPoints ;
+  unsigned int nPoints ;
   bool findNPoints (true);
   std::string line;
 
@@ -72,23 +71,32 @@ void Mesh::readPoints(std::string path)
   pointList_.resize(nPoints_);
 
   // Loop over the points to fill the vector 
-  while ( getline(in_file, line ) && line.find("(") == std::string::npos );
+  // Check if next line is a '('
+  getline(in_file, line );
+  bool catchParenthesis = (line.find('(')!= std::string::npos);
+
+  if (catchParenthesis)
   {
     char c; // Variable to catch "("
     double x, y, z; // Variables to store the x,y,z position of the points
     
-    for ( int i = 0; i < nPoints_; i++ )
+    for ( unsigned int i = 0; i < nPoints_; i++ )
     {
       std::getline( in_file, line );
 
-      std::stringstream(line ) >> c >> x >> y >> z;
+      std::stringstream(line) >> c >> x >> y >> z;
       
       pointList_[i]= Point(x,y,z); // Node list
     }
   }
+  else
+  {
+    in_file.close();
+    throw std::runtime_error("Problem reading points File");
+  }
+
   // Close the file
   in_file.close();
-
 }
 
 
@@ -112,21 +120,22 @@ void Mesh::readFaces(std::string path)
   // Resize the vectors according to the number of faces
   faceList_.resize(nFaces_);
 
-  // Loop over the points to fill the vector 
-  while ( getline(in_file, line ) && line.find("(") == std::string::npos );
+  // Check if next line is a '('
+  getline(in_file, line );
+  bool catchParenthesis = (line.find('(')!= std::string::npos);
+
+  if (catchParenthesis)
   {
+    // Loop over the points to fill the vector
     int nPointsInFace; // catch number of points in each Face
     char c; // Variable to catch "("
 
-
-    for ( int i = 0; i < nFaces_; i++ )
+    for ( unsigned int i = 0; i < nFaces_; i++ )
     {
       std::getline( in_file, line );
       std::stringstream line_2(line);
       line_2 >> nPointsInFace >> c;
 
-
-            
       std::vector<Point*> listOfPoints (nPointsInFace); // array to store the list of points
       int counter(0);
       int tmp;
@@ -137,16 +146,19 @@ void Mesh::readFaces(std::string path)
         counter++;
       } 
 
-
       faceList_[i]=Face(nPointsInFace,listOfPoints);
       faceList_[i].setID(i);
-
     }
+  }
+  else
+  {
+    in_file.close();
+    throw std::runtime_error("Problem reading owner File");
   }
   // Close the file
   in_file.close();
-
 }
+
 
 vector<int> Mesh::readOwners(std::string path)
 {
@@ -164,16 +176,18 @@ vector<int> Mesh::readOwners(std::string path)
   std::string line;
 
   // Gets number of owners in file
-  int nOwners = getNEntitites(in_file);
+  unsigned int nOwners = getNEntitites(in_file);
+
+  // Check if next line is a '('
+  getline(in_file, line );
+  bool catchParenthesis = (line.find('(')!= std::string::npos);
 
   vector<int> tmp_OwnersList(nOwners);
 
-  // Loop over the points to fill the vector 
-  while ( getline(in_file, line ) && line.find("(") == std::string::npos );
+  if (catchParenthesis)
   {
     int tmp(0); // catch number of owner
-
-    for ( int i = 0; i < nOwners; i++ )
+    for ( unsigned int i = 0; i < nOwners; i++ )
     {
       std::getline( in_file, line );
       std::stringstream line_2(line);
@@ -181,6 +195,12 @@ vector<int> Mesh::readOwners(std::string path)
       tmp_OwnersList[i]=tmp; 
     }
   }
+  else
+  {
+    in_file.close();
+    throw std::runtime_error("Problem reading owner File");
+  }
+
   // Close the file
   in_file.close();
 
@@ -204,23 +224,32 @@ vector<int> Mesh::readNeighbours(std::string path)
   std::string line;
 
   // Gets number of faces in file
-  int nNeighbours = getNEntitites(in_file);
+  unsigned int nNeighbours = getNEntitites(in_file);
 
   vector<int> tmp_NeighboursList(nNeighbours);
 
-  // Loop over the points to fill the vector 
-  while ( getline(in_file, line ) && line.find("(") == std::string::npos );
+    // Check if next line is a '('
+    getline(in_file, line );
+    bool catchParenthesis = (line.find('(')!= std::string::npos);
+
+  if (catchParenthesis)
   {
     int tmp(0); // catch number of cell neighbour
 
-    for ( int i = 0; i < nNeighbours; i++ )
+    for ( unsigned int i = 0; i < nNeighbours; i++ )
     {
       std::getline( in_file, line );
       std::stringstream line_2(line);
       line_2 >> tmp;
       tmp_NeighboursList[i]=tmp;
-    }
+    } 
   }
+  else
+  {
+    in_file.close();
+    throw std::runtime_error("Problem reading neighbour File");
+  }
+
   // Close the file
   in_file.close();
 
@@ -250,19 +279,17 @@ void Mesh::updateCellAndFaceData(std::string pathOwners, std::string pathNeighbo
   vector<vector<Face*> > cellFaces(nCells_);
 
   // Loops over the interior faces
-  for( int i = 0 ; i < nInteriorFaces_ ; i++)
+  for( unsigned int i = 0 ; i < nInteriorFaces_ ; i++)
   {    
     int tmp_owner = ownersList[i];
     int tmp_neighbour = neighboursList[i];
 
     cellFaces[tmp_owner].push_back(&faceList_[i]);
     cellFaces[tmp_neighbour].push_back(&faceList_[i]);
-  
-
   }
 
   // Loops over the boundary faces
-  for (int i = nInteriorFaces_; i < nFaces_; i++)
+  for (unsigned int i = nInteriorFaces_; i < nFaces_; i++)
   {
     int tmp_owner = ownersList[i];
     
@@ -355,10 +382,13 @@ void Mesh::readBoundary(std::string path)
 
   nPatches_ = getNEntitites(in_file);
 
-  // Loop over the points to fill the vector 
-  while ( getline(in_file, line ) && line.find("(") == std::string::npos );
+  // Check if next line is a '('
+  getline(in_file, line );
+  bool catchParenthesis = (line.find('(')!= std::string::npos);
+
+  if (catchParenthesis)
   {
-    for ( int i = 0; i < nPatches_; i++ )
+    for (unsigned int i = 0; i < nPatches_; i++ )
     {
       endInnerLoop = false;
 
@@ -387,28 +417,28 @@ void Mesh::readBoundary(std::string path)
 
         if(!checkBoundaryName && !firstCurly)
         {
-           name = words;
-           checkBoundaryName = true;
+          name = words;
+          checkBoundaryName = true;
         }
 
         if(words == "type" && (line_2 >> words2) && words2.back() == ';' )
         {
-           type = words2.substr(0, words2.size()-1);
-           checkType = true;
-           words2.clear();
+          type = words2.substr(0, words2.size()-1);
+          checkType = true;
+          words2.clear();
         }
 
         if(words == "nFaces" && (line_2 >> values) && ( (line_2 >>  words2) && words2.back() == ';') )
         {
-           nFaces = values;
-           checkNFaces = true;
-           words2.clear();
+          nFaces = values;
+          checkNFaces = true;
+          words2.clear();
         }
 
         if(words == "startFace" && (line_2 >> values) && ( (line_2 >>  words2) && words2.back() == ';'))
         {
-           startFace = values;
-           checkStartFace = true;
+          startFace = values;
+          checkStartFace = true;
         }
 
         // If the stringstream reaches the end of file some parameters are missing. 
@@ -437,12 +467,23 @@ void Mesh::readBoundary(std::string path)
 
       firstCurly = false;
       secondCurly = false;
-
-
     }
   }
+  
+  else
+  {
+    in_file.close();
+    throw std::runtime_error("Problem reading boundary File");
+  }
+
   // Close the file
   in_file.close();
-
-
 }
+
+const RunTime& Mesh::runTime() const
+{
+  return runTime_;
+}
+
+
+

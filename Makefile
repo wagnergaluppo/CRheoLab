@@ -8,12 +8,12 @@
 CXX = g++
 
 # define any compile-time flags
-CXXFLAGS	:= -std=c++11 -g
+CXXFLAGS	:= -std=c++11 -g -Wall
 
 # define library paths in addition to /usr/lib
 #   if I wanted to include libraries not in /usr/lib I'd specify
 #   their path using -Lpath, something like:
-LFLAGS = -lboost_filesystem -lboost_system
+LFLAGS = -lboost_filesystem -lboost_system 
 
 # define output directory
 OUTPUT	:= run

@@ -1,18 +1,18 @@
 #ifndef SCALAROPERATIONS_H
 #define SCALAROPERATIONS_H
+
 // Output scalarField to screen
 inline std::ostream& operator<<(std::ostream& os, const scalarField& v)
 {
     os << "[" << std::endl;
     
-    for (int i = 0; i < v.size(); ++i) {
+    for (unsigned int i = 0; i < v.size(); ++i) {
         os << "\t" << v[i] << std::endl;
     }
 
     os << "]\n";
     return os;
 }
-
 
 // Math Operations
 
@@ -21,7 +21,6 @@ inline std::ostream& operator<<(std::ostream& os, const scalarField& v)
 // Multiplication
 inline scalarField operator*(const scalarField& v1, const scalarField& v2)
 {
-
     checkSize(v1,v2);
    
    scalarField result(v1.size());
@@ -37,7 +36,6 @@ inline scalarField operator*(const scalarField& v1, const scalarField& v2)
 // Division
 inline scalarField operator/(const scalarField& v1, const scalarField& v2)
 {
-
     checkSize(v1,v2);
    
    scalarField result(v1.size());

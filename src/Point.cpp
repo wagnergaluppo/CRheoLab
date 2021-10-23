@@ -1,16 +1,14 @@
 #include "Point.h"
 
 Point::Point(double x, double y, double z)
-:   p_{x,y,z}
-{
-
-}
+:  
+    p_{x,y,z}
+{}
 
 Point::Point()
-:   p_{-1, -1 ,-1}
-{
-
-}
+:   
+    p_{-1, -1 ,-1}
+{}
 
 void Point::setCoord(double x, double y, double z)
 {
@@ -70,9 +68,8 @@ const vector3& Point::getPoint() const
     return p_;
 }
 
-
 std::ostream& operator<<(std::ostream& os, const Point& p)
 {
-os << "[ " << p[0] << ", " << p[1] << ", " << p[2] << " ]" << std::endl;
-return os;
+    os << "[ " << p[0] << ", " << p[1] << ", " << p[2] << " ]" << std::endl;
+    return os;
 }

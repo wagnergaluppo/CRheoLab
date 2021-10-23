@@ -4,12 +4,12 @@
 #include <array>
 
 
-typedef std::array<double, 3>          vector3;
-typedef std::array<double, 9>          tensor;
+typedef std::array<double, 3>   vector3;
+typedef std::array<double, 9>   tensor;
 
-typedef std::vector<double>                 scalarField;
-typedef std::vector<vector3>                vectorField;
-typedef std::vector<tensor>                 tensorField;
+typedef std::vector<double>     scalarField;
+typedef std::vector<vector3>    vectorField;
+typedef std::vector<tensor>     tensorField;
 
 #include <cmath>   
 #include "fieldOperations.h"

@@ -13,19 +13,15 @@ Face::Face(int nPointsInFace, vector<Point*> facePoints)
     weightingFactor_(-1),
     nonOrthogonalityAngle_(-1),
     skewness_(-1)
-{
-
-}
+{}
 
 Face::Face( )
-{
-}
+{}
 
 // Setters
 void Face::setOwner ( const Cell& owner)
 {
     owner_ = &owner;
-
 }
 
 void Face::setNeighbour(const Cell& neighbour)
@@ -83,7 +79,6 @@ const double& Face::getWeightingFactor() const
 
 const double& Face::getNonOrthogonality() const 
 {
-  
     return nonOrthogonalityAngle_;
 }
 
@@ -95,7 +90,6 @@ const double& Face::getSkewness() const
 // Computations
 void Face::computeArea()
 {
-
     double a(0);
     double b(0);
     double c(0); 
@@ -155,9 +149,7 @@ void Face::computeArea()
                 // face area
                 area_ = area_ + sqrt(s * (s - a) * (s - b) * (s - c));
         }
-
     }
-
 }
 
 void Face::computeCenterOfMass()
@@ -229,14 +221,10 @@ void Face::computeCenterOfMass()
 
                 // compute denominator
                 denominator = denominator + subarea;
-
         }
-
         // face center of mass
         centerOfMass_ = numerator / denominator;
-
     }
-
 }
 
 void Face::computeAreaVector()
@@ -251,7 +239,6 @@ void Face::computeAreaVector()
     
     // Computes the norm of the cross product between two vectors
     double mag_vector_tmp = mag(areaVector_tmp);
-
 
     if (isInteriorFace)
     {
@@ -297,8 +284,6 @@ void Face::computeWeightingFactor()
     {
         setWeightingFactor(1.0);
     }
-
-    
 }
 
 
@@ -390,7 +375,6 @@ void Face::computeIntersectionPoint()
         // Face Intersection Point 
         intersectionPoint_ = Co+dOF*unitNormalVectorFace;
     }
-
 }
 
 
@@ -439,7 +423,6 @@ void Face::computeSkewness()
 
         // normalized skewnnes
         normSkewness = mag(skewness)/fd;
-        
     }
     else
     {
@@ -468,18 +451,15 @@ void Face::computeSkewness()
         }
 
         // normalized skewnnes
-        normSkewness = mag(skewness)/fd;
-      
+        normSkewness = mag(skewness)/fd;    
     }  
 
-    setSkewness(normSkewness);
-    
+    setSkewness(normSkewness); 
 }
 
 
 std::ostream& operator<<(std::ostream& os, const Face& p)
 {
-
     os << "[ " << std::endl;
 
     for (unsigned int i= 0; i < p.facePoints_.size() ; i++)
@@ -489,6 +469,6 @@ std::ostream& operator<<(std::ostream& os, const Face& p)
 
     os << "]" << std::endl;
 
-return os;
+    return os;
 }
 

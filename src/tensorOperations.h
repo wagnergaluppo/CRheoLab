@@ -1,17 +1,18 @@
 #ifndef TENSOROPERATIONS_H
 #define TENSOROPERATIONS_H
+
 // Output vectorField to screen
 inline std::ostream& operator<<(std::ostream& os, const tensorField& t)
 {
     os << "[" << std::endl;
     
-    for (int i = 0; i < t.size(); ++i) {
+    for (unsigned int i = 0; i < t.size(); ++i) {
         
         os << "\t";
 
         os << "[ ";
 
-        for (int j=0; j< t[i].size(); j++)
+        for (unsigned int j=0; j< t[i].size(); j++)
         {
             os<< t[i][j] << " ";
         }
@@ -22,12 +23,11 @@ inline std::ostream& operator<<(std::ostream& os, const tensorField& t)
     return os;
 }
 
-
 inline std::ostream& operator<<(std::ostream& os, const tensor& t)
 {
     os << "[ " ;
     
-    for (int i = 0; i < t.size(); ++i)
+    for (unsigned int i = 0; i < t.size(); ++i)
     {
 
         os<< t[i] << " ";
@@ -45,7 +45,6 @@ inline std::ostream& operator<<(std::ostream& os, const tensor& t)
 // Summation
 inline tensor operator+(const tensor& t1, const tensor& t2)
 {
-   
    tensor result;
 
     for (unsigned int i = 0; i < t1.size(); i++)
@@ -60,7 +59,6 @@ inline tensor operator+(const tensor& t1, const tensor& t2)
 // Subtraction
 inline tensor operator-(const tensor& t1, const tensor& t2)
 {
-   
    tensor result;
 
     for (unsigned int i = 0; i < t1.size(); i++)

@@ -33,9 +33,6 @@ class Cell
         vector3 computeGeometricCenter() const;
         void computeMaxNonOrthogonality();
         void computeSkewness();
-    
-         
-    protected:
 
     private:
 
