@@ -22,5 +22,3 @@ gmshToFoam mesh32.msh
 
 ## Execute CRheo
 CRheo 
-
-
