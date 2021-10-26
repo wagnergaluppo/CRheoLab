@@ -18,7 +18,7 @@ class volField
 {
     public:
         // Default constructor
-        volField(std::string fileName, const Mesh& mesh);
+        volField(std::string fileName, const Mesh& mesh, const RunTime& time);
 
         // Destructor
         virtual ~volField(){} ;
@@ -26,9 +26,11 @@ class volField
         // Member Functions
         vectorType readInternalField();
         
+        // Read Data
         template <typename primitiveType>
         primitiveType readData(std::ifstream& in_file, std::istringstream& iss, std::string& line, int& lineCounter);
 
+        // Boundary condition structure
         struct patchBoundaryConditions
         {
             std::string type;
@@ -36,10 +38,12 @@ class volField
             std::map<std::string, std::string> otherInfo;
         };
 
+        // Read boundary field
         patchBoundaryConditions readBoundaryField(std::string& patchName);
 
     private:
-        const Mesh& mesh_;
+        const Mesh&     mesh_;
+        const RunTime&  runTime_;
         vectorType internalField;
 
 };

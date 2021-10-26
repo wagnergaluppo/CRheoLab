@@ -28,11 +28,17 @@ int main()
     RunTime time;
 
     Mesh polyMesh(time);
+    
+    volField<scalarField> p ("p", polyMesh, time);
+   // volField<vectorField> U ("U", polyMesh);
 
-    volField<scalarField> p ("p", polyMesh);
-    volField<vectorField> U ("U", polyMesh);
+    std::cout << "Current path is : " << time.Path() << std::endl;
 
-    std::cout << "Current path is : " << getExecutablePath() << std::endl;
+    std::string tst = "banana";
+    time.setFolder(tst);
+
+    std::cout << "Current path is : " << time.Path() << std::endl;
+
 
     return 0;
 }

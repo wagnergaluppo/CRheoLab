@@ -50,8 +50,6 @@ public:
 
 private:
 
-  RunTime& runTime_;
-
   void readMesh();
 
   unsigned int getNEntitites(std::ifstream& file);
