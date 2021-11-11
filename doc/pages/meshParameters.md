@@ -217,7 +217,7 @@ There are two faces, Owner face and Neighbou faces as shown in the fig
 
 Where,
 
-d = Vector from Cell Owner Centre of Mass to Neighbour Cell Centre of Mass
+\f$\vec{d}\f$ = Vector from Cell Owner Centre of Mass to Neighbour Cell Centre of Mass
 
 c_n = Centre of Mass of The Neighbour Cell
 
@@ -229,33 +229,34 @@ c_o = Centre of Mass of The Owner  Cell
 Code first for for whether the face is interier face, if Yes! then get it's getter for the neibouring face. then it call for getter for the centre of mass of the owner cell, Face Area vector
 
 \f[
-d = C_n - C_o
+\vec{d} = C_n - C_o
 \f]
 
 \f[
-S_f = getAreaVector()
+ \vec{S_f} = getAreaVector()
 \f]
 
 Calculation of Unit Face normal vector:
 
 \f[
-n_f = S_f/mag(Sf)
+\vec{n_f} =  \vec{S_f}/mag( \vec{S_f})
 \f]
 
 Calculation for the non-orthogonality angle in Radian:
 
-\f[
-theta = acos(d.nf/[|d|.|n|])
-\f]
 
+\f[
+θ = a cos ( \frac{\ d.\vec{n_f}\ }{|d|.|n|} )
+
+\f]
 
 Where,
 
-S_f = Surface Normal Vector
+\f$\vec{S_f}\f$ = Surface Normal Vector
 
-n_f=Unit Surface Normal Vector
+\f$\vec{n_f}\f$ = Unit Surface Normal Vector
 
-θ_Radians = Non- Orthogonality Angle in Radians
+θ = Non- Orthogonality Angle in Radians
 
 
 
@@ -268,7 +269,7 @@ There is only one end face, as shown in the following fig
 
 Where,
 
-d = Vector from Cell Owner Centre of Mass to Face Centre of Boundary face
+\f$\vec{d}\f$ = Vector from Cell Owner Centre of Mass to Face Centre of Boundary face
 
 Face Centre = Face Centre of Boundary face
 
@@ -280,33 +281,33 @@ c_o = Centre of Mass of The Owner  Cell
 Code first for for whether the face is interier face, if Yes! then get it's getter for the neibouring face. then it call for getter for the centre of mass of the owner cell, Face Area vector
 
 \f[
-d_n = faceCenter- C_o;
+\vec{d_n} = faceCenter- C_o;
 \f]
 
 \f[
-S_f = getAreaVector()
+\vec{S_f} = getAreaVector()
 \f]
 
 Calculation of Unit Face normal vector:
 
 \f[
-nf = Sf/mag(Sf)
+\vec{n_f} = \vec{S_f}/mag(\vec{S_f})
 \f]
 
 Calculation for the non-orthogonality angle in Radian:
 
 \f[
-theta = acos(d_n.nf/[|d_n|.|n|])
-\f]
+θ = a cos ( \frac{\ d_n.\vec{n_f}\ }{|d_n|.|n|} )
 
+\f]
 
 Where,
 
-S_f = Surface Normal Vector
+\f$\vec{S_f}\f$ = Surface Normal Vector
 
-n_f=Unit Surface Normal Vector
+\f$\vec{n_f}\f$=Unit Surface Normal Vector
 
-θ_Radians = Non- Orthogonality Angle in Radians
+θ = Non- Orthogonality Angle in Radians
 
 
 ----
