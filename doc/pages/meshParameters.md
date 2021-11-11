@@ -197,3 +197,116 @@ where \f$M\f$ is the maximum magnitude of the following quantities:
 
 Finnaly the Owner and Neighbour (for interior faces) cells skewness should be updated with the maximum of the value just calculated and the current cell value. This way, the cell skewness will be equal to the maximum skewness of the faces that comprise it. For more details, please refer to Cell::computeSkewness().
 
+
+----
+### Non-Orthogonality
+
+
+
+
+it is important to cheack the non orthogonality for the facees and Cells for the better understanding of meshing.
+There are two basic types 
+1. Non-Orthogonality Computation – Interior Faces
+2. Non-Orthogonality Computation – Boundary Faces
+
+### Non-Orthogonality Computation – Interior Faces
+
+There are two faces, Owner face and Neighbou faces as shown in the fig 
+
+\image html iFaceOT.svg "Figure 1: Interior Faces" width=350px 
+
+Where,
+
+d = Vector from Cell Owner Centre of Mass to Neighbour Cell Centre of Mass
+
+c_n = Centre of Mass of The Neighbour Cell
+
+c_o = Centre of Mass of The Owner  Cell
+
+
+### Algorithm for Non-Orthogonality ComputationInterior Face 
+
+Code first for for whether the face is interier face, if Yes! then get it's getter for the neibouring face. then it call for getter for the centre of mass of the owner cell, Face Area vector
+
+\f[
+d = C_n - C_o
+\f]
+
+\f[
+S_f = getAreaVector()
+\f]
+
+Calculation of Unit Face normal vector:
+
+\f[
+n_f = S_f/mag(Sf)
+\f]
+
+Calculation for the non-orthogonality angle in Radian:
+
+\f[
+theta = acos(d.nf/[|d|.|n|])
+\f]
+
+
+Where,
+
+S_f = Surface Normal Vector
+
+n_f=Unit Surface Normal Vector
+
+θ_Radians = Non- Orthogonality Angle in Radians
+
+
+
+
+### Non-Orthogonality Computation – Boundary Faces
+
+There is only one end face, as shown in the following fig 
+
+\image html fcOT.svg "Figure 2:  Boundary Faces" width=350px 
+
+Where,
+
+d = Vector from Cell Owner Centre of Mass to Face Centre of Boundary face
+
+Face Centre = Face Centre of Boundary face
+
+c_o = Centre of Mass of The Owner  Cell
+
+
+### Algorithm for Non-Orthogonality Computation Boundary Face 
+
+Code first for for whether the face is interier face, if Yes! then get it's getter for the neibouring face. then it call for getter for the centre of mass of the owner cell, Face Area vector
+
+\f[
+d_n = faceCenter- C_o;
+\f]
+
+\f[
+S_f = getAreaVector()
+\f]
+
+Calculation of Unit Face normal vector:
+
+\f[
+nf = Sf/mag(Sf)
+\f]
+
+Calculation for the non-orthogonality angle in Radian:
+
+\f[
+theta = acos(d_n.nf/[|d_n|.|n|])
+\f]
+
+
+Where,
+
+S_f = Surface Normal Vector
+
+n_f=Unit Surface Normal Vector
+
+θ_Radians = Non- Orthogonality Angle in Radians
+
+
+----
