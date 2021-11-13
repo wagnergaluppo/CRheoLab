@@ -1,0 +1,18 @@
+digraph "Face::computeWeightingFactor"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Face::computeWeightingFactor",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Computation of cells face weighting factor, ."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Face::getAreaVector",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classFace.html#adb84ea7c362dfcf1e7e8f350f47593c0",tooltip=" "];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Cell::getCenterOfMass",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classCell.html#a2b454c65d710f2c8d552d8110853515f",tooltip=" "];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Face::getCenterOfMass",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classFace.html#ae92dcf0e836f4214917cde6c73b4692d",tooltip=" "];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Face::getNeighbour",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classFace.html#a33743516939cc902d33a0845f2ce53db",tooltip=" "];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="Face::setWeightingFactor",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classFace.html#a02ea1825ef75e1e92760008aeb2c6fd4",tooltip=" "];
+}

@@ -1,0 +1,17 @@
+digraph "Boundary&lt; vectorType &gt;"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="Boundary\< vectorType \>",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="IODictionary",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classIODictionary.html",tooltip=" "];
+  Node3 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mesh_" ,fontname="Helvetica"];
+  Node3 [label="Mesh",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classMesh.html",tooltip=" "];
+  Node4 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" runTime_" ,fontname="Helvetica"];
+  Node4 [label="RunTime",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classRunTime.html",tooltip=" "];
+  Node5 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" patch_" ,fontname="Helvetica"];
+  Node5 [label="Patch",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classPatch.html",tooltip=" "];
+  Node6 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" boundary_" ,fontname="Helvetica"];
+  Node6 [label="Boundary\< vectorType\l \>::patchBoundaryConditions",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structBoundary_1_1patchBoundaryConditions.html",tooltip=" "];
+}
