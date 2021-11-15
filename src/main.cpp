@@ -3,6 +3,8 @@
 #include "IODictionaryI.h"
 #include "volFieldI.h"
 
+
+
 //  void write_csv(std::string filename, std::string , std::vector<double> );
 
 template <typename T>
@@ -30,18 +32,24 @@ int main()
     Mesh polyMesh;
     
     volField<scalarField> p ("p", polyMesh, time);
+    std::vector<Boundary<scalarField>>& pBoundary = p.boundaryField();
+    
+    // for (int i=0; i< 20; i++)
+
+    // {
+    // scalarField& valueOfField  = pBoundary[i].boundary();
+    // scalarField& valueOfField  = pBoundary[i][j];
+    // }       
+
    // volField<vectorField> U ("U", polyMesh);
 
-    std::cout << "Current path is : " << time.Path() << std::endl;
+   // boundaryField<scalarField> tst ("p", polyMesh, time);
 
-    std::string tst = "banana";
-    time.setFolder(tst);
+    // TODO main > volField>boundaryfield> boundary> patch
+    volField<scalarField> pBC ("p", polyMesh, time);
+    
 
-    std::cout << "Current path is : " << time.Path() << std::endl;
-
-    volField<vectorField> U("U", polyMesh, time);
 
     return 0;
 }
-
 

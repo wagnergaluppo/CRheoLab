@@ -13,7 +13,7 @@ class Patch
         // Destructor
         virtual ~Patch(){};
         
-        std::string name();
+        const std::string& name() const;
                
     protected:
 

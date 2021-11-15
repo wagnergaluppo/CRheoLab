@@ -11,7 +11,7 @@ Patch::Patch(std::string name, std::string type, int nFaces, int startFace)
 }
 
 
-std::string Patch::name()
+const std::string& Patch::name() const
 {
     return name_;
 }
