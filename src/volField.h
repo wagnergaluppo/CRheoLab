@@ -4,12 +4,14 @@
 #include "IODictionary.h"
 #include "RunTime.h"
 
-typedef std::array<double, 3>   vector3;
-typedef std::array<double, 9>   tensor;
+typedef std::array<double, 3> vector3;
+typedef std::array<double, 6> symmTensor;
+typedef std::array<double, 9> tensor;
 
-typedef std::vector<double>     scalarField;
-typedef std::vector<vector3>    vectorField;
-typedef std::vector<tensor>     tensorField;
+typedef std::vector<double> scalarField;
+typedef std::vector<vector3> vectorField;
+typedef std::vector<symmTensor> symmTensorField;
+typedef std::vector<tensor> tensorField;
 
 template< typename vectorType>
 class volField
@@ -17,6 +19,7 @@ class volField
     public IODictionary
 {
     public:
+    
         // Default constructor
         volField(std::string fileName, const Mesh& mesh, const RunTime& time);
 
