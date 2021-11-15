@@ -56,35 +56,35 @@ The values of \f$\phi\f$ are known at the control volume centroids \f$C\f$ and \
 
 A simple linear interpolation will result in the following equation:
 
-\f[
+\f{equation}{
 	\phi_{f}=g_{f}\phi_{F}+\left(1-g_{f}\right)\phi_{C}
-\f]
+\f}
 
 Where,
 
-\f[
+\f{equation}{
 	g_{f}=\frac{\vec{d}_{Cf}}{\vec{d}_{Cf}+\vec{d}_{fF}}
-\f]
+\f}
 
 On the other hand the calculation can be also done by the next equation.
 
-\f[
+\f{equation}{
 	\phi_{f}=g_{c}\phi_{C}+\left(1-g_{c}\right)\phi_{F}
-\f]
+\f}
 
 Where,
 
-\f[
+\f{equation}{
 	g_{c}=\frac{\vec{d}_{fF}}{\vec{d}_{Cf}+\vec{d}_{fF}}
-\f]
+\f}
 
 The simplicity of this formula does not extend into multi-dimensional situations, as in two or three dimensions, the circumstances become a bit more complicated. In this case, there is not a unique option for the definition of the geometric weighting factors.
 
 One choice would be to base the weighting factor on the respective volumes, such that:
 
-\f[
+\f{equation}{
 	g_{f}=\frac{V_{C}}{V_{C}+V_{F}}
-\f]
+\f}
 
 This however yields wrong results in certain cases, as the Figure FWF2 is illustrating.
 
@@ -94,9 +94,9 @@ A better alternative for such cases, is to base the interpolation on the normal 
 
 Then the interpolation based on the normal distances to the face \f$f\f$ is computed as:
 
-\f[
+\f{equation}{
 	g_{f}=\frac{\vec{d}_{Cf}\cdot \vec{e}_{f}}{ \vec{d}_{Cf} \cdot \vec{e}_{f}+ \vec{d}_{fF} \cdot \vec{e}_{f}} ; \vec{e}_{f}=\frac{ \vec{S}_{f}}{\left\| \vec{S}_{f}\right\|}
-\f]
+\f}
 
 where these parameters used for the calculations are presented in Figure FWF3.
 
@@ -105,9 +105,9 @@ where these parameters used for the calculations are presented in Figure FWF3.
 
 In CRheolab we use the same procedure as in [OpenFOAM(R)](https://www.openfoam.com/), which is centered on the Neighbour cell with:
 
-\f[
+\f{equation}{
 	g_{c}=\frac{ \left | \vec{d}_{fF} \cdot \vec{S}_f \right | }{ \left | \vec{d}_{Cf} \cdot \vec{S}_f \right | + \left | \vec{d}_{fF} \cdot \vec{S}_f \right |}
-\f]
+\f}
 
 This implementation is carried out in Face::computeWeightingFactor()
 
@@ -122,9 +122,9 @@ Firstly, the methodology behind the computation of each cell volume is built ove
 
 1. Compute the geometric centre \f$X_G\f$ of each cell 
 
-\f[
+\f{equation}{
    X_G = \frac{1}{k} \sum^k_{i=1}X_i
-\f]
+\f}
 
     where k stands for the number of vertices in each cell. This step is implement in Cell::computeGeometricCenter(). 
 
@@ -137,18 +137,18 @@ Firstly, the methodology behind the computation of each cell volume is built ove
    
 3. Calculate the volume \f$V_{pyr}\f$ of each pyramid
 
-\f[
+\f{equation}{
   V_{pyr} = \frac{1}{3} d_{Gf}.\vec{S}_f
-\f]
+\f}
 
 	This step is implement in Cell::computepyrVol(). 
 
 
 4. Compute the volume of each cell \f$V_C \f$ as the sum of the volumes of all pyramids
 
-\f[
+\f{equation}{
    V_C = \sum_{\sim Sub-pyramids} V_{pyr}
-\f]
+\f}
 
 	This step is implement in Cell::computeVolume(). 
 
@@ -157,15 +157,15 @@ The computation of the center of mass \f$X_C\f$ of each cell can be done by the 
 
 1. Compute the geometric centre \f$(X_{CE})_{pyr}\f$ of each of the pyramids 
 
-\f[
+\f{equation}{
 (X_{CE})_{pyr} = 0.75(X_{CE})_f + 0.25(X_G)_{pyr}
-\f]
+\f}
 
 2. The cell centroid \f$X_G\f$ is equal to the weighted mean of the centroids of the pyramids:
 
-\f[
+\f{equation}{
 X_C = \frac{\sum_{\sim Sub-pyramids}(X_{CE})_{pyr}V_{pyr}}{V_C}
-\f]
+\f}
 
 The computation of \f$X_C\f$ is implemented in Cell::computeCenter().
 
@@ -184,9 +184,9 @@ This will give the Skewness Vector, \f$\vec{S}_{kw}\f$, (See Figure XX)
 
 Then the actual Skewness, \f$S_{kw}\f$, value is obtained by a normalization, as:
 
-\f[
+\f{equation}{
 	S_{kw}=\frac{\| \vec{S}_{kw} \|}{M}
-\f]
+\f}
 
 where \f$M\f$ is the maximum magnitude of the following quantities:
 * **For Interior Faces**: \f$0.2 \| \vec{O}_{cm} \vec{N}_{cm} \|\f$;
@@ -198,57 +198,49 @@ where \f$M\f$ is the maximum magnitude of the following quantities:
 Finnaly the Owner and Neighbour (for interior faces) cells skewness should be updated with the maximum of the value just calculated and the current cell value. This way, the cell skewness will be equal to the maximum skewness of the faces that comprise it. For more details, please refer to Cell::computeSkewness().
 
 
-
 ----
 ### Non-Orthogonality
 
 The non-orthogonality of a mesh is defined as the angle made by the vector joining two adjacent cell centers across their common face \f$\vec{d}\f$ and the face normal \f$\vec{n}_{f}\f$.
 
-A vector perpendicular to the face shared by both cells creates an angle θ in relation to the vector connecting the centre of mass of the Owner cell \f$c_o\f$ and the neighbor cell \f$c_n\f$. This is the Non-Orthogonality angle \f$\theta\f$.
+A vector perpendicular to the face shared by both cells creates an angle θ in relation to the vector connecting the centre of mass of the Owner cell \f$c_o\f$ and the neighbor cell \f$c_n\f$. This is the non-orthogonality angle \f$\theta\f$.
 
-The Non-orthonality angle is computed in two different ways based on the location of the cell in the domain: 
-1. Non-Orthogonality Computation for Interior Faces
-2. Non-Orthogonality Computation for Boundary Faces
+
 \image html cellNonOrtho.svg "Figure 1: Cell Non-orthogonality" width =800 px
+
+As the cells at the domain boundary do not have a neighbor, The \f$\vec{d}\f$ is calculated differently based on the location of the cell in the domain: 
 
 ### Non-Orthogonality Computation for Interior Faces
 
-For the interior faces 
-
 \image html iFaceOT.svg "Figure 2: Interior Faces" width =350 px
 
+If the cell is an interior one, the non-orthogonality angle is calculated as follows:
 
-If the cell is an interior one, the Non-orthogonality angle is calculated as follows:
-
-Face Area vector:
-
+Distance Vector - joins two adjacent cell centers:
 \f{equation}{
 	\vec{d} = c_n - c_o \label{dVec}
 \f}
 
 
 Calculation of Unit Face normal vector:
-
 \f{equation}{
 	\vec{n}_{f} =  \frac{\vec{S}_{f}}{| \vec{S}_{f}|} 
+	\label{normalVec}
 \f}
 
 Calculation for the non-orthogonality angle in Radian:
-
-
 \f{equation}{
 	θ = \arccos \left( \frac{\ \vec{d}\cdot \vec{n}_{f} }{|\vec{d}|\cdot |\vec{n}_{f}|} \right) 
-	\label{nonOrthInt}
-
+	\label{theta}
 \f}	
 
 Where,
 
-\f$\vec{S}_{f}\f$ = Surface Normal Vector
+\f$\vec{S}_{f}\f$ = Surface Area Vector
 
 \f$\vec{n}_{f}\f$ = Unit Surface Normal Vector
 
-\f$\theta\f$ = Non-Orthogonality Angle in Radians \eqref{nonOrthInt}
+\f$\theta\f$ = Non-Orthogonality Angle in Radians \eqref{theta}
 
 
 
@@ -260,40 +252,19 @@ If the cell is located at the boundary as shown in the following figure
 
 Where,
 
-\f$\vec{d}\f$ = Vector from Cell Owner Centre of Mass to Face Centre of Boundary face
+\f$\vec{d_n}\f$ = Vector from Cell Owner Centre of Mass to Face Centre of Boundary face
 
 \f$c_f\f$ = Face Centre of Boundary face
 
 \f$c_o\f$ = Centre of Mass of The Owner  Cell
 
-
-
-Face Area vector:
+Distance vector:
 
 \f{equation}{
 	\vec{d}_{n} = c_f- c_o
 \f}
 
-Calculation of Unit Face normal vector:
-
-\f{equation}{
-	\vec{n}_{f} =  \frac{\vec{S}_{f}}{| \vec{S}_{f}|}
-\f}
-
-Calculation for the non-orthogonality angle in Radian:
-
-\f{equation}{
-	\theta = \arccos \left( \frac{\ \vec{d}_{n}\cdot\vec{n}_{f}\ }{|\vec{d}_{n}|\cdot |\vec{n}_{f}|} \right)
-\f}
-
-
-Where,
-
-\f$\vec{S}_{f}\f$ = Surface Normal Vector
-
-\f$\vec{n}_{f}\f$=Unit Surface Normal Vector
-
-\f$\theta\f$ = Non- Orthogonality Angle in Radians
+The surface normal vector and the non-orthogonality angle are being calculated using \eqref{normalVec} and \eqref{theta} respectively.
 
 
 For more details, please refer to Face::computeNonOrthogonality()
