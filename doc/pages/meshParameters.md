@@ -202,43 +202,45 @@ Finnaly the Owner and Neighbour (for interior faces) cells skewness should be up
 ----
 ### Non-Orthogonality
 
-The non-orthogonality of a mesh is defined as the angle made by the vector joining two adjacent cell centers across their common face \f$\vec{d}\f$ and the face normal \f$\hat{n}\f$.
+The non-orthogonality of a mesh is defined as the angle made by the vector joining two adjacent cell centers across their common face \f$\vec{d}\f$ and the face normal \f$\vec{n}_{f}\f$.
 
 A vector perpendicular to the face shared by both cells creates an angle θ in relation to the vector connecting the centre of mass of the Owner cell \f$c_o\f$ and the neighbor cell \f$c_n\f$. This is the Non-Orthogonality angle \f$\theta\f$.
 
 The Non-orthonality angle is computed in two different ways based on the location of the cell in the domain: 
 1. Non-Orthogonality Computation for Interior Faces
 2. Non-Orthogonality Computation for Boundary Faces
-\image html cellNonOrtho.svg "Figure 1: Cell Non-orthogonality" width=600px 
+\image html cellNonOrtho.svg "Figure 1: Cell Non-orthogonality" width =800 px
 
 ### Non-Orthogonality Computation for Interior Faces
 
 For the interior faces 
 
-\image html iFaceOT.svg "Figure 2: Interior Faces" width=450px 
+\image html iFaceOT.svg "Figure 2: Interior Faces" width =350 px
 
 
 If the cell is an interior one, the Non-orthogonality angle is calculated as follows:
 
 Face Area vector:
 
-\f[
-	\vec{d} = c_n - c_o
-\f]
+\f{equation}{
+	\vec{d} = c_n - c_o \label{dVec}
+\f}
 
 
 Calculation of Unit Face normal vector:
 
-\f[
-	\vec{n}_{f} =  \frac{\vec{S}_{f}}{| \vec{S}_{f}|}
-\f]
+\f{equation}{
+	\vec{n}_{f} =  \frac{\vec{S}_{f}}{| \vec{S}_{f}|} 
+\f}
 
 Calculation for the non-orthogonality angle in Radian:
 
 
-\f[
-	θ = \arccos \left( \frac{\ \vec{d}\cdot \vec{n}_{f} }{|\vec{d}|\cdot |\vec{n}_{f}|} \right)
-\f]
+\f{equation}{
+	θ = \arccos \left( \frac{\ \vec{d}\cdot \vec{n}_{f} }{|\vec{d}|\cdot |\vec{n}_{f}|} \right) 
+	\label{nonOrthInt}
+
+\f}	
 
 Where,
 
@@ -246,7 +248,7 @@ Where,
 
 \f$\vec{n}_{f}\f$ = Unit Surface Normal Vector
 
-\f$\theta\f$ = Non-Orthogonality Angle in Radians
+\f$\theta\f$ = Non-Orthogonality Angle in Radians \eqref{nonOrthInt}
 
 
 
@@ -254,7 +256,7 @@ Where,
 
 If the cell is located at the boundary as shown in the following figure
 
-\image html fcOT.svg "Figure 3:  Boundary Faces" width=400px 
+\image html fcOT.svg "Figure 3:  Boundary Faces" width =300 px
 
 Where,
 
@@ -268,21 +270,21 @@ Where,
 
 Face Area vector:
 
-\f[
+\f{equation}{
 	\vec{d}_{n} = c_f- c_o
-\f]
+\f}
 
 Calculation of Unit Face normal vector:
 
-\f[
+\f{equation}{
 	\vec{n}_{f} =  \frac{\vec{S}_{f}}{| \vec{S}_{f}|}
-\f]
+\f}
 
 Calculation for the non-orthogonality angle in Radian:
 
-\f[
+\f{equation}{
 	\theta = \arccos \left( \frac{\ \vec{d}_{n}\cdot\vec{n}_{f}\ }{|\vec{d}_{n}|\cdot |\vec{n}_{f}|} \right)
-\f]
+\f}
 
 
 Where,
