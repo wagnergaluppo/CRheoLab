@@ -4,7 +4,6 @@ This is my commit, @jayeshgolhar7
 
 Ok jayesh!
 
-<<<<<<< HEAD
 
 This a my test and you change the same file please!
 But I will try to update my thing before commiting it.
@@ -12,6 +11,4 @@ I couldn't update my file, so I will stage it before updating.
 It didn't work as well.
 I will try to commit also, before updating mine.
 
-=======
 Wait wagnar, I am also changing it....
->>>>>>> 0433e681e90ed82b941146607de0d63ed65ce2ec
