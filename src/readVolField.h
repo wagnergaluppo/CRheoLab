@@ -13,7 +13,6 @@ double volField<scalarField>::readData(std::ifstream& in_file, std::istringstrea
     return this->readScalarData(in_file,iss,line, lineCounter);
 }
 
-
 template <>
 template <>
 vector3 volField<vectorField>::readData(std::ifstream& in_file, std::istringstream& iss, std::string& line, int& lineCounter)

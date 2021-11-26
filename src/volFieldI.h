@@ -9,16 +9,16 @@ volField<vectorType>::volField(std::string fileName, const Mesh &mesh, const Run
 {
   for (unsigned int i = 0; i < mesh_.nPatches_; i++)
   {
-    boundaryField_.push_back(Boundary<vectorType>
-    ( 
+    boundaryField_.push_back
+    (
+      Boundary<vectorType>
+      ( 
         fileName,
         mesh_.patchList_[i],
-        mesh_,
         runTime_
-    ));
+      )
+    );
   }
-  
-  // test();
 }
 
 #include "readVolField.h"
@@ -30,13 +30,31 @@ std::vector<Boundary<vectorType>>& volField<vectorType>::boundaryField()
   return boundaryField_;
 }
 
+// TODO Group4 // Returns the ID for a given named patch, if not found returns null (-1)    
+// template <typename vectorType>
+// int volField<vectorType>::patchID(std::string patchName) const
+// {
+//   // This is to avoid any nonexisting patch to be returned
+//   patchID = -1;
+//   for (unsigned int i = 0; i < mesh_.nPatches_; i++)
+//   {
+//     bool foundName(mesh_.patchList_[i].patchID(patchName));
+//     if( foundName )
+//     {
+//       patchID = i;
+//     } 
+//   }
+//   return patchID;
+// }
+
+
 // template <typename vectorType>
 // void volField<vectorType>::test()
 // {
-//   vectorType& banana = boundaryField_[0].boundary();
+//   vectorType& vectorBCFieldTest = boundaryField_[0].boundary();
 
-//   for (unsigned int i =0; i< banana.size(); i++)
+//   for (unsigned int i =0; i< vectorBCFieldTest.size(); i++)
 //   {
-//       banana[i]=2;
+//       vectorBCFieldTest[i]=2;
 //   }
 // }

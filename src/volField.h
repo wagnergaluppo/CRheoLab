@@ -37,6 +37,9 @@ class volField
         // Give access to the boundary entities
         std::vector<Boundary<vectorType>>& boundaryField();
 
+        // TODO Group4  // Returns the ID for a given named patch, if not found returns null (-1)    
+        // int patchID(std::string patchName) const;
+        
     private:
         const Mesh&     mesh_;
         const RunTime&  runTime_;
