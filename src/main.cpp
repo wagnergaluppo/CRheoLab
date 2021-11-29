@@ -19,6 +19,9 @@ std::ostream& operator<<(std::ostream& os, const std::vector<T>& v)
 
 using namespace std;
 
+
+
+
 int main()
 {
         
@@ -42,12 +45,14 @@ int main()
     std::cout << pBoundary[1].patchName() << std::endl;
     std::cout << pBoundary[2].patchName() << std::endl;
 
-    // std::cout << p.patchID(pBoundary[2].patchName()) << std::endl;
-    // std::cout << p.patchID("right") << std::endl;
-    // std::cout << p.patchID("Jayesh") << std::endl;
+    std::cout<<"Patch ID: "<<p.patchID("banana")<<std::endl;
+    std::cout<<"Patch ID: "<<p.patchID("top")<<std::endl;
+    std::cout<<"Patch ID: "<<p.patchID("bottom")<<std::endl;
+    std::cout<<"Patch Name: "<<pBoundary[p.patchID("top")].patchName()<<std::endl;
+    std::cout<<"Patch Name: "<<pBoundary[p.patchID("banana")].patchName()<<std::endl;
+    // std::cout<<"Patch ID: "<<p.patchID(pBoundary[p.patchID("banana")].patchName())<<std::endl;
 
-    //
-    unsigned int CellI = 0;
+/*    unsigned int CellI = 0;
     scalar& valueOfpFieldAtPositionCellI  = pBoundary[0][CellI];
     vector3& valueOfUFieldAtPositionCellI  = uBoundary[0][CellI];
 
@@ -89,7 +94,7 @@ int main()
     //         uBoundary[i][j] = pressureStrength*vector3{1.0,1.0,0.0};
     //     }
     // }
-
+*/  
     return 0;
 }
 

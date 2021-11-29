@@ -38,7 +38,7 @@ class volField
         std::vector<Boundary<vectorType>>& boundaryField();
 
         // TODO Group4  // Returns the ID for a given named patch, if not found returns null (-1)    
-        // int patchID(std::string patchName) const;
+        int patchID(std::string patchName);
         
     private:
         const Mesh&     mesh_;

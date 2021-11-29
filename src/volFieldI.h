@@ -58,3 +58,27 @@ std::vector<Boundary<vectorType>>& volField<vectorType>::boundaryField()
 //       vectorBCFieldTest[i]=2;
 //   }
 // }
+// template <typename vectorType>
+// std::vector<Boundary<vectorType>>& volField<vectorType>::boundaryField()
+// {
+//   return boundaryField_;
+// }
+template <typename vectorType>
+int volField<vectorType>::patchID(std::string patchName)
+{
+  int pId=-1;
+
+  for(long unsigned int i=0;i<boundaryField_.size();i++)
+  {
+    if(boundaryField_[i].patchName()==patchName)
+      {
+        pId=i;
+        break;
+      }
+  }
+  if (pId<0)
+    {
+      std::cout<<"Could not find the Patch: "<<patchName<<std::endl;
+    }  
+  return pId;
+}
