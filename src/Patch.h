@@ -12,9 +12,11 @@ class Patch
 
         // Destructor
         virtual ~Patch(){};
-        
+
         const std::string& name() const;
-               
+
+        int nFaces() const;
+
     protected:
 
     private:

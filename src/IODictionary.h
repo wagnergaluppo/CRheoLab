@@ -6,20 +6,25 @@
 #include <map>
 #include <fstream>
 #include <iostream>
-#include <sstream> 
+#include <sstream>
 #include <algorithm>
+
+enum fileAction {
+      FILE_READ=1,
+      FILE_WRITE=2
+};
 
 class IODictionary
 {
     public:
         // Constructor
         IODictionary(std::string path, std::string fileName);
-        
+
         // Destructor
         virtual ~IODictionary(){} ;
 
         bool setPath (std::string& newPath);
-        
+
     protected:
         int countCharactersInString(const std::string& line);
         std::vector<std::string> splitString(const std::string& line, char delimiter);
@@ -37,7 +42,7 @@ class IODictionary
         double findScalar( const std::string& path, const std::string& fileName, const std::string& keyword);
         std::string findAsString( const std::string& path, const std::string& fileName, const std::string& keyword);
         std::map<std::string, std::string> readHeader( const std::string& path, const std::string& fileName);
-        
+
         template <typename primitiveType>
         primitiveType readVectorTensorData(std::ifstream& in_file, std::istringstream& iss, std::string& line, int lineCounter);
 
@@ -51,4 +56,4 @@ class IODictionary
 
 
 
-#endif 
+#endif

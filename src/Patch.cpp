@@ -15,3 +15,8 @@ const std::string& Patch::name() const
 {
     return name_;
 }
+
+int Patch::nFaces() const
+{
+    return nFaces_;
+}

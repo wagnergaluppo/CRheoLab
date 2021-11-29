@@ -5,16 +5,15 @@
 #include "Mesh.h"
 #include "RunTime.h"
 
-
 template< typename vectorType>
 class Boundary
 :
     public IODictionary
 {
     public:
-    
+
         // Default constructor
-        Boundary(std::string fileName, const Patch& patch, const Mesh& mesh, const RunTime& time);
+        Boundary(std::string fileName, const Patch& patch, const Mesh& mesh, const RunTime& time, fileAction action);
 
         // Destructor
         virtual ~Boundary(){} ;
@@ -42,7 +41,8 @@ class Boundary
         const RunTime& runTime_;
         const Patch& patch_;
         patchBoundaryConditions boundary_;
+        fileAction action_;
 
 };
 
-#endif 
+#endif
