@@ -1,4 +1,4 @@
-#include "volField.h"
+#include "readVolField.h"
 
 template <typename vectorType>
 volField<vectorType>::volField(std::string fileName, const Mesh &mesh, const RunTime &time, fileAction action)
@@ -11,7 +11,7 @@ volField<vectorType>::volField(std::string fileName, const Mesh &mesh, const Run
   // check action
   if (action  == FILE_READ)
   {
-     internalField_(readInternalField());
+     internalField_=readInternalField();
 
      for (unsigned int i = 0; i < mesh_.nPatches_; i++)
      {
@@ -28,7 +28,7 @@ volField<vectorType>::volField(std::string fileName, const Mesh &mesh, const Run
   }
   else if (action == FILE_WRITE)
   {
-      internalField_.reserve(mesh.nCells_);
+      internalField_.resize(mesh.nCells_);
 
       for (unsigned int i = 0; i < mesh_.nPatches_; i++)
       {
@@ -49,8 +49,6 @@ volField<vectorType>::volField(std::string fileName, const Mesh &mesh, const Run
 
   // test();
 }
-
-#include "readVolField.h"
 
 // Give access to the boundary entities
 template <typename vectorType>

@@ -12,11 +12,12 @@ Boundary<vectorType>::Boundary(std::string fileName, const Patch& patch, const M
       // check action
       if (action == FILE_READ)
       {
-            boundary_(readBoundaryField(patch_.name()));
+            boundary_=readBoundaryField(patch_.name());
       }
       else if (action == FILE_WRITE)
       {
-            boundary_.reserve(patch_.nFaces());
+            boundary_.type="calculated";
+            boundary_.fieldValue.resize(patch_.nFaces());
       }
       else
       {

@@ -46,4 +46,6 @@ class volField
 
 };
 
+#include "volFieldI.h"
+
 #endif
