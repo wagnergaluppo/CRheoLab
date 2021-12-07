@@ -1,4 +1,4 @@
-#include "Boundary.h"
+#include "boundary.h"
 #include "readBoundary.h"
 
 template <typename vectorType>

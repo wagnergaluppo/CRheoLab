@@ -3,7 +3,7 @@
 
 #include "IODictionary.h"
 #include "RunTime.h"
-#include "BoundaryI.h"
+#include "boundaryI.h"
 
 typedef std::array<double, 3> vector3;
 typedef std::array<double, 6> symmTensor;
