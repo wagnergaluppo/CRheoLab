@@ -25,7 +25,6 @@ Boundary<vectorType>::Boundary(std::string fileName, const Patch& patch, const M
       }
 }
 
-
 template <typename vectorType>
 vectorType& Boundary<vectorType>::boundary()
 {
