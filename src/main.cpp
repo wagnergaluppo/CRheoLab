@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Mesh.h"
 #include "IODictionaryI.h"
-#include "volFieldI.h"
+#include "volField.h"
 
 
 
@@ -22,35 +22,34 @@ using namespace std;
 
 int main()
 {
-        
+
     std::cout << "Current path is : " << getExecutablePath() << std::endl;
 
    checkCaseStructure();
-    
+
     RunTime time;
 
     Mesh polyMesh;
-    
-    volField<scalarField> p ("p", polyMesh, time);
+
+    volField<scalarField> p ("p", polyMesh, time, FILE_READ);
     std::vector<Boundary<scalarField>>& pBoundary = p.boundaryField();
-    
+
     // for (int i=0; i< 20; i++)
 
     // {
     // scalarField& valueOfField  = pBoundary[i].boundary();
     // scalarField& valueOfField  = pBoundary[i][j];
-    // }       
+    // }
 
    // volField<vectorField> U ("U", polyMesh);
 
    // boundaryField<scalarField> tst ("p", polyMesh, time);
 
     // TODO main > volField>boundaryfield> boundary> patch
-    volField<scalarField> pBC ("p", polyMesh, time);
-    
+    volField<scalarField> pBC ("p", polyMesh, time, FILE_READ);
+
 
 
 
     return 0;
 }
-

@@ -3,7 +3,7 @@
 
 #include "IODictionary.h"
 #include "RunTime.h"
-#include "BoundaryI.h"
+#include "boundaryI.h"
 
 typedef std::array<double, 3> vector3;
 typedef std::array<double, 6> symmTensor;
@@ -20,9 +20,9 @@ class volField
     public IODictionary
 {
     public:
-    
+
         // Default constructor
-        volField(std::string fileName, const Mesh& mesh, const RunTime& time);
+        volField(std::string fileName, const Mesh& mesh, const RunTime& time, fileAction action);
 
         // Destructor
         virtual ~volField(){} ;
@@ -38,11 +38,14 @@ class volField
         std::vector<Boundary<vectorType>>& boundaryField();
 
     private:
-        const Mesh&     mesh_;
-        const RunTime&  runTime_;
+        const Mesh& mesh_;
+        const RunTime& runTime_;
         vectorType internalField_;
         std::vector<Boundary<vectorType>> boundaryField_;
+        fileAction action_;
 
 };
 
-#endif 
+#include "volFieldI.h"
+
+#endif

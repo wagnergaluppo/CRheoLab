@@ -1,27 +1,54 @@
-#include "volField.h"
+#include "readVolField.h"
 
 template <typename vectorType>
-volField<vectorType>::volField(std::string fileName, const Mesh &mesh, const RunTime &time)
+volField<vectorType>::volField(std::string fileName, const Mesh &mesh, const RunTime &time, fileAction action)
     : IODictionary(time.Path(), fileName),
       mesh_(mesh),
       runTime_(time),
-      internalField_(readInternalField())
+      action_(action)
 {
-  for (unsigned int i = 0; i < mesh_.nPatches_; i++)
+
+  // check action
+  if (action  == FILE_READ)
   {
-    boundaryField_.push_back(Boundary<vectorType>
-    ( 
-        fileName,
-        mesh_.patchList_[i],
-        mesh_,
-        runTime_
-    ));
+     internalField_=readInternalField();
+
+     for (unsigned int i = 0; i < mesh_.nPatches_; i++)
+     {
+       boundaryField_.push_back(Boundary<vectorType>
+       (
+           fileName,
+           mesh_.patchList_[i],
+           mesh_,
+           runTime_,
+           action
+       ));
+     }
+
   }
-  
+  else if (action == FILE_WRITE)
+  {
+      internalField_.resize(mesh.nCells_);
+
+      for (unsigned int i = 0; i < mesh_.nPatches_; i++)
+      {
+        boundaryField_.push_back(Boundary<vectorType>
+        (
+            fileName,
+            mesh_.patchList_[i],
+            mesh_,
+            runTime_,
+            action
+        ));
+      }
+  }
+  else
+  {
+        std::cerr << "Unrecognized action for internalField!" << std::endl;
+  }
+
   // test();
 }
-
-#include "readVolField.h"
 
 // Give access to the boundary entities
 template <typename vectorType>
