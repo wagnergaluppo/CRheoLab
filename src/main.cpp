@@ -1,9 +1,7 @@
 #include <iostream>
 #include "Mesh.h"
-#include "IODictionaryI.h"
+#include "IODictionary.h"
 #include "volField.h"
-
-
 
 //  void write_csv(std::string filename, std::string , std::vector<double> );
 
@@ -31,7 +29,7 @@ int main()
 
     Mesh polyMesh;
 
-    volField<scalarField> p ("p", polyMesh, time, FILE_READ);
+    volField<scalarField> p ("p", polyMesh, time, MUST_READ);
     std::vector<Boundary<scalarField>>& pBoundary = p.boundaryField();
 
     // for (int i=0; i< 20; i++)
@@ -46,7 +44,7 @@ int main()
    // boundaryField<scalarField> tst ("p", polyMesh, time);
 
     // TODO main > volField>boundaryfield> boundary> patch
-    volField<scalarField> pBC ("p", polyMesh, time, FILE_READ);
+    volField<scalarField> pBC ("p", polyMesh, time, MUST_READ);
 
 
 
