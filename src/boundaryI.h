@@ -10,11 +10,11 @@ Boundary<vectorType>::Boundary(std::string fileName, const Patch& patch, const M
       action_(action)
 {
       // check action
-      if (action == FILE_READ)
+      if (action == MUST_READ)
       {
             boundary_=readBoundaryField(patch_.name());
       }
-      else if (action == FILE_WRITE)
+      else if (action == NO_READ)
       {
             boundary_.type="calculated";
             boundary_.fieldValue.resize(patch_.nFaces());

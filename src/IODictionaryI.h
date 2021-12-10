@@ -1,6 +1,4 @@
 
-#include "IODictionary.h"
-
 template <typename primitiveType>
 primitiveType IODictionary::readVectorTensorData(std::ifstream& in_file, std::istringstream& iss, std::string& line, int lineCounter)
 {

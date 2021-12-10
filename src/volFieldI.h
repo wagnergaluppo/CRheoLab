@@ -8,8 +8,8 @@ volField<vectorType>::volField(std::string fileName, const Mesh &mesh, const Run
       action_(action)
 {
 
-  // check action
-  if (action  == FILE_READ)
+  // Check action
+  if (action  == MUST_READ)
   {
      internalField_=readInternalField();
 
@@ -26,7 +26,7 @@ volField<vectorType>::volField(std::string fileName, const Mesh &mesh, const Run
      }
 
   }
-  else if (action == FILE_WRITE)
+  else if (action == NO_READ)
   {
       internalField_.resize(mesh.nCells_);
 
@@ -47,7 +47,6 @@ volField<vectorType>::volField(std::string fileName, const Mesh &mesh, const Run
         std::cerr << "Unrecognized action for internalField!" << std::endl;
   }
 
-  // test();
 }
 
 // Give access to the boundary entities
@@ -57,13 +56,3 @@ std::vector<Boundary<vectorType>>& volField<vectorType>::boundaryField()
   return boundaryField_;
 }
 
-// template <typename vectorType>
-// void volField<vectorType>::test()
-// {
-//   vectorType& banana = boundaryField_[0].boundary();
-
-//   for (unsigned int i =0; i< banana.size(); i++)
-//   {
-//       banana[i]=2;
-//   }
-// }
