@@ -39,18 +39,22 @@ class volField
 
         // G5 Contribution
         // Give access to the boundary entities
-        std::vector<vectorType>& internalField();
+       vectorType& internalField();
 
+        // G5 Contribution
         //useful functions
         template <typename primitiveType>
         void shiftField(const primitiveType& shiftQuantity);
-
         void scaleField(const double& scaleQuantity);
-
         template<typename primitiveType>
         void shiftMaxField(const primitiveType& dummyQuantity);
         template<typename primitiveType>
         void shiftMinField(const primitiveType& dummyQuantity);
+        void projectVectorField(const vector3& projectVector);
+        vectorField projectTensorField(const vector3& projectVector);
+        scalarField I1ofTensor();
+        scalarField I2ofTensor();
+        scalarField I3ofTensor();
 
     private:
         const Mesh& mesh_;
@@ -59,14 +63,7 @@ class volField
         std::vector<Boundary<vectorType>> boundaryField_;
         fileAction action_;
 
-        //Friend Fuctions
-        template<class vectorTypeF>
-        friend inline volField<vectorTypeF> operator+(const volField<vectorTypeF> & vf1, const volField<vectorTypeF> & vf2);
-        
-        template<class vectorTypeF>
-        friend inline volField<vectorTypeF> operator-(const volField<vectorTypeF> & vf1, const volField<vectorTypeF> & vf2);
-
-};
+ };
 
 #include "volFieldI.h"
 

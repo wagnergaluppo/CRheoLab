@@ -18,8 +18,38 @@ inline std::ostream& operator<<(std::ostream& os, const scalarField& v)
 
 // At the field level
 
+// G5 Contributions
+// Sum scalarField with a constant
+inline scalarField operator+(const scalarField& v1, const double& v2)
+{
+     
+   scalarField result(v1.size());
+
+   for(unsigned int i = 0 ; i < v1.size(); i++)
+   {
+        result[i] = v1[i] + v2;
+   }
+
+   return result;
+}
+
+// G5 Contributions
+// Subtraction scalarField with a constant
+inline scalarField operator-(const scalarField& v1, const double& v2)
+{
+     
+   scalarField result(v1.size());
+
+   for(unsigned int i = 0 ; i < v1.size(); i++)
+   {
+        result[i] = v1[i] - v2;
+   }
+
+   return result;
+}
+
 // Multiplication
-inline scalarField operator*(const scalarField& v1, const scalarField& v2)
+inline scalarField operator*( scalarField& v1,  scalarField& v2)
 {
     checkSize(v1,v2);
    

@@ -165,6 +165,35 @@ inline vector3 operator^(const vector3& v1, const vector3& v2)
 
 
 // At the field level
+// G5 Contributions
+// Sum of a vectorField field with a fixed vector3
+inline vectorField operator+(const vectorField& v1, const vector3& d1)
+{
+    vectorField result(v1.size());
+
+    for(unsigned int i = 0 ; i < v1.size(); i++)
+    {
+        result[i] = v1[i] + d1;
+    }
+
+    return result;
+}
+
+// G5 Contributions
+// Subtraction of a vectorField field with a fixed vector3
+inline vectorField operator-(const vectorField& v1, const vector3& d1)
+{
+    vectorField result(v1.size());
+
+    for(unsigned int i = 0 ; i < v1.size(); i++)
+    {
+        result[i] = v1[i] - d1;
+    }
+
+    return result;
+}
+
+
 inline vectorField operator*(const vectorField& v1, const double& d1)
 {
     vectorField result(v1.size());

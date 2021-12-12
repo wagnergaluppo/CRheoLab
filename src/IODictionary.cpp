@@ -18,6 +18,12 @@ const std::string& IODictionary::Name() const
     return fileName_;
 }
 
+// G5 Contributions
+void IODictionary::setName(std::string& newName)
+{
+    fileName_ = newName;
+}
+
 bool IODictionary::setPath (std::string& newPath)
 {
     path_ = newPath;

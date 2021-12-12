@@ -27,6 +27,12 @@ class IODictionary
         virtual ~IODictionary(){} ;
 
         bool setPath (std::string& newPath);
+
+        //G5 Contribution
+        void setName(std::string& newName);
+
+        //G5 Contribution - Moved from protected
+        const std::string& Name() const;
         
     protected:
 	
@@ -159,7 +165,9 @@ class IODictionary
         primitiveType readVectorTensorData(std::ifstream& in_file, std::istringstream& iss, std::string& line, int lineCounter);
 
         const std::string& Path() const;
-        const std::string& Name() const;
+
+        //G5 Moved to public
+        //const std::string& Name() const;
 
     private:
         std::string path_;

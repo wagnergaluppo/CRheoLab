@@ -37,8 +37,11 @@ class Boundary
         // Returning the field value for the Boundary
         vectorType& boundary();
 
+        // Returning the type for the Boundary Patch
+        std::string& type();
+
         // Returning the valImposed var for the Boundary
-        bool valImposed();
+        bool& valImposed();
 
     private:
         const Mesh& mesh_;

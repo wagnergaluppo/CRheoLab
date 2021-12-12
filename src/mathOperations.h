@@ -18,6 +18,7 @@ typedef std::vector<tensor>     tensorField;
 #include "scalarOperations.h"
 #include "vectorOperations.h"
 #include "tensorOperations.h"
+#include "symmTensorOperations.h"
 #endif
 
 

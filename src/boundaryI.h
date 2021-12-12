@@ -32,7 +32,13 @@ vectorType& Boundary<vectorType>::boundary()
 }
 
 template <typename vectorType>
-bool Boundary<vectorType>::valImposed()
+bool& Boundary<vectorType>::valImposed()
 {
   return boundary_.valImposed;
+}
+
+template <typename vectorType>
+std::string& Boundary<vectorType>::type()
+{
+  return boundary_.type;
 }
