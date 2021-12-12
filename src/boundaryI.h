@@ -30,3 +30,9 @@ vectorType& Boundary<vectorType>::boundary()
 {
   return boundary_.fieldValue;
 }
+
+template <typename vectorType>
+bool Boundary<vectorType>::valImposed()
+{
+  return boundary_.valImposed;
+}

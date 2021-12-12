@@ -39,13 +39,29 @@ int main()
     // scalarField& valueOfField  = pBoundary[i][j];
     // }
 
-   // volField<vectorField> U ("U", polyMesh);
+   //volField<vectorField> U ("U", polyMesh);
 
    // boundaryField<scalarField> tst ("p", polyMesh, time);
 
     // TODO main > volField>boundaryfield> boundary> patch
-    volField<scalarField> pBC ("p", polyMesh, time, MUST_READ);
+   /*  volField<scalarField> pBA ("p", polyMesh, time, MUST_READ);
+    volField<scalarField> pBB ("p", polyMesh, time, MUST_READ);
+    volField<scalarField> pBC = pBB + pBA;
+    volField<scalarField> pBD = pBB - pBA;
+    pBC.shiftField(20.0);
+    pBC.shiftMaxField(1.0);
+    pBC.shiftMinField(1.0);
+    pBC.scaleField(2.0);
+    std::cout << "teste4" << endl; */
+    //pBC = pBB + pBA;
 
+    volField<vectorField> UA ("U", polyMesh, time, MUST_READ);
+    volField<vectorField> UB ("U", polyMesh, time, MUST_READ);
+    //volField<vectorField> UC = UA + UB;
+   // volField<vectorField> UD = UA - UB;
+    //UC.shiftField(UA.internalField());
+    //UC.shiftMinField(UA.internalField());
+    //UC.shiftMaxField(UA.internalField());
 
 
 

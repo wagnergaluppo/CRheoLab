@@ -24,6 +24,7 @@ class Boundary
             std::string type;
             vectorType fieldValue;
             std::map<std::string, std::string> otherInfo;
+            bool valImposed;
         };
 
         // Read Data
@@ -33,8 +34,11 @@ class Boundary
         // Read Boundary field
         patchBoundaryConditions readBoundaryField(const std::string& patchName);
 
-        // Returning the field value for the Boudary
+        // Returning the field value for the Boundary
         vectorType& boundary();
+
+        // Returning the valImposed var for the Boundary
+        bool valImposed();
 
     private:
         const Mesh& mesh_;
@@ -42,7 +46,7 @@ class Boundary
         const Patch& patch_;
         patchBoundaryConditions boundary_;
         fileAction action_;
-
+  
 };
 
 #endif

@@ -303,6 +303,19 @@ inline double mag(const vector3& v1)
    return result;
 }
 
+// G5 - Contribtuion
+// Define > comparison operator for vector3
+inline bool operator>(const vector3& v1, const vector3& v2)
+{
+   return (mag(v1)>mag(v2));
+}
+
+// G5 - Contribtuion
+// Define < comparison operator for vector3
+inline bool operator<(const vector3& v1, const vector3& v2)
+{
+   return (mag(v1)<mag(v2));
+}
 
 // Magnitude of a vector
 inline scalarField mag(const vectorField& v1)
@@ -342,4 +355,37 @@ vectorField unitVector(const vectorField& v1)
    return result;
 }
 */
+
+// G5 - Contribtuion
+//return the maximum of the vectorField
+// define new functions in vectorOperations.h
+// inline bool operator>(const vector3& v1, const vector3& v2)
+inline vector3 maxField(const vectorField& v1)
+{   
+   
+   vector3 result = v1[0];
+   
+   for(unsigned int i = 1 ; i < v1.size(); i++)
+   {
+        if (v1[i] > result) result=v1[i];
+   }
+   return result;
+}
+
+// G5 - Contribtuion
+//return the minimum of the scalarField
+// define new functions in vectorOperations.h
+// inline bool operator<(const vector3& v1, const vector3& v2)
+inline vector3 minField(const vectorField& v1)
+{   
+   
+   vector3 result = v1[0];
+   
+   for(unsigned int i = 1 ; i < v1.size(); i++)
+   {
+        if (v1[i] < result) result=v1[i];
+   }
+   return result;
+}
+
 #endif
