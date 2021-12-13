@@ -416,7 +416,6 @@ vectorField volField<vectorType>::projectTensorField(const vector3& v1)
 
 // G5 - Contribution
 //To compute the magnitude of a vectorField
-// define new functions in vectorOperations.h
 inline double magVector(const vectorField& v1) {
 
 for (unsigned int i=0; i < v1.size(); i++) {
@@ -430,7 +429,6 @@ for (unsigned int i=0; i < v1.size(); i++) {
 
 // G5 - Contribution
 // To compute a scalarField to store the magnitude of the vectorField
-// define new functions in vectorOperations.h
 template <typename vectorType>
 scalarField volField<vectorType>::magVector()
 {
