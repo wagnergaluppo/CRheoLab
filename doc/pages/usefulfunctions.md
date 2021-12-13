@@ -48,7 +48,7 @@ To perform this operation a volField class method is available, that receives a 
 
 ### Project a VectorField (Karinate) 
 
-1-We need to compute the projection of a vectorField to determine the component of a vector in a given direction.
+1- We need to compute the projection of a vectorField to determine the component of a vector in a given direction.
  
 The documentation for calculating the vector projection is adapted from \cite  Greenshields (2015). OpenFoam Programmers Guide.
 
@@ -80,7 +80,7 @@ The dot product of two vectors is non-commutative (order dependent) and produces
 
 ### To compute the magnitude of a vector (Karinate)
 
-2-We  need to compute the magnitude of a vectorField
+2- We need to compute the magnitude of a vectorField
 
 The documentation for calculating the vector magnitude is adapted from \cite  Gradshteyn and Ryzhik (2000). Tables of Integrals, Series and Products.
 
