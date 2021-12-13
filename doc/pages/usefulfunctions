@@ -26,19 +26,13 @@ The calculation of the minimum or maximum value of the field depends on the type
 ----
 ### Shift Field (Paulo)
 
-Shift the field with a constant (scalar, vector, symTensor and tensor)
-The constant is the
-minimum value
-maximum value
+Shift the field with a constant (scalar, vector, symTensor and tensor) The constant is the minimum value maximum value
 
 To perform this operation two strategies are available:
-1- **as a volField class methods**:
-receiving a constant as shift quantity parameter;
-using maximum or minimum value of the field (using instead shiftMaxField and shiftMixField methods).
-2- **as a function application**: 
+1- As a volField class methods:
+receiving a constant as shift quantity parameter; using maximum or minimum value of the field (using instead shiftMaxField and shiftMixField methods).
+2- As a function application: 
 overloading the + and - operators, to perform addition or subtraction between a volField object and a constant.
-
-
 
 
 ----
