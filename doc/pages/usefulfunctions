@@ -49,8 +49,6 @@ Scale the field with a constant scalar (same documentation as Shift)
 
 ----
 
-
-
 ### Project a VectorField (Karinate) 
 
 1-We need to compute the projection of a vectorField to determine the component of a vector in a given direction.
@@ -87,7 +85,6 @@ The dot product of two vectors is non-commutative (order dependent) and produces
 
 2-We  need to compute the magnitude of a vectorField
 
-
 The documentation for calculating the vector magnitude is adapted from \cite  Gradshteyn and Ryzhik (2000). Tables of Integrals, Series and Products.
 
 To calculate the magnitude of a vectorField, we have to perform two algebraic operations; magnitude squared of a 3-Dimensional vector and magnitude (square root of the magnitude squared)
@@ -107,7 +104,6 @@ Magnitude for the vector, which is the square root of the magnitude squared \f$ 
 *     \f$ |V| = \sqrt {{V}_x{V}_x + \ {V}_y{V}_y + \ {V}_z{V}_z} \f$ 
 
 ----
-
 
 ### Tensor Field related (Mohamed)
 1- Create a vector field with component of the tensor in one direction
