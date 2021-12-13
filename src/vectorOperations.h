@@ -452,8 +452,7 @@ for(unsigned int i= 0; i < internalField.size(); i++) {
  }
 
 for(unsigned int i = 0; i < mesh_.nPatches_; i++){
-
-    for(unsigned int i = 0; i < mesh_.nPatches_; i++){
+ for(unsigned int i = 0; i < mesh_.nPatches_; i++){
        result.boundaryField_[i].type = "fixedValue";
        result.boundaryField_[i].valImposed = true;
       for(unsigned int j = 0; j < result.boundaryField_[i].fieldValue.size(); j++){
