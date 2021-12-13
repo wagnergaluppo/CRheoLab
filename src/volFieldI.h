@@ -199,8 +199,8 @@ void volField<vectorType>::scaleField(const double& scaleQuantity)
 // shift max field
 // TODO remove dummyQuantity detect primtive type automatically
 template<typename vectorType>
-template<typename primitiveType>
-void volField<vectorType>::shiftMaxField(const primitiveType& dummyQuantity)
+//template<typename primitiveType>
+void volField<vectorType>::shiftMaxField()
 {
     // New operations defined into scalarOperations.h 
         // inline double maxField(const scalarField& v1)
@@ -210,11 +210,11 @@ void volField<vectorType>::shiftMaxField(const primitiveType& dummyQuantity)
         // inline tensor maxField(const tensorField& t1)
     // New operations defined into symmTensorOperations.h 
         // inline tensor maxField(const tensorField& t1)
-    primitiveType maxFieldValue = maxField(internalField_);
+    typename vectorType::value_type maxFieldValue = maxField(internalField_);
     for(unsigned int i = 0 ; i < mesh_.nPatches_; i++){
         // just compute if value is imposed and the size of the boundary is > 0
         if (boundaryField_[i].valImposed() & (boundaryField_[i].boundary().size() > 0 )) {
-            primitiveType maxBndFieldValue = maxField(boundaryField_[i].boundary());
+            typename vectorType::value_type maxBndFieldValue = maxField(boundaryField_[i].boundary());
             if (maxBndFieldValue > maxFieldValue) maxFieldValue = maxBndFieldValue;            
         }
     }
@@ -225,8 +225,7 @@ void volField<vectorType>::shiftMaxField(const primitiveType& dummyQuantity)
 // shift min field
 // TODO remove dummyQuantity detect primtive type automatically
 template<typename vectorType>
-template<typename primitiveType>
-void volField<vectorType>::shiftMinField(const primitiveType& dummyQuantity)
+void volField<vectorType>::shiftMinField()
 {
     // New operations defined into scalarOperations.h 
         // inline double maxField(const scalarField& v1)
@@ -236,11 +235,11 @@ void volField<vectorType>::shiftMinField(const primitiveType& dummyQuantity)
         // inline tensor maxField(const tensorField& t1)
     // New operations defined into symmTensorOperations.h 
         // inline tensor maxField(const tensorField& t1)
-    primitiveType minFieldValue = minField(internalField_);
+    typename vectorType::value_type minFieldValue = minField(internalField_);
     for(unsigned int i = 0 ; i < mesh_.nPatches_; i++){
         // just compute if value is imposed and the size of the boundary is > 0
         if (boundaryField_[i].valImposed() & (boundaryField_[i].boundary().size() > 0 )) {
-            primitiveType minBndFieldValue = minField(boundaryField_[i].boundary());
+            typename vectorType::value_type minBndFieldValue = minField(boundaryField_[i].boundary());
             if (minBndFieldValue < minFieldValue) minFieldValue = minBndFieldValue;            
         }
     }

@@ -46,10 +46,8 @@ class volField
         template <typename primitiveType>
         void shiftField(const primitiveType& shiftQuantity);
         void scaleField(const double& scaleQuantity);
-        template<typename primitiveType>
-        void shiftMaxField(const primitiveType& dummyQuantity);
-        template<typename primitiveType>
-        void shiftMinField(const primitiveType& dummyQuantity);
+        void shiftMaxField();
+        void shiftMinField();
         void projectVectorField(const vector3& projectVector);
         vectorField projectTensorField(const vector3& projectVector);
         scalarField I1ofTensor();
