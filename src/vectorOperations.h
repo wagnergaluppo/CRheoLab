@@ -419,19 +419,6 @@ inline vector3 minField(const vectorField& v1)
 
 #endif
 
-// G5 - Contribution
-//To compute the magnitude of a vectorField
-// define new functions in vectorOperations.h
-inline double magVector(const vectorField& v1) {
-
-for (unsigned int i=0; i < v1.size(); i++) {
-       double sum = (pow(v1[i][0],2)
-                    +pow(v1[i][1],2)
-                    +pow(v1[i][2],2));
-    double result= sqrt(sum);
-              return result;
-  } 
-   }
 
 /* // G5 - Contribution
 // To compute a scalarField to store the magnitude of the vectorField
