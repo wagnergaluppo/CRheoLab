@@ -16,9 +16,11 @@ class Patch
         const std::string& name() const;
 
         // Returns the number of faces in the boundary patch
+        ///@brief Returns the number of faces in the boundary patch
         int nFaces() const;
 
         // Returns the index of a patch in the boundary patch list
+        ///@brief Returns the index of a patch in the boundary patch list
         int index() const;
 
     protected:
