@@ -10,7 +10,8 @@ This page is dedicated to the useful Functions for the volScalarField
 ### General Information (Miguel)
 
 The useful functions created for the volField Class aim at providing a set of utilities to manipulate objects of the class and/or create new objects based on
-previously created objects of the class. 
+previously created objects of the class. That will include for example calculating the maximum and minimum of a field, the shift and scale of a field, 
+the projection of a vector, and the tensor invariants.
 
 ----
 ### Max and Min from a Field (Miguel)
