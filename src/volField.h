@@ -20,9 +20,12 @@ class volField
     public IODictionary
 {
     public:
-    
+
         // Default constructor
-        volField(std::string fileName, const Mesh& mesh, const RunTime& time);
+        volField(std::string fileName, const Mesh& mesh, const RunTime& time, fileAction action);
+
+        // Constructor with a default value passed by argument
+        volField(std::string fileName, const Mesh& mesh, const RunTime& time, fileAction action, const typename vectorType::value_type& defaultValue);
 
         // Destructor
         virtual ~volField(){} ;
@@ -37,15 +40,15 @@ class volField
         // Give access to the boundary entities
         std::vector<Boundary<vectorType>>& boundaryField();
 
-        // TODO Group4  // Returns the ID for a given named patch, if not found returns null (-1)    
-        int patchID(std::string patchName);
-        
     private:
-        const Mesh&     mesh_;
-        const RunTime&  runTime_;
+        const Mesh& mesh_;
+        const RunTime& runTime_;
         vectorType internalField_;
         std::vector<Boundary<vectorType>> boundaryField_;
+        fileAction action_;
 
 };
 
-#endif 
+#include "volFieldI.h"
+
+#endif

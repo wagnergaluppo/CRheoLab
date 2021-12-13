@@ -2,13 +2,40 @@
 #include "readBoundary.h"
 
 template <typename vectorType>
-Boundary<vectorType>::Boundary(std::string fileName, const Patch& patch, const RunTime& time)
+Boundary<vectorType>::Boundary(std::string fileName, const Patch& patch, const Mesh& mesh, const RunTime& time, fileAction action)
     : IODictionary(time.Path(), fileName),
+      mesh_(mesh),
       runTime_(time),
       patch_(patch),
-      boundary_(readBoundaryField( patch_.name() )),
-      size_(boundary_.fieldValue.size())
-{}
+      action_(action)
+{
+    // check action
+    if (action == MUST_READ)
+    {
+        boundary_=readBoundaryField(patch_.name());
+    }
+    else if (action == NO_READ)
+    {
+        boundary_.type="calculated";
+        boundary_.fieldValue.resize(patch_.nFaces());
+    }
+    else
+    {
+        std::cerr << "Unrecognized action for boundaryField!" << std::endl;
+    }
+}
+
+template <typename vectorType>
+Boundary<vectorType>::Boundary(std::string fileName, const Patch& patch, const Mesh& mesh, const RunTime& time, fileAction action, const typename vectorType::value_type& defaultValue)
+    : IODictionary(time.Path(), fileName),
+      mesh_(mesh),
+      runTime_(time),
+      patch_(patch),
+      action_(action)
+{
+    boundary_.type="calculated";
+    boundary_.fieldValue.resize(patch_.nFaces(),defaultValue);
+}
 
 
 template <typename vectorType>
@@ -16,30 +43,6 @@ vectorType& Boundary<vectorType>::boundary()
 {
   return boundary_.fieldValue;
 }
-
-// Returning the size of the boundary patch
-template <typename vectorType>
-const int& Boundary<vectorType>::size() const
-{
-  return size_;
-}
-
-// TODO Group4 Returning the index in the boundaryField for the patch given name 
-template <typename vectorType>
-const bool Boundary<vectorType>::patchID(std::string patchName) const
-{
-  return (patchName==patch_.name())?(true):(false);
-}
-
-// TODO Group4 Returning the name of a patch for the given index at the boundaryField
-template <typename vectorType>
-const std::string Boundary<vectorType>::patchName() const
-{
-  return patch_.name();
-}
-
-// Implementation of [] operator.  This function must return a
-// reference as array element can be put on left side
 
 template <typename vectorType>
 typename vectorType::value_type& Boundary<vectorType>::operator[](unsigned int posI)

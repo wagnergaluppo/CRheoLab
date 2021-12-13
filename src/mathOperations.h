@@ -3,7 +3,6 @@
 #include<vector>
 #include <array>
 
-typedef double  scalar;
 
 typedef std::array<double, 3>   vector3;
 typedef std::array<double, 6>   symmTensor;

@@ -14,7 +14,10 @@ class Boundary
     public:
     
         // Default constructor
-        Boundary(std::string fileName, const Patch& patch, const RunTime& time);
+        Boundary(std::string fileName, const Patch& patch, const Mesh& mesh, const RunTime& time, fileAction action);
+
+        // Constructor with a default value passed by argument
+        Boundary(std::string fileName, const Patch& patch, const Mesh& mesh, const RunTime& time, fileAction action, const typename vectorType::value_type& defaultValue);
 
         // Destructor
         virtual ~Boundary(){} ;
@@ -37,28 +40,19 @@ class Boundary
         // Returning the field value for the Boundary
         vectorType& boundary();
 
-        // Returning the size of the boundary patch
-        const int& size() const;
-        
-        // TODO Group4 Returning the index in the boundaryField for the patch given name 
-        const bool patchID(std::string patchName) const;
-
-        // TODO Group4 Returning the name of a patch for the given index at the boundaryField
-        const std::string patchName() const;
-        
         // Operator Overloading templated
         // Setter
         typename vectorType::value_type& operator[](unsigned int posI);
 
         // Getter
         typename vectorType::value_type operator[](unsigned int posI) const;
-        
+                
     private:
-        // const Mesh& mesh_;
+        const Mesh& mesh_;
         const RunTime& runTime_;
         const Patch& patch_;
         patchBoundaryConditions boundary_;
-        int size_;
+        fileAction action_;
 
 };
 

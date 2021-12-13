@@ -8,13 +8,19 @@ class Patch
 {
     public:
         // Constructor
-        Patch(std::string, std::string, int, int);
+        Patch(std::string, std::string, int, int, int);
 
         // Destructor
         virtual ~Patch(){};
-        
+
         const std::string& name() const;
-               
+
+        // Returns the number of faces in the boundary patch
+        int nFaces() const;
+
+        // Returns the index of a patch in the boundary patch list
+        int index() const;
+
     protected:
 
     private:
@@ -22,6 +28,7 @@ class Patch
         std::string type_;
         int nFaces_;
         int startFace_;
+        int index_;
 
 };
 
