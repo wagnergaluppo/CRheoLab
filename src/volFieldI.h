@@ -428,7 +428,7 @@ for (unsigned int i=0; i < v1.size(); i++) {
 
 // G5 - Contribution
 // To compute a scalarField to store the magnitude of the vectorField
-template <typename vectorType>
+/* template <typename vectorType>
 scalarField volField<vectorType>::magVector()
 {
   vector3 v1;
@@ -457,4 +457,4 @@ else
  {
 cout:: << "Error: Function volField<vectorType>::magVector called for a non vector Field";
   }
-return result;
+return result; */
