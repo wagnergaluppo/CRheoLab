@@ -55,16 +55,17 @@ int main()
     pBC.shiftMaxField();
     pBC.shiftMinField();
     pBC.scaleField(2.0);
-    std::cout << "teste5" << endl; 
+
     
-    //volField<vectorField> UA ("U", polyMesh, time, MUST_READ);
-    //volField<vectorField> UB ("U", polyMesh, time, MUST_READ);
-    //volField<vectorField> UC = UA + UB;
-    //volField<vectorField> UD = UA - UB;
+    volField<vectorField> UA ("U", polyMesh, time, MUST_READ);
+    volField<vectorField> UB ("U", polyMesh, time, MUST_READ);
+    volField<vectorField> UC = UA + UB;
+    volField<vectorField> UD = UA - UB;
     //UC.shiftField(UA.internalField());
     //UC.shiftMinField(UA.internalField());
     //UC.shiftMaxField(UA.internalField());
 
+    std::cout << "teste6" << endl; 
 
 
     return 0;

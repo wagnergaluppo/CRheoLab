@@ -21,7 +21,7 @@ internalField uniform ( 1 1 1 );
 
 boundaryField
 {
-    inlet
+   top
     {
         type          zeroGradient ;
         /*type            fixedValue;
@@ -29,17 +29,36 @@ boundaryField
         value           uniform (0 0 0);*/
     }
 
-    banana
+    bottom
     {
         type            fixedValue;
         p2 banana;
         value           uniform (0 0 0);
     }
 
-    walls
+    right
     {
         type            fixedValue;
         value           uniform (0 0 0);
     }
+
+    left
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+
+    back
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+
+    frontAndBack
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+
 }
 // ************************************************************************* //
