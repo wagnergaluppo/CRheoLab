@@ -451,7 +451,7 @@ volField<scalarField> volField<vectorType>::magVector()
             {
                 result.boundaryField()[i].type() = "fixedValue";
                 result.boundaryField()[i].valImposed() = true;
-                for(unsigned int j = 0; j < result.boundaryField()[i].boundary().size(); j++)
+                for(unsigned int j = 0; j < boundaryField()[i].boundary().size(); j++)
                 {
                     result.boundaryField()[i].boundary()[j] = mag(boundaryField()[i].boundary()[j]);  
                 }
