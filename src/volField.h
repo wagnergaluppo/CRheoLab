@@ -53,7 +53,7 @@ class volField
         scalarField I1ofTensor();
         scalarField I2ofTensor();
         scalarField I3ofTensor();
-        scalarField magVector();
+        volField<scalarField> magVector();
 
     private:
         const Mesh& mesh_;
