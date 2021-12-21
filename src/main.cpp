@@ -50,6 +50,8 @@ int main()
     // #include "tensorFieldVerification.h"
     // #include "symmTensorFieldVerification.h"
 
+    // apply the useful function
+    // Loop over internal and Boundary Fields and compare the results with the expected.
 
     
     volField<vectorField> UA ("U", polyMesh, time, MUST_READ);
