@@ -428,33 +428,37 @@ for (unsigned int i=0; i < v1.size(); i++) {
 
 // G5 - Contribution
 // To compute a scalarField to store the magnitude of the vectorField
-/* template <typename vectorType>
+template <typename vectorType>
 scalarField volField<vectorType>::magVector()
 {
   vector3 v1;
   volField<scalarField> result;
-if (typeid(internalField).hash_code()==typeid(v1).hash_code() {
-    string magFieldFname="magof"+fieldName_;
+  if (typeid(internalField).hash_code()==typeid(v1).hash_code()) {
 
-       result.fieldName_=magFieldFname;
-       result.runTime_=runTime_;
+ std::string magfieldName="magof"+result.Name();
+     
+     result.setName = magfieldName;
+     result.runTime_=runTime_;
+  
+    for(unsigned int i= 0; i < internalField_.size(); i++){
+    result.internalField().push_back(mag(internalField[i]));
+   }
 
-for(unsigned int i= 0; i < internalField.size(); i++) {
-    result.internalField.push_back(mag(internalField[i]));
- }
-
-for(unsigned int i = 0; i < mesh_.nPatches_; i++){
- for(unsigned int i = 0; i < mesh_.nPatches_; i++){
+  for(unsigned int i = 0; i < mesh_.nPatches_; i++){
+ 
+    for(unsigned int i = 0; i < mesh_.nPatches_; i++){
        result.boundaryField_[i].type = "fixedValue";
        result.boundaryField_[i].valImposed = true;
-      for(unsigned int j = 0; j < result.boundaryField_[i].fieldValue.size(); j++){
-         result.boundaryField_[i].fieldValue.push_back (mag(boundaryField_[i].fieldValue[j])); 
+       for(unsigned int j = 0; j < j < result.boundaryField()[i].boundary().size(); j++){
+          result.boundaryField()[i].boundary().push_back(mag(boundaryField()[i].boundary()[j]));  
       }
     }
+  }
+}
+    else
+   {
+     std::cout << "Error: Function volField<vectorType>::magVector called for a non vector Field";
    }
-  }
-else
- {
-cout:: << "Error: Function volField<vectorType>::magVector called for a non vector Field";
-  }
-return result; */
+
+   return result; 
+}
