@@ -45,22 +45,15 @@ int main()
 
     // TODO main > volField>boundaryfield> boundary> patch
 
-    #include "scalarFieldVerification.h"
-    // #include "vectorFieldVerification.h"
+    //#include "scalarFieldVerification.h"
+    #include "vectorFieldVerification.h"
     // #include "tensorFieldVerification.h"
     // #include "symmTensorFieldVerification.h"
 
     // apply the useful function
     // Loop over internal and Boundary Fields and compare the results with the expected.
 
-    
-    volField<vectorField> UA ("U", polyMesh, time, MUST_READ);
-    volField<vectorField> UB ("U", polyMesh, time, MUST_READ);
-    volField<vectorField> UC = UA + UB;
-    volField<vectorField> UD = UA - UB;
-    //UC.shiftField(UA.internalField());
-    //UC.shiftMinField(UA.internalField());
-    //UC.shiftMaxField(UA.internalField());
+
 
     std::cout << "teste6" << endl; 
 
