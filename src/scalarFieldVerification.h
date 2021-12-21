@@ -1,0 +1,11 @@
+    volField<scalarField> pBA ("p", polyMesh, time, MUST_READ);
+    volField<scalarField> pBB ("p", polyMesh, time, MUST_READ);
+    volField<scalarField> pBC = pBB - pBA;
+    volField<scalarField> pBD = pBB + pBA;
+    double shift = 20;
+    volField<scalarField> pBE = pBC + shift;
+    volField<scalarField> pBF = pBD - shift;
+    pBC.shiftField(20.0);
+    pBC.shiftMaxField();
+    pBC.shiftMinField();
+    pBC.scaleField(2.0);
