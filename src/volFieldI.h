@@ -441,7 +441,7 @@ volField<scalarField> volField<vectorType>::magVector()
         
         for(unsigned int i= 0; i < internalField_.size(); i++)
         {
-            result.internalField().push_back(mag(internalField_[i]));
+            result.internalField()[i] = mag(internalField_[i]);
         }
 
         for(unsigned int i = 0; i < mesh_.nPatches_; i++)
@@ -453,7 +453,7 @@ volField<scalarField> volField<vectorType>::magVector()
                 result.boundaryField()[i].valImposed() = true;
                 for(unsigned int j = 0; j < result.boundaryField()[i].boundary().size(); j++)
                 {
-                    result.boundaryField()[i].boundary().push_back(mag(boundaryField()[i].boundary()[j]));  
+                    result.boundaryField()[i].boundary()[j] = mag(boundaryField()[i].boundary()[j]);  
                 }
             }
         }
