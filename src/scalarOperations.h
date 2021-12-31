@@ -14,7 +14,18 @@ inline std::ostream& operator<<(std::ostream& os, const scalarField& v)
     return os;
 }
 
+
+
+
 // Math Operations
+
+// At scalar level
+// G5 Contributions
+// define mag operation for a double
+inline double mag(const double& s1)
+{      
+   return abs(s1);
+}
 
 // At the field level
 

@@ -97,7 +97,7 @@ inline volField<vectorType> operator-(const volField<vectorType> & vf1, const vo
     //TODO - remove the results2 function from this fuction
     volField<vectorType> result2 = vf2;
 
-    result.internalField() = result.internalField() + result2.internalField();    
+    result.internalField() = result.internalField() - result2.internalField();    
     
     for(unsigned int i = 0 ; i < result.boundaryField().size(); i++)
     {
@@ -197,9 +197,7 @@ void volField<vectorType>::scaleField(const double& scaleQuantity)
 }
 
 // shift max field
-// TODO remove dummyQuantity detect primtive type automatically
 template<typename vectorType>
-//template<typename primitiveType>
 void volField<vectorType>::shiftMaxField()
 {
     // New operations defined into scalarOperations.h 
@@ -223,7 +221,6 @@ void volField<vectorType>::shiftMaxField()
 }
 
 // shift min field
-// TODO remove dummyQuantity detect primtive type automatically
 template<typename vectorType>
 void volField<vectorType>::shiftMinField()
 {
@@ -251,18 +248,21 @@ void volField<vectorType>::shiftMinField()
 template< typename vectorType>
 void volField<vectorType>::projectVectorField(const vector3& projectVector)
 {   
-    if (typeid(internalField_).hash_code()==typeid(projectVector).hash_code()) {
+    //std::cout << "hc1:" << typeid(internalField_[0]).hash_code() << std::endl;
+    //std::cout << "hc2:" << typeid(projectVector).hash_code() << std::endl;
+    
+    if (typeid(internalField_[0]).hash_code()==typeid(projectVector).hash_code()) 
+    {
         vector3 normProjectVector = projectVector / mag(projectVector);
         // New operation defined into vectorOperations.h 
-        // TODO
         // inline vectorField operator*( const scalarField& s1, const vector3& v1)
-        // TODO
         // inline scalarField operator&(const vectorField& v1, const vector3& v2)
-        internalField = (internalField & normProjectVector) * normProjectVector;
+        internalField_ = (internalField_ & normProjectVector) * normProjectVector;
 
         for(unsigned int i = 0 ; i < mesh_.nPatches_; i++){
-            if (boundaryField_[i].valImposed) {       
-                boundaryField_[i].fieldValue =  (boundaryField_[i].fieldValue & normProjectVector) * normProjectVector;                     
+            if (boundaryField_[i].valImposed()) 
+            {       
+                boundaryField_[i].boundary() =  (boundaryField_[i].boundary() & normProjectVector) * normProjectVector;                     
             }
         }  
     }   
@@ -414,19 +414,6 @@ vectorField volField<vectorType>::projectTensorField(const vector3& v1)
 }
 
 // G5 - Contribution
-//To compute the magnitude of a vectorField
-inline double magVector(const vectorField& v1) {
-
-for (unsigned int i=0; i < v1.size(); i++) {
-       double sum = (pow(v1[i][0],2)
-                    +pow(v1[i][1],2)
-                    +pow(v1[i][2],2));
-    double result= sqrt(sum);
-              return result;
-  } 
-   }
-
-// G5 - Contribution
 // To compute a scalarField to store the magnitude of the vectorField
 template <typename vectorType>
 volField<scalarField> volField<vectorType>::magVector()
@@ -464,4 +451,32 @@ volField<scalarField> volField<vectorType>::magVector()
     }
 
     return result; 
+}
+
+// G5 - Contribution
+// To compute a scalarField to store the magnitude of the vectorField
+template <typename vectorType>
+void compareVolFields(std::string operName, volField<vectorType>& f1, volField<vectorType>& f2)
+{
+  double intFieldError = 0.;
+  double bndFieldError = 0.;
+
+  for (unsigned int i= 0; i < f1.internalField().size(); i++)
+  {
+    intFieldError += mag(f1.internalField()[i] - f2.internalField()[i]);
+  }
+
+  for(unsigned int i = 0; i < f1.boundaryField().size(); i++)
+  {
+      for(unsigned int j = 0; j < f1.boundaryField()[i].boundary().size(); j++)
+      {
+          bndFieldError += mag(f1.boundaryField()[i].boundary()[j] -  f2.boundaryField()[i].boundary()[j]);  
+      }
+  }
+  std::cout << std::endl << "####################################" << std::endl;
+  std::cout << "###### Error " << operName << " #####" << std::endl;
+  std::cout << "Internal Field: " << intFieldError << std::endl;
+  std::cout << "Boundary Field: " << bndFieldError << std::endl;
+  std::cout << "####################################" << std::endl << std::endl;
+  
 }

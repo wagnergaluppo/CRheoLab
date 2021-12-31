@@ -206,6 +206,18 @@ inline vectorField operator*(const vectorField& v1, const double& d1)
     return result;
 }
 
+inline vectorField operator*(const scalarField& sf1, const vector3& v1)
+{
+    vectorField result(sf1.size());
+
+    for(unsigned int i = 0 ; i < sf1.size(); i++)
+    {
+        result[i] = sf1[i] * v1;
+    }
+
+    return result;
+}
+
 inline vectorField operator*( const double& d1, const vectorField& v1)
 {
 
@@ -303,6 +315,19 @@ inline scalarField operator&(const vectorField& v1, const vectorField& v2)
     for(unsigned int i = 0 ; i < v1.size(); i++)
     {
         result[i] = v1[i] & v2[i];
+    }
+
+    return result;
+}
+
+
+inline scalarField operator&(const vectorField& v1, const vector3& v2)
+{
+    scalarField result(v1.size());
+
+    for(unsigned int i = 0 ; i < v1.size(); i++)
+    {
+        result[i] = v1[i] & v2;
     }
 
     return result;
