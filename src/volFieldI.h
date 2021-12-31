@@ -425,11 +425,8 @@ volField<scalarField> volField<vectorType>::magVector()
         std::string magfieldName="magof"+result.Name();
         
         result.setName(magfieldName);
-        
-        for(unsigned int i= 0; i < internalField_.size(); i++)
-        {
-            result.internalField()[i] = mag(internalField_[i]);
-        }
+
+        result.internalField() = mag(internalField_);
 
         for(unsigned int i = 0; i < mesh_.nPatches_; i++)
         {
@@ -438,10 +435,8 @@ volField<scalarField> volField<vectorType>::magVector()
             {
                 result.boundaryField()[i].type() = "fixedValue";
                 result.boundaryField()[i].valImposed() = true;
-                for(unsigned int j = 0; j < boundaryField()[i].boundary().size(); j++)
-                {
-                    result.boundaryField()[i].boundary()[j] = mag(boundaryField()[i].boundary()[j]);  
-                }
+
+                result.boundaryField()[i].boundary() = mag(boundaryField()[i].boundary()); 
             }
         }
     }
@@ -462,9 +457,9 @@ void compareVolFields(std::string operName, volField<vectorType>& f1, volField<v
   double bndFieldError = 0.;
 
   for (unsigned int i= 0; i < f1.internalField().size(); i++)
-  {
-    intFieldError += mag(f1.internalField()[i] - f2.internalField()[i]);
-  }
+   {
+     intFieldError += mag(f1.internalField()[i] - f2.internalField()[i]);
+   }
 
   for(unsigned int i = 0; i < f1.boundaryField().size(); i++)
   {
