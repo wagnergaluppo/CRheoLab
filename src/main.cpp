@@ -2,8 +2,8 @@
 #include "Mesh.h"
 #include "IODictionary.h"
 #include "volField.h"
-#include "vectorFieldVerification_functions.h"
-//#include "scalarFieldVerification_functions.h"
+//#include "vectorFieldVerification_functions.h"
+#include "scalarFieldVerification_functions.h"
 #include <time.h>       /* time */
 
 //  void write_csv(std::string filename, std::string , std::vector<double> );
@@ -48,8 +48,8 @@ int main()
 
     // TODO main > volField>boundaryfield> boundary> patch
 
-    //#include "scalarFieldVerification.h"
-    #include "vectorFieldVerification.h"
+    #include "scalarFieldVerification.h"
+    //#include "vectorFieldVerification.h"
     // #include "tensorFieldVerification.h"
     // #include "symmTensorFieldVerification.h"
 

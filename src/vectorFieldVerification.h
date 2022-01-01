@@ -15,7 +15,7 @@ srand((unsigned) time(0));
 // Generate Random Vector Fields
 volField<vectorField> UA = randVectorField("UA", polyMesh, rTime);
 volField<vectorField> UB = randVectorField("UB", polyMesh, rTime);
-compareVolFields<vectorField>("Random Vectors", UA, UB);
+compareVolFields<vectorField>("Random Vector Fields", UA, UB);
 
 // Sum Outside the class
 volField<vectorField> USum = UA + UB;
