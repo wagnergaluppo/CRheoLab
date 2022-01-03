@@ -8,7 +8,7 @@ volField<vectorType>::volField(std::string fileName, const Mesh &mesh, const Run
       action_(action)
 {
 
-  // check action
+  // Check action
   if (action  == MUST_READ)
   {
      internalField_=readInternalField();

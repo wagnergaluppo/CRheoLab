@@ -18,8 +18,6 @@ class boundaryField
 
         ///@brief boundaryField Class default constructor 
         ///@param fileName name of the file to read field data from
-        ///@param mesh reference to an object of class Mesh 
-        ///@param time reference to a RunTime object
         ///@param action Enum fileAction ( MUST_READ or NO_READ)
         boundaryField(std::string fileName, fileAction action);
 
