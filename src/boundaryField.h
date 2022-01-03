@@ -21,7 +21,7 @@ class boundaryField
         ///@param mesh reference to an object of class Mesh 
         ///@param time reference to a RunTime object
         ///@param action Enum fileAction ( MUST_READ or NO_READ)
-        boundaryField(std::string fileName, const Mesh& mesh, const RunTime& time, fileAction action);
+        boundaryField(std::string fileName, fileAction action);
 
         // Destructor
         virtual ~boundaryField(){} ;
@@ -40,8 +40,6 @@ class boundaryField
         const std::string& patchName(const int& ID) const;
 
     private:
-        const Mesh& mesh_;
-        const RunTime& runTime_;
         vector<boundary<vectorType>> boundaryField_;
         const int& nPatches_ ;
         fileAction action_;

@@ -19,7 +19,6 @@ volField<vectorType>::volField(std::string fileName, const Mesh &mesh, const Run
        (
            fileName,
            mesh_.patchList_[i],
-           mesh_,
            runTime_,
            action
        ));
@@ -36,7 +35,6 @@ volField<vectorType>::volField(std::string fileName, const Mesh &mesh, const Run
         (
             fileName,
             mesh_.patchList_[i],
-            mesh_,
             runTime_,
             action
         ));
@@ -65,7 +63,6 @@ volField<vectorType>::volField(std::string fileName, const Mesh &mesh, const Run
         (
             fileName,
             mesh_.patchList_[i],
-            mesh_,
             runTime_,
             action,
             defaultValue
