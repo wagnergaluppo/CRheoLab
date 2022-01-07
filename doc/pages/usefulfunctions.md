@@ -105,7 +105,7 @@ Magnitude for the vector, which is the square root of the magnitude squared \f$ 
 ### Tensor Field related (Mohamed)
 1- Create a vector field with component of the tensor in one direction
 
-The component of the tensor in one direction is obtained by multiplying the transpose of the tensor by the unity vector in that direction. As for example for the direction of x, the mathematical operation takes the following form as shown in Eq(1): 
+The component of the tensor in one direction is obtained by multiplying the tensor by the unity vector in that direction. As for example for the direction of x, the mathematical operation takes the following form as shown in Eq(1): 
 
 \begin{equation}
 \begin{pmatrix}
@@ -114,7 +114,7 @@ The component of the tensor in one direction is obtained by multiplying the tran
 \sigma _{yx}& \sigma _{yy} &\sigma _{yz} \\ 
 \newline
 \sigma _{zx}& \sigma _{zy} & \sigma _{zz}\ 
-\end{pmatrix}^{t}\begin{pmatrix}
+\end{pmatrix}\begin{pmatrix}
 1\\ 
 \newline
 0\\ 

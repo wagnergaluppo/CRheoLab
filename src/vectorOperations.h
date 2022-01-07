@@ -378,11 +378,7 @@ inline scalarField mag(const vectorField& v1)
 
    for(unsigned int i = 0 ; i < v1.size(); i++)
    {
-       result[i] = std::sqrt(
-                                  v1[i][0]*v1[i][0]
-                                + v1[i][1]*v1[i][1]
-                                + v1[i][2]*v1[i][2]
-                            );
+       result[i] = mag(v1[i]);
    }
 
    return result;

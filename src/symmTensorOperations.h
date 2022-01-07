@@ -61,7 +61,7 @@ inline double I2(const symmTensor& t)
 {
    double result;
 
-   result= t[0]*t[3]+t[0]*t[6]+t[3]*t[5]-t[1]*t[1]-t[4]*t[4]-t[2]*t[2];
+   result= t[0]*t[3]+t[0]*t[5]+t[3]*t[5]-t[1]*t[1]-t[4]*t[4]-t[2]*t[2];
 
    return result;
 }
@@ -71,9 +71,50 @@ inline double I2(const symmTensor& t)
 // Third Invariant -T13*T22*T31+T12*T23*T31+T13*T21*T32-T11*T23*T32-T12*T21*T33+T11*T22*T33
 inline double I3(const symmTensor& t)
 {
-   double result;
+    double result;
 
-   result= -t[2]*t[3]*t[2] + t[1]*t[4]*t[2] + t[2]*t[1]*t[4] - t[0]*t[4]*t[4] - t[1]*t[1]*t[6] + t[0]*t[3]*t[6];
+   //result= -t[2]*t[3]*t[2] + t[1]*t[4]*t[2] + t[2]*t[1]*t[4] - t[0]*t[4]*t[4] - t[1]*t[1]*t[5] + t[0]*t[3]*t[5];
+    result=  t[1]*t[4]*t[2] + t[2]*t[1]*t[4]  + t[0]*t[3]*t[5] - (t[2]*t[3]*t[2] + t[0]*t[4]*t[4] + t[1]*t[1]*t[5]);
+    return result;     
+}
+
+
+
+// Create a ScalarFiled with the Magnitude of a symmTensor Field (first invariant)
+inline scalarField I1(const symmTensorField& t1)
+{
+   scalarField result(t1.size());
+
+   for(unsigned int i = 0 ; i < t1.size(); i++)
+   {
+       result[i] = I1(t1[i]);
+   }
+
+   return result;
+}
+
+// Create a ScalarFiled with the Magnitude of a symmTensor Field (second invariant)
+inline scalarField I2(const symmTensorField& t1)
+{
+   scalarField result(t1.size());
+
+   for(unsigned int i = 0 ; i < t1.size(); i++)
+   {
+       result[i] = I2(t1[i]);
+   }
+
+   return result;
+}
+
+// Create a ScalarFiled with the Magnitude of a symmTensor Field (third invariant)
+inline scalarField I3(const symmTensorField& t1)
+{
+   scalarField result(t1.size());
+
+   for(unsigned int i = 0 ; i < t1.size(); i++)
+   {
+       result[i] = I3(t1[i]);
+   }
 
    return result;
 }
@@ -168,18 +209,17 @@ inline symmTensor  operator/(const double& d1, const symmTensor& t1)
    return result;
 }
 
-/*//inner product / dot product
-symmTensor operator&(const symmTensor& t1, const vector3& v1)
+//inner product / dot product
+inline vector3 operator&(const symmTensor& t1, const vector3& v1)
 {  
    vector3 result;
 
-    result = ( t1[0]*v1[0]+ 
-                  
-            )
+    result[0] =  t1[0]*v1[0] + t1[1]*v1[1] + t1[2]*v1[2];
+    result[1] =  t1[1]*v1[0] + t1[3]*v1[1] + t1[4]*v1[2];
+    result[2] =  t1[2]*v1[0] + t1[4]*v1[1] + t1[5]*v1[2];
 
    return result;
 }
-*/
 
 // At the field level
 
@@ -332,5 +372,38 @@ inline symmTensor minField(const symmTensorField& t1)
    }
    return result;
 }
+
+
+
+
+// Magnitude of a symmTensor
+inline double mag(const symmTensor& t1)
+{
+    double result = std::sqrt(
+                              t1[0]*t1[0]
+                            + t1[1]*t1[1]
+                            + t1[2]*t1[2]
+                            + t1[3]*t1[3]
+                            + t1[4]*t1[4]
+                            + t1[5]*t1[5]
+                        );
+   return result;
+}
+
+// Magnitude of a symmTensor
+inline scalarField mag(const symmTensorField& t1)
+{
+   scalarField result(t1.size());
+
+   for(unsigned int i = 0 ; i < t1.size(); i++)
+   {
+       result[i] = mag(t1[i]);
+   }
+
+   return result;
+}
+
+
+
 
 #endif

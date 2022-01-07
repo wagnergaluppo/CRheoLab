@@ -165,18 +165,18 @@ inline tensor  operator/(const double& d1, const tensor& t1)
    return result;
 }
 
-/*//inner product / dot product
-tensor operator&(const tensor& t1, const vector3& v1)
+//inner product / dot product
+inline vector3 operator&(const tensor& t1, const vector3& v1)
 {  
    vector3 result;
 
-    result = ( t1[0]*v1[0]+ 
-                  
-            )
+    result[0] =  t1[0]*v1[0] + t1[1]*v1[1] + t1[2]*v1[2];
+    result[1] =  t1[3]*v1[0] + t1[4]*v1[1] + t1[5]*v1[2];
+    result[2] =  t1[6]*v1[0] + t1[7]*v1[1] + t1[8]*v1[2];
 
    return result;
 }
-*/
+
 
 // At the field level
 
@@ -330,5 +330,79 @@ inline tensor minField(const tensorField& t1)
    }
    return result;
 }
+
+// Create a ScalarFiled with the Magnitude of a Tensor Field (first invariant)
+inline scalarField I1(const tensorField& t1)
+{
+   scalarField result(t1.size());
+
+   for(unsigned int i = 0 ; i < t1.size(); i++)
+   {
+       result[i] = I1(t1[i]);
+   }
+
+   return result;
+}
+
+// Create a ScalarFiled with the Magnitude of a Tensor Field (second invariant)
+inline scalarField I2(const tensorField& t1)
+{
+   scalarField result(t1.size());
+
+   for(unsigned int i = 0 ; i < t1.size(); i++)
+   {
+       result[i] = I2(t1[i]);
+   }
+
+   return result;
+}
+
+// Create a ScalarFiled with the Magnitude of a Tensor Field (third invariant)
+inline scalarField I3(const tensorField& t1)
+{
+   scalarField result(t1.size());
+
+   for(unsigned int i = 0 ; i < t1.size(); i++)
+   {
+       result[i] = I3(t1[i]);
+   }
+
+   return result;
+}
+
+
+
+
+// Magnitude of a tensor
+inline double mag(const tensor& t1)
+{
+    double result = std::sqrt(
+                              t1[0]*t1[0]
+                            + t1[1]*t1[1]
+                            + t1[2]*t1[2]
+                            + t1[3]*t1[3]
+                            + t1[4]*t1[4]
+                            + t1[5]*t1[5]
+                            + t1[6]*t1[6]
+                            + t1[7]*t1[7]
+                            + t1[8]*t1[8]
+                        );
+   return result;
+}
+
+// Magnitude of a tensor
+inline scalarField mag(const tensorField& t1)
+{
+   scalarField result(t1.size());
+
+   for(unsigned int i = 0 ; i < t1.size(); i++)
+   {
+       result[i] = mag(t1[i]);
+   }
+
+   return result;
+}
+
+
 
 #endif

@@ -49,10 +49,10 @@ class volField
         void shiftMaxField();
         void shiftMinField();
         void projectVectorField(const vector3& projectVector);
-        vectorField projectTensorField(const vector3& projectVector);
-        scalarField I1ofTensor();
-        scalarField I2ofTensor();
-        scalarField I3ofTensor();
+        volField<vectorField> projectTensorField(const vector3& projectVector);
+        volField<scalarField>  I1ofTensor();
+        volField<scalarField>  I2ofTensor();
+        volField<scalarField>  I3ofTensor();
         volField<scalarField> magVector();
 
     private:

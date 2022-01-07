@@ -270,30 +270,27 @@ void volField<vectorType>::projectVectorField(const vector3& projectVector)
 
 // calculate a scalar field to store the 1st Invariant of a tensor field
 template< typename vectorType>
-scalarField volField<vectorType>::I1ofTensor()
+volField<scalarField>  volField<vectorType>::I1ofTensor()
 {   
     tensor t1;
     symmTensor st1;
-    volField<scalarField> result;
-    if (typeid(internalField).hash_code()==typeid(t1).hash_code() || typeid(internalField).hash_code()==typeid(st1).hash_code())
+    volField<scalarField> result(Name(),mesh_,runTime_,NO_READ);
+
+    if (typeid(internalField()[0]).hash_code()==typeid(t1).hash_code() || typeid(internalField()[0]).hash_code()==typeid(st1).hash_code())
     {
-        std::string I1FileName="I1of"+fileName_;
+        std::string I1FileName="I1of"+result.Name();
                 
-        result.fileName_=I1FileName;
-        result.runTime_=runTime_;        
-        
-        for(unsigned int i = 0 ; i < internalField.size(); i++){
-            result.internalField().push_back(I1(internalField()[i]));            
-        }
+        result.setName(I1FileName);     
 
-        for(unsigned int i = 0 ; i < mesh_.nPatches_; i++){
+        result.internalField()=I1(internalField());
 
-            for(unsigned int i = 0 ; i < mesh_.nPatches_; i++){
+        for(unsigned int i = 0 ; i < mesh_.nPatches_; i++)
+        {
+          //  for(unsigned int i = 0 ; i < mesh_.nPatches_; i++)
+            {
                 result.boundaryField()[i].type() = "fixedValue";
-                result.boundaryField()[i].valImposed = true;
-                for(unsigned int j = 0 ; j < result.boundaryField()[i].boundary().size(); j++){
-                    result.boundaryField()[i].boundary().push_back(I1(boundaryField()[i].boundary()[j]));
-                }
+                result.boundaryField()[i].valImposed() = true;
+                result.boundaryField()[i].boundary()=I1(boundaryField()[i].boundary());
             }
         }
     }
@@ -307,101 +304,117 @@ scalarField volField<vectorType>::I1ofTensor()
 
 // calculate a scalar field to store the 2nd Invariant of a tensor field
 template< typename vectorType>
-scalarField volField<vectorType>::I2ofTensor()
+volField<scalarField>  volField<vectorType>::I2ofTensor()
 {   
     tensor t1;
     symmTensor st1;
-    volField<scalarField> result;
-    if (typeid(internalField).hash_code()==typeid(t1).hash_code() || typeid(internalField).hash_code()==typeid(st1).hash_code()) {
-       
-        std::string I2FileName="I2of"+fileName_;
-        
-        result.fileName_=I2FileName;
-        result.runTime_=runTime_;
+    volField<scalarField> result(Name(),mesh_,runTime_,NO_READ);
 
-        for(unsigned int i = 0 ; i < internalField.size(); i++){
-            result.internalField().push_back(I2(internalField()[i]));   
-        }
+    if (typeid(internalField()[0]).hash_code()==typeid(t1).hash_code() || typeid(internalField()[0]).hash_code()==typeid(st1).hash_code())
+    {
+        std::string I2FileName="I2of"+result.Name();
+                
+        result.setName(I2FileName);     
 
-        for(unsigned int i = 0 ; i < mesh_.nPatches_; i++){
+        result.internalField()=I2(internalField());
 
-            for(unsigned int i = 0 ; i < mesh_.nPatches_; i++){
+        for(unsigned int i = 0 ; i < mesh_.nPatches_; i++)
+        {
+        //    for(unsigned int i = 0 ; i < mesh_.nPatches_; i++)
+            {
                 result.boundaryField()[i].type() = "fixedValue";
-                result.boundaryField()[i].valImposed = true;
-                for(unsigned int j = 0 ; j < result.boundaryField()[i].boundary().size(); j++){
-                    result.boundaryField()[i].boundary().push_back(I2(boundaryField()[i].boundary()[j]));
-                }
+                result.boundaryField()[i].valImposed() = true;
+                result.boundaryField()[i].boundary()=I2(boundaryField()[i].boundary());
             }
         }
     }
     else
     {
         std::cout << "Error: Function volField<vectorType>::I2ofTensor called for a non tensor Field";
-    }      
+    }    
     return result;
 }
 
 // calculate a scalar field to store the 3rd Invariant of a tensor field
 template< typename vectorType>
-scalarField volField<vectorType>::I3ofTensor()
+volField<scalarField>  volField<vectorType>::I3ofTensor()
 {   
     tensor t1;
     symmTensor st1;
-    volField<scalarField> result;
-    if (typeid(internalField).hash_code()==typeid(t1).hash_code() || typeid(internalField).hash_code()==typeid(st1).hash_code()) {
-        
-        std::string newName = "I3of"+Name();
+    volField<scalarField> result(Name(),mesh_,runTime_,NO_READ);
 
-        result.setName(newName);
-        result.runTime_=runTime_;        
+    if (typeid(internalField()[0]).hash_code()==typeid(t1).hash_code() || typeid(internalField()[0]).hash_code()==typeid(st1).hash_code())
+    {
+        std::string I3FileName="I3of"+result.Name();
+                
+        result.setName(I3FileName);     
 
-        for(unsigned int i = 0 ; i < internalField_.size(); i++){
-            result.internalField().push_back(I3(internalField()[i]));    
-        }
+        result.internalField()=I3(internalField());
 
-        for(unsigned int i = 0 ; i < mesh_.nPatches_; i++){
-
-            for(unsigned int i = 0 ; i < mesh_.nPatches_; i++){
+        for(unsigned int i = 0 ; i < mesh_.nPatches_; i++)
+        {
+        //    for(unsigned int i = 0 ; i < mesh_.nPatches_; i++)
+            {
                 result.boundaryField()[i].type() = "fixedValue";
-                result.boundaryField()[i].valImposed = true;
-                for(unsigned int j = 0 ; j < result.boundaryField()[i].boundary().size(); j++){
-                    result.boundaryField()[i].boundary().push_back(I3(boundaryField()[i].boundary()[j]));
-                }
+                result.boundaryField()[i].valImposed() = true;
+                result.boundaryField()[i].boundary()=I3(boundaryField()[i].boundary());
             }
         }
     }
     else
     {
         std::cout << "Error: Function volField<vectorType>::I3ofTensor called for a non tensor Field";
-    }   
+    }    
     return result;
 }
 
 // Create a vector field with component of the tensor in one direction
 template< typename vectorType>
-vectorField volField<vectorType>::projectTensorField(const vector3& v1)
+volField<vectorField>  volField<vectorType>::projectTensorField(const vector3& v1)
 {   
     tensor t1;
     symmTensor st1;
-    volField<scalarField> result;
-    if (typeid(internalField).hash_code()==typeid(t1).hash_code() || typeid(internalField).hash_code()==typeid(st1).hash_code()) {
-        
+    volField<vectorField> result(Name(),mesh_,runTime_,NO_READ);
+      
+    if (typeid(internalField()[0]).hash_code()==typeid(t1).hash_code() || typeid(internalField()[0]).hash_code()==typeid(st1).hash_code())
+    {    
         std::string newName = "Projof"+result.Name();
-
         result.setName(newName);
-        result.runTime_=runTime_;   
-        
-        for(unsigned int i = 0 ; i < internalField_.size(); i++){
-            result.internalField().push_back(internalField[i] & v1);    
+
+        vector3 normv1 = v1 / mag(v1); 
+
+        for(unsigned int i = 0 ; i < internalField_.size(); i++)
+        {     
+        //    result.internalField().push_back(internalField()[i] & normv1);
+            result.internalField()[i][0] = internalField()[i][0] * normv1[0] + 
+                                           internalField()[i][1] * normv1[1] +
+                                           internalField()[i][2] * normv1[2] ;  
+            result.internalField()[i][1] = internalField()[i][3] * normv1[0] + 
+                                           internalField()[i][4] * normv1[1] +
+                                           internalField()[i][5] * normv1[2] ;  
+            result.internalField()[i][2] = internalField()[i][6] * normv1[0] + 
+                                           internalField()[i][7] * normv1[1] +
+                                           internalField()[i][8] * normv1[2] ; 
         }
 
-        for(unsigned int i = 0 ; i < mesh_.nPatches_; i++){
-
-            for(unsigned int i = 0 ; i < mesh_.nPatches_; i++){
+        for(unsigned int i = 0 ; i < mesh_.nPatches_; i++)
+      {
+        //    for(unsigned int i = 0 ; i < mesh_.nPatches_; i++)
+            {
                 result.boundaryField()[i].type() = "fixedValue";
-                result.boundaryField()[i].valImposed = true;
-                for(unsigned int j = 0 ; j < result.boundaryField()[i].boundary().size(); j++){
-                    result.boundaryField()[i].boundary().push_back(boundaryField()[i].boundary()[j] & v1);
+                result.boundaryField()[i].valImposed() = true;
+                for(unsigned int j = 0 ; j < result.boundaryField()[i].boundary().size(); j++)
+                {
+                //    result.boundaryField()[i].boundary().push_back(boundaryField()[i].boundary()[j] & normv1);
+                    result.boundaryField()[i].boundary()[j][0] = boundaryField()[i].boundary()[j][0] * normv1[0] + 
+                                                                 boundaryField()[i].boundary()[j][1] * normv1[1] +
+                                                                 boundaryField()[i].boundary()[j][2] * normv1[2] ;
+                    result.boundaryField()[i].boundary()[j][1] = boundaryField()[i].boundary()[j][3] * normv1[0] + 
+                                                                 boundaryField()[i].boundary()[j][4] * normv1[1] +
+                                                                 boundaryField()[i].boundary()[j][5] * normv1[2] ; 
+                    result.boundaryField()[i].boundary()[j][2] = boundaryField()[i].boundary()[j][6] * normv1[0] + 
+                                                                 boundaryField()[i].boundary()[j][7] * normv1[1] +
+                                                                 boundaryField()[i].boundary()[j][8] * normv1[2] ; 
                 }
             }
         }

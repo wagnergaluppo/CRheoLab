@@ -3,7 +3,9 @@
 #include "IODictionary.h"
 #include "volField.h"
 //#include "vectorFieldVerification_functions.h"
-#include "scalarFieldVerification_functions.h"
+//#include "scalarFieldVerification_functions.h"
+//#include "tensorFieldVerification_functions.h"
+#include "symmTensorFieldVerification_functions.h"
 #include <time.h>       /* time */
 
 //  void write_csv(std::string filename, std::string , std::vector<double> );
@@ -32,8 +34,8 @@ int main()
 
     Mesh polyMesh;
 
-    volField<scalarField> p ("p", polyMesh, rTime, MUST_READ);
-    std::vector<Boundary<scalarField>>& pBoundary = p.boundaryField();
+    //volField<scalarField> p ("p", polyMesh, rTime, MUST_READ);
+    //std::vector<Boundary<scalarField>>& pBoundary = p.boundaryField();
 
     // for (int i=0; i< 20; i++)
 
@@ -48,17 +50,17 @@ int main()
 
     // TODO main > volField>boundaryfield> boundary> patch
 
-    #include "scalarFieldVerification.h"
+   // #include "scalarFieldVerification.h"
     //#include "vectorFieldVerification.h"
-    // #include "tensorFieldVerification.h"
-    // #include "symmTensorFieldVerification.h"
+     //#include "tensorFieldVerification.h"
+    #include "symmTensorFieldVerification.h"
 
     // apply the useful function
     // Loop over internal and Boundary Fields and compare the results with the expected.
 
 
 
-    std::cout << "teste6" << endl; 
+   // std::cout << "teste6" << endl; 
 
 
     return 0;
