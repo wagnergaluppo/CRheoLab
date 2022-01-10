@@ -385,8 +385,8 @@ volField<vectorField>  volField<vectorType>::projectTensorField(const vector3& v
 
         for(unsigned int i = 0 ; i < internalField_.size(); i++)
         {     
-        //    result.internalField().push_back(internalField()[i] & normv1);
-            result.internalField()[i][0] = internalField()[i][0] * normv1[0] + 
+            result.internalField()[i] = internalField()[i] & normv1;
+          /*  result.internalField()[i][0] = internalField()[i][0] * normv1[0] + 
                                            internalField()[i][1] * normv1[1] +
                                            internalField()[i][2] * normv1[2] ;  
             result.internalField()[i][1] = internalField()[i][3] * normv1[0] + 
@@ -394,7 +394,7 @@ volField<vectorField>  volField<vectorType>::projectTensorField(const vector3& v
                                            internalField()[i][5] * normv1[2] ;  
             result.internalField()[i][2] = internalField()[i][6] * normv1[0] + 
                                            internalField()[i][7] * normv1[1] +
-                                           internalField()[i][8] * normv1[2] ; 
+                                           internalField()[i][8] * normv1[2] ; */
         }
 
         for(unsigned int i = 0 ; i < mesh_.nPatches_; i++)
@@ -405,8 +405,8 @@ volField<vectorField>  volField<vectorType>::projectTensorField(const vector3& v
                 result.boundaryField()[i].valImposed() = true;
                 for(unsigned int j = 0 ; j < result.boundaryField()[i].boundary().size(); j++)
                 {
-                //    result.boundaryField()[i].boundary().push_back(boundaryField()[i].boundary()[j] & normv1);
-                    result.boundaryField()[i].boundary()[j][0] = boundaryField()[i].boundary()[j][0] * normv1[0] + 
+                    result.boundaryField()[i].boundary()[j] = boundaryField()[i].boundary()[j] & normv1;
+                /*    result.boundaryField()[i].boundary()[j][0] = boundaryField()[i].boundary()[j][0] * normv1[0] + 
                                                                  boundaryField()[i].boundary()[j][1] * normv1[1] +
                                                                  boundaryField()[i].boundary()[j][2] * normv1[2] ;
                     result.boundaryField()[i].boundary()[j][1] = boundaryField()[i].boundary()[j][3] * normv1[0] + 
@@ -414,7 +414,7 @@ volField<vectorField>  volField<vectorType>::projectTensorField(const vector3& v
                                                                  boundaryField()[i].boundary()[j][5] * normv1[2] ; 
                     result.boundaryField()[i].boundary()[j][2] = boundaryField()[i].boundary()[j][6] * normv1[0] + 
                                                                  boundaryField()[i].boundary()[j][7] * normv1[1] +
-                                                                 boundaryField()[i].boundary()[j][8] * normv1[2] ; 
+                                                                 boundaryField()[i].boundary()[j][8] * normv1[2] ; */
                 }
             }
         }
@@ -476,7 +476,7 @@ void compareVolFields(std::string operName, volField<vectorType>& f1, volField<v
      if ( errorRelAdd > 1e-3){
          std::cout << "Relative Error Internal:" << errorRelAdd << std::endl;
          std::cout << "field 1:" <<  f1.internalField()[i] << std::endl;
-         std::cout << "field 2:" <<  f1.internalField()[i] << std::endl << std::endl;
+         std::cout << "field 2:" <<  f2.internalField()[i] << std::endl << std::endl;
      }
    }
 
@@ -490,7 +490,7 @@ void compareVolFields(std::string operName, volField<vectorType>& f1, volField<v
           if ( errorRelAdd > 1e-3){
                 std::cout << "Relative Error BND:" << errorRelAdd << std::endl;
                 std::cout << "field 1:" <<  f1.internalField()[i] << std::endl;
-                std::cout << "field 2:" <<  f1.internalField()[i] << std::endl << std::endl;
+                std::cout << "field 2:" <<  f2.internalField()[i] << std::endl << std::endl;
             }  
       }
   }
