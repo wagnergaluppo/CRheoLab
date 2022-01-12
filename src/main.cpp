@@ -2,6 +2,9 @@
 #include "Mesh.h"
 #include "IODictionary.h"
 #include "volField.h"
+#include "FVMatrix.h"
+
+
 
 //  void write_csv(std::string filename, std::string , std::vector<double> );
 
@@ -31,6 +34,8 @@ int main()
 
     volField<scalarField> p ("p", polyMesh, time, MUST_READ);
     std::vector<Boundary<scalarField>>& pBoundary = p.boundaryField();
+
+    FVMatrix TEquation(polyMesh, jacobi);
 
     // for (int i=0; i< 20; i++)
 
