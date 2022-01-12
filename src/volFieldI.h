@@ -473,11 +473,11 @@ void compareVolFields(std::string operName, volField<vectorType>& f1, volField<v
    {
      double errorRelAdd = abs (mag(f1.internalField()[i] - f2.internalField()[i]) / ( 0.5 * mag(f1.internalField()[i] + f2.internalField()[i])));
      intFieldError += errorRelAdd;
-     if ( errorRelAdd > 1e-3){
-         std::cout << "Relative Error Internal:" << errorRelAdd << std::endl;
-         std::cout << "field 1:" <<  f1.internalField()[i] << std::endl;
-         std::cout << "field 2:" <<  f2.internalField()[i] << std::endl << std::endl;
-     }
+    //  if ( errorRelAdd > 1e-3){
+    //      std::cout << "Relative Error Internal:" << errorRelAdd << std::endl;
+    //      std::cout << "field 1:" <<  f1.internalField()[i] << std::endl;
+    //      std::cout << "field 2:" <<  f2.internalField()[i] << std::endl << std::endl;
+    //  }
    }
 
   for(unsigned int i = 0; i < f1.boundaryField().size(); i++)
@@ -487,11 +487,11 @@ void compareVolFields(std::string operName, volField<vectorType>& f1, volField<v
           double errorRelAdd = abs (mag(f1.boundaryField()[i].boundary()[j] -  f2.boundaryField()[i].boundary()[j]) / 
                     ( 0.5 * mag(f1.boundaryField()[i].boundary()[j] +  f2.boundaryField()[i].boundary()[j])));
           bndFieldError += errorRelAdd;
-          if ( errorRelAdd > 1e-3){
-                std::cout << "Relative Error BND:" << errorRelAdd << std::endl;
-                std::cout << "field 1:" <<  f1.internalField()[i] << std::endl;
-                std::cout << "field 2:" <<  f2.internalField()[i] << std::endl << std::endl;
-            }  
+        //   if ( errorRelAdd > 1e-3){
+        //         std::cout << "Relative Error BND:" << errorRelAdd << std::endl;
+        //         std::cout << "field 1:" <<  f1.internalField()[i] << std::endl;
+        //         std::cout << "field 2:" <<  f2.internalField()[i] << std::endl << std::endl;
+        //     }  
       }
   }
   std::cout << std::endl << "####################################" << std::endl;

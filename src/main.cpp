@@ -50,18 +50,13 @@ int main()
 
     // TODO main > volField>boundaryfield> boundary> patch
 
-   // #include "scalarFieldVerification.h"
+    //#include "scalarFieldVerification.h"
     //#include "vectorFieldVerification.h"
-     //#include "tensorFieldVerification.h"
-    #include "symmTensorFieldVerification.h"
+    //#include "tensorFieldVerification.h"
+    //#include "symmTensorFieldVerification.h"
 
     // apply the useful function
     // Loop over internal and Boundary Fields and compare the results with the expected.
-
-
-
-   // std::cout << "teste6" << endl; 
-
 
     return 0;
 }
