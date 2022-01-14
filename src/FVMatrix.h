@@ -18,7 +18,10 @@ class FVMatrix
         virtual ~FVMatrix(){} ;
 
         // Member Functions
-        
+        inline double axMultiplication(const std::vector<double>& aMatrix_, const std::vector<double>& x0Vector, const unsigned int& i);
+        inline double axMultiplicationFullLine(const std::vector<double>& aMatrix_, const std::vector<double>& x0Vector, const unsigned int& i);
+        inline double normalizedResidualValue(const std::vector<double>& aMatrix_, const std::vector<double>& x0Vector, const std::vector<double>& bVector);
+        inline double relativeResidualValue();
 
     private:
         std::vector<double> aMatrix_;
@@ -28,7 +31,8 @@ class FVMatrix
         double relResidual_;
         double residualNormFactor_;
         double wSOR_;
-        Solver selectedSolver_;      
+        Solver selectedSolver_; 
+        double normalizedResidualValue_;     
   
 
 };
