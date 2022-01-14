@@ -1,0 +1,65 @@
+#ifndef LILSPMAT_H
+#define LILSPMAT_H
+
+#include <vector>
+
+// Class to implement a list of lists for a sparse matrix
+// The std::vector structure is used to implement the list
+//
+
+class lilSpmat {
+
+public:
+
+  // Number of rows of the stored matrix
+  unsigned int numRows_;
+
+  // Number of columns of the stored matrix
+  unsigned int numCols_;
+
+  // Vector of vector for the columns
+  // columns_[i] is the vector for row i
+  // columns_[i][j] is the index in position j of the std::vector for row i
+  // columns_ always has numRows_ entries
+  // columns_[i] has as many entries as non-null values in row i
+  std::vector< std::vector<unsigned int> > columns_;
+
+  // vector of vector for the values
+  // values_[i] is the vector for row i
+  // values_[i][j] is the index in position j of the std::vector for row i
+  // values_ always has numRows_ entries
+  // values_[i] has as many entries as non-null values in row i
+  std::vector< std::vector<double> > values_;
+
+  // Constructor
+  lilSpmat(unsigned int numRows, unsigned int numCols);
+
+  // Destructor
+  virtual ~lilSpmat(){};
+
+private:
+
+  // Adds a value to position (i,j) if exists, otherwise inserts a new value
+  void addValue(unsigned int i, unsigned int j, double val);
+
+  // Subtracts a value to position (i,j) if exists, otherwise inserts a new value with oposite sign
+  void subValue(unsigned int i, unsigned int j, double val);
+
+  // Deletes the value in position (i,j) if exists, otherwise does nothing
+  void delValue(unsigned int i, unsigned int j);
+
+  // Returns the value in position (i,j) if exists, otherwise returns 0
+  double getValue(unsigned int i, unsigned int j);
+
+  // Returns the sparse matrix in a dense format as a vector of vectors
+  std::vector< std::vector<double> > dense();
+
+  // Returns the product matrix-vector as a vector
+  std::vector<double> matMul(std::vector<double> v);
+
+  // Returns the product (row-of-matrix)-vector for a specific row of the matrix as a double
+  double vecMul(unsigned int i, std::vector<double> v);
+
+};
+
+#endif // LILSPMAT_H
