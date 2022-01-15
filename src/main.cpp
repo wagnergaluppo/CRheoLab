@@ -35,7 +35,7 @@ int main()
     volField<scalarField> p ("p", polyMesh, time, MUST_READ);
     std::vector<Boundary<scalarField>>& pBoundary = p.boundaryField();
 
-    FVMatrix TEquation(polyMesh, jacobi);
+    FVMatrix TEquation(polyMesh, jacobi, 1E-5, 1E-2);
 
     // for (int i=0; i< 20; i++)
 

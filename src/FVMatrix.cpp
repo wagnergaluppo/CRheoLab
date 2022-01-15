@@ -1,37 +1,39 @@
 #include "FVMatrix.h"
 
-FVMatrix::FVMatrix(const Mesh& mesh, Solver solver, double solverParam):
-nCells_(mesh.nCells_), 
+FVMatrix::FVMatrix(const Mesh& mesh, Solver solver, double absNormResidual, double relNormResidual,  double solverParam ):
 selectedSolver_(solver),
-residualNormFactor_(0.0) 
+absNormResidual_(absNormResidual),
+relNormResidual_(relNormResidual),
+nCells_(mesh.nCells_), 
+residualNormFactor_(-1.0)
 {
     if (selectedSolver_ == SOR) wSOR_=solverParam;    
 }
 
-inline double FVMatrix::axMultiplication(const std::vector<double>& aMatrix_, const std::vector<double>& x0Vector, const unsigned int& i)
+inline double FVMatrix::axMultiplicationNoDiagonal(const std::vector<double>& aMatrix_, const std::vector<double>& x0Vector, const unsigned int& lineI)
 {
         double x = 0.0;
 
-        for(unsigned int j = 0; j < i ; j++)
+        for(unsigned int j = 0; j < lineI ; j++)
         {
-            x += aMatrix_[j + i * x0Vector.size()] * x0Vector[j];
+            x += aMatrix_[j + lineI * nCells_] * x0Vector[j];
         }
 
-        for(unsigned int j = i + 1; j < x0Vector.size() ; j++)
+        for(unsigned int j = lineI + 1; j < nCells_ ; j++)
         {
-            x += aMatrix_[j + i * x0Vector.size()] * x0Vector[j];
+            x += aMatrix_[j + lineI * nCells_] * x0Vector[j];
         }
     
     return x;
 }
 
-inline double FVMatrix::axMultiplicationFullLine(const std::vector<double>& aMatrix_, const std::vector<double>& x0Vector, const unsigned int& i)
+inline double FVMatrix::axMultiplication(const std::vector<double>& aMatrix_, const std::vector<double>& x0Vector, const unsigned int& lineI)
 {
         double x = 0.0;
 
-        for(unsigned int j = 0; j < x0Vector.size() ; j++)
+        for(unsigned int j = 0; j < nCells_ ; j++)
         {
-            x += aMatrix_[j + i * x0Vector.size()] * x0Vector[j];
+            x += aMatrix_[j + lineI * nCells_] * x0Vector[j];
         }
     
     return x;
@@ -39,22 +41,18 @@ inline double FVMatrix::axMultiplicationFullLine(const std::vector<double>& aMat
 
 inline double FVMatrix::normalizedResidualValue(const std::vector<double>& aMatrix_, const std::vector<double>& x0Vector, const std::vector<double>& bVector)
 {
-    normalizedResidualValue_ = 0.0;
+    double residualMagnitude = 0.0;  
 
-    for(unsigned int i = 0; i < x0Vector.size() ; i++)
+    for(unsigned int i = 0; i < nCells_ ; i++)
     {
-        normalizedResidualValue_ += abs(bVector[i] - axMultiplicationFullLine(aMatrix_, x0Vector, i));
+        residualMagnitude += abs(bVector[i] - axMultiplication(aMatrix_, x0Vector, i));
     }
 
-    if(residualNormFactor_ == 0)
+    if(residualNormFactor_ > 0.0) //in the constructor is initilized with -1.0 then we can check if it was initialized or not.
+        return (residualMagnitude/residualNormFactor_);
+    else 
     {
-        residualNormFactor_ = normalizedResidualValue_;
+        residualNormFactor_ = residualMagnitude;
+        return 1.0;
     }
-
-    return normalizedResidualValue_;
-}
-
-inline double FVMatrix::relativeResidualValue()
-{
-    return normalizedResidualValue_ / residualNormFactor_; 
 }
