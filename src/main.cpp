@@ -34,8 +34,24 @@ int main()
 
     volField<scalarField> p ("p", polyMesh, time, MUST_READ);
     std::vector<Boundary<scalarField>>& pBoundary = p.boundaryField();
+    //std::cout << ">> criar vector " << std::endl;
+    std::vector<double> T1(polyMesh.nCells_,0.);
+    std::vector<double> T2(polyMesh.nCells_,0.);
+    std::vector<double> T3(polyMesh.nCells_,0.);
+    //std::cout << "T: " << T << std::endl;
+    FVMatrix TEquation1(polyMesh, T1, jacobi, 1E-15, 1E-15);
+    FVMatrix TEquation2(polyMesh, T2, gaussSidel, 1E-15, 1E-15);
+    FVMatrix TEquation3(polyMesh, T3, SOR, 1E-15, 1E-15, 1.2);
+    //std::cout << ">> solve " << std::endl;
+    std::cout << ">> Jacobi " << std::endl;
+    TEquation1.solve();
+    std::cout << ">> Gauss-Siedel " << std::endl;
+    TEquation2.solve();
+    std::cout << ">> SOR, w=1.2 " << std::endl;
+    TEquation3.solve();
 
-    FVMatrix TEquation(polyMesh, jacobi, 1E-5, 1E-2);
+    //std::cout << "ncell: " << polyMesh.nCells_ << std::endl;
+   
 
     // for (int i=0; i< 20; i++)
 
@@ -51,8 +67,7 @@ int main()
     // TODO main > volField>boundaryfield> boundary> patch
     volField<scalarField> pBC ("p", polyMesh, time, MUST_READ);
 
-
-
+         
 
     return 0;
 }
