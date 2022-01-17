@@ -9,7 +9,7 @@ int main(int argc, char const *argv[]) {
       lilSpmat spmat = lilSpmat(10,10);
 
       // Display the number of elements in each row
-      for(unsigned int i=0;i<spmat.numRows_;i++)
+      for(unsigned int i=0;i<spmat.getNumRows();i++)
       {
             std::cout << spmat.columns_[i].size() << std::endl;
       }
@@ -19,7 +19,7 @@ int main(int argc, char const *argv[]) {
       // Display the number of elements in each row
       // Should provide the same as above since both columns_ and values_ should
       // have the same size
-      for(unsigned int i=0;i<spmat.numRows_;i++)
+      for(unsigned int i=0;i<spmat.getNumRows();i++)
       {
             std::cout << spmat.values_[i].size() << std::endl;
       }
@@ -28,7 +28,7 @@ int main(int argc, char const *argv[]) {
 
       // Display the columns in each row
       std::vector<unsigned int>::iterator iit;
-      for(unsigned int i=0;i<spmat.numRows_;i++)
+      for(unsigned int i=0;i<spmat.getNumRows();i++)
       {
             for(iit = spmat.columns_[i].begin(); iit != spmat.columns_[i].end(); ++iit)
             {
@@ -41,7 +41,7 @@ int main(int argc, char const *argv[]) {
 
       // Display the columns in each row
       std::vector<double>::iterator dit;
-      for(unsigned int i=0;i<spmat.numRows_;i++)
+      for(unsigned int i=0;i<spmat.getNumRows();i++)
       {
             for(dit = spmat.values_[i].begin(); dit != spmat.values_[i].end(); ++dit)
             {

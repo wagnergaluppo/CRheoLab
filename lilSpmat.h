@@ -1,21 +1,15 @@
 #ifndef LILSPMAT_H
 #define LILSPMAT_H
 
+#include "spmat.h"
 #include <vector>
 
 // Class to implement a list of lists for a sparse matrix
 // The std::vector structure is used to implement the list
-//
 
-class lilSpmat {
+class lilSpmat : public spmat {
 
-public:
-
-  // Number of rows of the stored matrix
-  unsigned int numRows_;
-
-  // Number of columns of the stored matrix
-  unsigned int numCols_;
+public: // change to private later
 
   // Vector of vector for the columns
   // columns_[i] is the vector for row i
@@ -31,13 +25,16 @@ public:
   // values_[i] has as many entries as non-null values in row i
   std::vector< std::vector<double> > values_;
 
+public:
+
   // Constructor
   lilSpmat(unsigned int numRows, unsigned int numCols);
 
   // Destructor
   virtual ~lilSpmat(){};
 
-private:
+  // Returns the sparsity of the matrix
+  double sparsity();
 
   // Adds a value to position (i,j) if exists, otherwise inserts a new value
   void addValue(unsigned int i, unsigned int j, double val);
