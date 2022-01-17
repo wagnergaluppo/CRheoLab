@@ -45,6 +45,7 @@ typename Boundary<vectorType>::patchBoundaryConditions Boundary<vectorType>::rea
  
     // Create structure to store information
     patchBoundaryConditions store;
+    store.uniformField=true;
   
     // File location path
     std::string fileLocation = this->Path() + this->Name();
@@ -159,7 +160,6 @@ typename Boundary<vectorType>::patchBoundaryConditions Boundary<vectorType>::rea
                         {
                             if (checkExactMatch(line, "uniform"))
                             {
-                                
                                 checkSemiColon(in_file, line, lineCounter);
 
                                 // Strips the string from uniform onwards
@@ -183,6 +183,8 @@ typename Boundary<vectorType>::patchBoundaryConditions Boundary<vectorType>::rea
                             } // If the internalField is non-uniform
                             else if (checkExactMatch(line, "nonuniform")) 
                             {
+                                store.uniformField=false;
+
                                 newLineAndUpdateSStream(in_file, iss, line, lineCounter);
 
                                 // Variable to store the number of points in the field

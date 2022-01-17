@@ -21,6 +21,15 @@ Boundary<vectorType>::Boundary(std::string fileName, const Patch& patch, const R
     {
         std::cerr << "Unrecognized action for boundaryField!" << std::endl;
     }
+
+    // Verifying if the patch size is in agreement with the mesh Patch size
+    
+    if ((!boundaryValues_.uniformField) && (boundaryValues_.type!="empty") && boundaryValues_.fieldValue.size()!=patch_.nFaces())
+    {
+        std::cerr << "The input data for the patch named as " << patch_.name() << " has " << boundaryValues_.fieldValue.size() << " entries, while this patch allows only " << patch_.nFaces()  << " face!" << std::endl;
+    }
+     
+
 }
 
 template <typename vectorType>

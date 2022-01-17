@@ -41,6 +41,7 @@ class Boundary
         struct patchBoundaryConditions
         {
             std::string type;
+            bool uniformField;
             vectorType fieldValue;
             std::map<std::string, std::string> otherInfo;
         };
@@ -52,7 +53,8 @@ class Boundary
         // Read Boundary field
         ///@brief this function reads from a specified patch and returns the information as patchBoundaryConditions object.
         ///@param patchName the name of patch for reading information. 
-        patchBoundaryConditions readBoundaryField(const std::string& patchName);
+        patchBoundaryConditions readBoundaryField( const std::string& patchName );
+        // patchBoundaryConditions readBoundaryField(const std::string& patchName, bool& uniformField);
 
         // Returning the field value for the Boundary
         vectorType& boundary();
