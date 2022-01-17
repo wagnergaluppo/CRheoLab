@@ -1,11 +1,12 @@
 #include <iostream>
 #include "Mesh.h"
-#include "IODictionary.h"
-#include "volField.h"
+#include "IODictionaryI.h"
+#include "IODictionaryw.h"
+#include "volFieldI.h"
 
 //  void write_csv(std::string filename, std::string , std::vector<double> );
 
-template <typename T>
+/*template <typename T>
 std::ostream& operator<<(std::ostream& os, const std::vector<T>& v)
 {
     os << "[ \n";
@@ -14,40 +15,53 @@ std::ostream& operator<<(std::ostream& os, const std::vector<T>& v)
     }
     os << "]\n";
     return os;
-}
+}*/
 
 using namespace std;
 
 int main()
 {
-
+      
     std::cout << "Current path is : " << getExecutablePath() << std::endl;
 
-   checkCaseStructure();
-
+    checkCaseStructure();
+    
     RunTime time;
 
     Mesh polyMesh;
+    
+    volField<scalarField> p ("p", polyMesh, time);
+    std::cout << "Current path is : " << time.Path() << std::endl;
 
-    volField<scalarField> p ("p", polyMesh, time, MUST_READ);
-    std::vector<Boundary<scalarField>>& pBoundary = p.boundaryField();
+    std::string tst = "0";
+    time.setFolder(tst);
 
-    // for (int i=0; i< 20; i++)
+    std::cout << "Current path is : " << time.Path() << std::endl;
 
-    // {
-    // scalarField& valueOfField  = pBoundary[i].boundary();
-    // scalarField& valueOfField  = pBoundary[i][j];
-    // }
+    volField<vectorField> U("U", polyMesh, time);
 
-   // volField<vectorField> U ("U", polyMesh);
+    symmTensorField symmfield =  {{5e+06, -0.000144797, -0.000460091, 0.0545079, -0.00401398, 0.102309},{5e+06, -0.000115814 ,-0.000726005, 0.00996289 ,0.0168723, 0.0300389},{5e+06, -0.000115814 ,-0.000726005, 0.00996289 ,0.0168723, 0.0300389}  } ;
+    patchBoundaryConditions<symmTensorField> pBCRIght = { "calculated", symmfield , {} };
+    patchBoundaryConditions<symmTensorField> pBCLeft = { "empty", {} , {} };
+    patchBoundaryConditions<symmTensorField> pBCTop = { "empty", symmfield , {} };
 
-   // boundaryField<scalarField> tst ("p", polyMesh, time);
+     std::cout<<"\n\n"<<std::endl;
+    //std::cout << '\n'<< pBCRight << std::endl;
+    boundaryField<symmTensorField> bField = {{"Right","Left","Top"},{pBCRIght,pBCLeft,pBCTop}};
+     
+    internalField<symmTensorField> iField =  {symmfield.size(),symmfield};
 
-    // TODO main > volField>boundaryfield> boundary> patch
-    volField<scalarField> pBC ("p", polyMesh, time, MUST_READ);
+    std::cout<<iField<<std::endl;
+
+    std::cout<< bField << std::endl;
 
 
+
+    std::cout<<"OK"<<std::endl;
 
 
     return 0;
+    
 }
+
+
