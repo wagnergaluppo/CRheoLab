@@ -14,3 +14,9 @@ lilSpmat::lilSpmat(unsigned int numRows, unsigned int numCols)
   columns_.reserve(numRows_);
   values_.reserve(numRows_);
 }
+
+// Returns the sparsity of the matrix
+double lilSpmat::sparsity()
+{
+  return 0.0;
+}
