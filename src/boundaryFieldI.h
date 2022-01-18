@@ -1,13 +1,12 @@
-#include "boundaryField.h"
 
 template <typename vectorType>
-boundaryField<vectorType>::boundaryField(std::string fileName, fileAction action)
+boundaryField<vectorType>::boundaryField(std::string fileName, const Mesh& mesh, const RunTime& time, fileAction action)
 :     nPatches_(mesh.nPatches_),
       action_(action)
 {
     for (int i = 0; i < nPatches_; i++)
     {
-        boundaryField_.push_back(boundary<vectorType>(fileName, mesh_.patchList_[i], runTime_, action));
+        boundaryField_.push_back(Boundary<vectorType>(fileName, mesh.patchList_[i], time, action));
     }
 }
 

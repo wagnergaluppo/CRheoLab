@@ -3,7 +3,7 @@
 
 #include "IODictionary.h"
 #include "RunTime.h"
-#include "BoundaryI.h"
+#include "boundaryField.h"
 
 typedef std::array<double, 3> vector3;
 typedef std::array<double, 6> symmTensor;
@@ -37,14 +37,19 @@ class volField
         template <typename primitiveType>
         primitiveType readData(std::ifstream& in_file, std::istringstream& iss, std::string& line, int& lineCounter);
 
-        // Give access to the boundary entities
-        std::vector<Boundary<vectorType>>& boundaryField();
+        // // Give access to the boundary entities
+        // boundaryField<vectorType>& boundaryField();
 
     private:
         const Mesh& mesh_;
         const RunTime& runTime_;
         vectorType internalField_;
-        std::vector<Boundary<vectorType>> boundaryField_;
+        boundaryField<vectorType> boundaryField_;
+        // std::vector<Boundary<vectorType>> boundaryField_;
+        // boundaryField<vectorType> boundaryField_; //error: ‘boundaryField’ does not name a type
+        // typename boundaryField<vectorType> boundaryField_; //error: ‘boundaryField’ does not name a type
+        // typename boundaryField<vectorType>;  // expected nested-name-specifier
+        // template < typename boundaryField<vectorType>> boundaryField_; expected nested-name-specifier
         fileAction action_;
 
 };

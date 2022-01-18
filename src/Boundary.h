@@ -69,8 +69,10 @@ class Boundary
     private:
         const Patch& patch_;
         patchBoundaryConditions boundaryValues_;
-        fileAction action_;
+        // fileAction action_;
 
 };
+
+#include "BoundaryI.h"
 
 #endif 

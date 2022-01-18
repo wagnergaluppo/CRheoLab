@@ -1,11 +1,9 @@
-#include "Boundary.h"
 #include "readBoundary.h"
 
 template <typename vectorType>
 Boundary<vectorType>::Boundary(std::string fileName, const Patch& patch, const RunTime& time, fileAction action)
     : IODictionary(time.Path(), fileName),
-      patch_(patch),
-      action_(action)
+      patch_(patch)
 {
     // check action
     if (action == MUST_READ)
@@ -24,7 +22,7 @@ Boundary<vectorType>::Boundary(std::string fileName, const Patch& patch, const R
 
     // Verifying if the patch size is in agreement with the mesh Patch size
     
-    if ((!boundaryValues_.uniformField) && (boundaryValues_.type!="empty") && boundaryValues_.fieldValue.size()!=patch_.nFaces())
+    if ((!boundaryValues_.uniformField) && (boundaryValues_.type!="empty") && (int)boundaryValues_.fieldValue.size()!= (int)patch_.nFaces())
     {
         std::cerr << "The input data for the patch named as " << patch_.name() << " has " << boundaryValues_.fieldValue.size() << " entries, while this patch allows only " << patch_.nFaces()  << " face!" << std::endl;
     }
@@ -35,8 +33,7 @@ Boundary<vectorType>::Boundary(std::string fileName, const Patch& patch, const R
 template <typename vectorType>
 Boundary<vectorType>::Boundary(std::string fileName, const Patch& patch, const RunTime& time, fileAction action, const typename vectorType::value_type& defaultValue)
     : IODictionary(time.Path(), fileName),
-      patch_(patch),
-      action_(action)
+      patch_(patch)
 {
     boundaryValues_.type="calculated";
     boundaryValues_.fieldValue.resize(patch_.nFaces(),defaultValue);

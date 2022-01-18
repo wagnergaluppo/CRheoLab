@@ -30,12 +30,15 @@ int main()
     Mesh polyMesh;
 
     volField<scalarField> p ("p", polyMesh, time, MUST_READ);
-    std::vector<Boundary<scalarField>>& pBoundary = p.boundaryField();
+    
+    // std::vector<Boundary<scalarField>>& pBoundary = p.boundaryField();
+
+    boundaryField<scalarField> boundaryFieldTest("p",polyMesh,time,MUST_READ);
 
     // volField<scalarField> p ("p", polyMesh, time, FILE_READ);
     // std::vector< Boundary<scalarField> >& pBoundary = p.boundaryField();
     volField<vectorField> U ("U", polyMesh, time, NO_READ, vector3{1,2,3} );
-    std::vector< Boundary<vectorField> >& uBoundary = U.boundaryField();
+    // std::vector< Boundary<vectorField> >& uBoundary = U.boundaryField();
 
     // volField<tensorField> tau ("tau", polyMesh, time);
 

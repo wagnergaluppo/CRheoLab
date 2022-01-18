@@ -19,7 +19,7 @@ class boundaryField
         ///@brief boundaryField Class default constructor 
         ///@param fileName name of the file to read field data from
         ///@param action Enum fileAction ( MUST_READ or NO_READ)
-        boundaryField(std::string fileName, fileAction action);
+        boundaryField(std::string fileName, const Mesh& mesh, const RunTime& time, fileAction action);
 
         // Destructor
         virtual ~boundaryField(){} ;
@@ -37,11 +37,14 @@ class boundaryField
         ///@brief Returns the name in the boundaryField patch list for the give patch index 
         const std::string& patchName(const int& ID) const;
 
+        vector<Boundary<vectorType>> boundaryField_;
+        
     private:
-        vector<boundary<vectorType>> boundaryField_;
         const int& nPatches_ ;
         fileAction action_;
 
 };
+
+#include "boundaryFieldI.h"
 
 #endif
